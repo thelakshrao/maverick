@@ -104,6 +104,7 @@ export default function Home() {
                             src={heroProduct}
                             alt="Maveric Lab Tesamoreline 10mg"
                             fill
+                            priority
                             sizes="380px"
                             className="object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.3)]"
                         />

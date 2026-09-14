@@ -16,11 +16,8 @@ const LOGO_ASPECT = logo.width / logo.height;
 const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASPECT;
 
 const SAMPLE_Y = 40;
+const THROTTLE_MS = 100; // ~10 checks/sec — cheap enough to run forever
 
-// A "transparent" element doesn't actually paint anything at this pixel —
-// so we should see through it to whatever is really behind it, instead of
-// trusting its data-navbar tag (fixes floating/overlapping sections that
-// have no background of their own, e.g. negative-margin card grids).
 function isTransparent(el) {
     const cs = getComputedStyle(el);
     const bg = cs.backgroundColor;
@@ -52,36 +49,50 @@ export default function Navbar() {
             let theme = null;
 
             for (const el of stack) {
-                if (isTransparent(el)) continue; // see through it to what's behind
+                if (isTransparent(el)) continue;
                 const themed = el.closest("[data-navbar]");
                 if (themed) theme = themed.getAttribute("data-navbar");
-                break; // first opaque thing we hit — stop here either way
+                break;
             }
 
-            // Last-resort fallback: body's tag, even if technically "transparent"
             if (!theme) {
                 theme = document.body.getAttribute("data-navbar");
             }
 
-            if (theme) setDark(theme !== "light");
+            if (theme) {
+                setDark((prevDark) => {
+                    const nextDark = theme !== "light";
+                    return prevDark === nextDark ? prevDark : nextDark;
+                });
+            }
         };
 
-        checkBackground();
-        window.addEventListener("scroll", checkBackground, { passive: true });
-        window.addEventListener("resize", checkBackground);
-        window.addEventListener("load", checkBackground);
+        // Instead of guessing when layout has "settled" (after images load,
+        // after animations finish, after resize), we just keep checking on
+        // a cheap loop for as long as the navbar is mounted. This makes the
+        // navbar self-correct immediately after ANY layout shift — image
+        // load, font load, animation, resize — without ever needing the
+        // user to scroll to "wake it up".
+        let rafId;
+        let lastRun = 0;
 
-        const raf1 = requestAnimationFrame(checkBackground);
-        const timeout1 = setTimeout(checkBackground, 300);
-        const timeout2 = setTimeout(checkBackground, 1000);
+        const loop = (time) => {
+            if (time - lastRun >= THROTTLE_MS) {
+                checkBackground();
+                lastRun = time;
+            }
+            rafId = requestAnimationFrame(loop);
+        };
+
+        rafId = requestAnimationFrame(loop);
+
+        // Still listen for scroll directly (not throttled) so fast scrolls
+        // feel instant rather than snapping on the next 100ms tick.
+        window.addEventListener("scroll", checkBackground, { passive: true });
 
         return () => {
+            cancelAnimationFrame(rafId);
             window.removeEventListener("scroll", checkBackground);
-            window.removeEventListener("resize", checkBackground);
-            window.removeEventListener("load", checkBackground);
-            cancelAnimationFrame(raf1);
-            clearTimeout(timeout1);
-            clearTimeout(timeout2);
         };
     }, []);
 

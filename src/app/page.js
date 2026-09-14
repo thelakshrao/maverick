@@ -6,12 +6,12 @@ import Navbar from "@/components/Navbar";
 
 export default function Page() {
   return (
-    <div className="flex flex-col w-full">
+    <main className="w-full min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <Home />
       <MavericStats />
       <OurStandards />
       <PurityShowcase />
-    </div>
+    </main>
   );
 }

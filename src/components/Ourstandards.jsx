@@ -102,6 +102,7 @@ export default function OurStandards() {
                         src={styleproduct1}
                         alt=""
                         fill
+                        sizes="100vw"
                         className="object-cover object-[80%_center]"
                     />
                 </div>
@@ -180,6 +181,7 @@ export default function OurStandards() {
                         src={styleproduct2}
                         alt=""
                         fill
+                        sizes="100vw"
                         className="object-cover object-[20%_center]"
                     />
                 </div>
@@ -294,7 +296,7 @@ export default function OurStandards() {
                 className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#12306e] to-[#050b2e] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
             >
                 <div className="pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden>
-                    <Image src={styleproduct1} alt="" fill className="object-cover object-center" />
+                    <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />
                 </div>
 
                 <h2 className="relative text-2xl font-bold text-white md:text-3xl">
