@@ -7,12 +7,6 @@ import heroProduct from "../images/heroproduct.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/* -------------------------------------------------------------------- */
-/*  Reusable directional variants — same language as the Our Standards  */
-/*  page: every element declares which edge it enters from, and a       */
-/*  parent "container" orchestrates the stagger on mount.               */
-/* -------------------------------------------------------------------- */
-
 const container = (stagger = 0.12, delay = 0.15) => ({
     hidden: {},
     visible: { transition: { staggerChildren: stagger, delayChildren: delay } },
@@ -80,7 +74,7 @@ export default function Home() {
             <main className="min-h-screen bg-[#eef1f6]">
 
                 {/* ===================== DESKTOP ===================== */}
-                <div className="relative hidden md:block h-180 w-full overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]">
+                <div data-navbar="dark" className="relative hidden md:block h-180 w-full overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]">
 
                     <motion.div
                         initial="hidden"
@@ -244,7 +238,7 @@ export default function Home() {
                 </div>
 
                 {/* ===================== MOBILE ===================== */}
-                <div className="md:hidden relative w-full overflow-hidden bg-gradient-to-b from-[#050b2e] via-[#12306e] to-[#3f7ee8]">
+                <div data-navbar="dark" className="md:hidden relative w-full overflow-hidden bg-gradient-to-b from-[#050b2e] via-[#12306e] to-[#3f7ee8]">
 
                     <motion.div
                         initial="hidden"
@@ -262,8 +256,6 @@ export default function Home() {
                         />
                     </motion.div>
 
-                    {/* scrim behind the copy — keeps the text legible no matter how the
-              background image renders, instead of relying on its opacity alone */}
                     <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[420px] bg-gradient-to-b from-[#050b2e] via-[#050b2e]/85 to-transparent" />
 
                     <motion.div
@@ -277,7 +269,7 @@ export default function Home() {
                         initial="hidden"
                         animate="visible"
                         variants={container(0.12, 0.2)}
-                        className="relative z-10 flex flex-col items-start px-4 pt-24 pb-0 font-sans text-left"
+                        className="relative z-10 flex flex-col items-start px-4 pt-24 pb-10 font-sans text-left"
                     >
                         <motion.p
                             variants={fromLeft}
@@ -312,15 +304,13 @@ export default function Home() {
                         </motion.p>
                     </motion.div>
 
-                    {/* Hero image, flush with the bottom of the card — pills + button overlaid on top of it */}
                     <motion.div
                         initial={{ opacity: 0, y: 20, scale: 1.05 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-                        className="relative z-10 mt-6 h-[380px] w-full"
+                        className="relative z-10 mt-4 h-[380px] w-full"
                     >
                         <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-4 w-[60%] rounded-full bg-black/20 blur-lg" />
-                        {/* -inset-x-8 makes the image render bigger than its column width without affecting layout */}
                         <div className="absolute -inset-x-8 inset-y-0">
                             <Image
                                 src={hero1}
@@ -332,7 +322,6 @@ export default function Home() {
                             />
                         </div>
 
-                        {/* Feature row — small text, dividers vertically centered with the label */}
                         <motion.div
                             initial="hidden"
                             animate="visible"
@@ -352,7 +341,6 @@ export default function Home() {
                             ))}
                         </motion.div>
 
-                        {/* Explore Products button — overlaid near the bottom of the image, not pushing it down */}
                         <motion.div
                             initial="hidden"
                             animate="visible"

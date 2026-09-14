@@ -8,12 +8,6 @@ import logo from "@/images/logo.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/* -------------------------------------------------------------------- */
-/*  Every card declares which edge it flies in from — same directional  */
-/*  language as the Our Standards page, instead of every card sliding   */
-/*  in identically from the left.                                       */
-/* -------------------------------------------------------------------- */
-
 function edgeVariants(edge, distance = 48) {
     const offsets = {
         left: { x: -distance, y: 0 },
@@ -51,9 +45,6 @@ function CoaIcon() {
     );
 }
 
-// Shared content for all 4 stat cards. `icon: true` renders the CoA icon
-// instead of a big number value. `edge` sets which side the card enters
-// from — matched to its position in the 2x2 grid (tl/tr/bl/br).
 const allStats = [
     { edge: "left", value: "99%+", title: "Purity", detail: "Tested for quality & consistency" },
     {
@@ -66,8 +57,6 @@ const allStats = [
     { edge: "right", icon: true, title: "Batch Verified", detail: "Scan · Verify · Track" },
 ];
 
-// Rounded corner per grid position so the 2x2 group reads as one rounded
-// block even though the individual cards touch with zero gap.
 const cornerClass = [
     "rounded-tl-3xl",
     "rounded-tr-3xl",
@@ -77,12 +66,12 @@ const cornerClass = [
 
 export default function MaverickStats() {
     return (
-        <div className="w-full max-w-6xl mx-auto">
+        <div data-navbar="light" className="w-full max-w-6xl mx-auto">
             {/* heading, outside the box on every breakpoint */}
             <motion.div
                 initial={{ opacity: 0, y: -32 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
+                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                 transition={{ duration: 1.4, ease: EASE }}
                 className="text-center mb-5 px-4"
             >
@@ -108,7 +97,7 @@ export default function MaverickStats() {
             </motion.div>
 
             {/* ===================== MOBILE: cards only, no box, no man ===================== */}
-            <div className="md:hidden grid grid-cols-2 px-4 pb-8">
+            <div data-navbar="dark" className="md:hidden grid grid-cols-2 px-4 pb-8">
                 {allStats.map((s, i) => {
                     const col = i % 2;
                     const row = Math.floor(i / 2);
@@ -118,13 +107,11 @@ export default function MaverickStats() {
                             custom={i}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, amount: 0.4 }}
+                            viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                             variants={edgeVariants(s.edge)}
                             whileTap={{ scale: 0.97 }}
                             className={`relative overflow-hidden bg-[#12306e] p-5 h-40 flex flex-col justify-center ${cornerClass[i]}`}
                         >
-                            {/* sliced product image — each card shows one quarter,
-                  so together they form the full vial with zero gaps */}
                             <div
                                 className="absolute inset-0 opacity-20 pointer-events-none"
                                 style={{
@@ -151,6 +138,7 @@ export default function MaverickStats() {
 
             {/* ===================== DESKTOP: original rounded section with man ===================== */}
             <section
+                data-navbar="dark"
                 className="
           hidden md:flex relative w-full overflow-hidden
           rounded-[32px] mb-14
@@ -158,7 +146,6 @@ export default function MaverickStats() {
           bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]
         "
             >
-                {/* image side: product bg + man */}
                 <div className="absolute inset-0 h-full overflow-hidden">
                     <Image
                         src={styleproduct1}
@@ -169,7 +156,7 @@ export default function MaverickStats() {
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.4 }}
+                        viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                         transition={{ duration: 0.7, ease: EASE }}
                         className="absolute inset-0 z-[1]"
                     >
@@ -182,18 +169,16 @@ export default function MaverickStats() {
                     </motion.div>
                 </div>
 
-                {/* logo, pinned to the section corner */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 0.18, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                     transition={{ duration: 0.8, ease: EASE }}
                     className="absolute top-5 right-5 w-[50px] h-[50px] z-[2]"
                 >
                     <Image src={logo} alt="" fill className="object-contain" />
                 </motion.div>
 
-                {/* stats side */}
                 <div
                     className="
             relative w-full h-full z-[2]
@@ -208,7 +193,7 @@ export default function MaverickStats() {
                                 custom={i}
                                 initial="hidden"
                                 whileInView="visible"
-                                viewport={{ once: true, amount: 0.4 }}
+                                viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
                                 variants={edgeVariants(s.edge)}
                                 whileHover={{ y: -6, borderColor: "rgba(255,255,255,0.5)" }}
                                 className="

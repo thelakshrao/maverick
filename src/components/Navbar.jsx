@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import logo from "../images/logo.png";
 
@@ -15,36 +15,78 @@ const LOGO_HEIGHT = 36;
 const LOGO_ASPECT = logo.width / logo.height;
 const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASPECT;
 
-// How far down from the top of the viewport we "sample" to decide what's
-// behind the navbar — roughly the vertical middle of the navbar itself.
 const SAMPLE_Y = 40;
+
+// A "transparent" element doesn't actually paint anything at this pixel —
+// so we should see through it to whatever is really behind it, instead of
+// trusting its data-navbar tag (fixes floating/overlapping sections that
+// have no background of their own, e.g. negative-margin card grids).
+function isTransparent(el) {
+    const cs = getComputedStyle(el);
+    const bg = cs.backgroundColor;
+    const hasBgColor =
+        bg && bg !== "transparent" && !/rgba?\(0,\s*0,\s*0,\s*0\)/.test(bg);
+    const hasBgImage = cs.backgroundImage && cs.backgroundImage !== "none";
+    return !hasBgColor && !hasBgImage;
+}
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-    const [dark, setDark] = useState(true); // true = on a dark bg, show white logo
+    const [dark, setDark] = useState(true);
+    const navRef = useRef(null);
 
     useEffect(() => {
         const checkBackground = () => {
-            // Temporarily ignore pointer events on the nav so elementFromPoint
-            // can see through it to the section actually behind it.
-            const el = document.elementFromPoint(window.innerWidth / 2, SAMPLE_Y);
-            if (!el) return;
-            const themed = el.closest("[data-navbar]");
-            const theme = themed?.getAttribute("data-navbar");
-            setDark(theme !== "light");
+            const navEl = navRef.current;
+            let stack = [];
+
+            if (navEl) {
+                const prev = navEl.style.pointerEvents;
+                navEl.style.pointerEvents = "none";
+                stack = document.elementsFromPoint(window.innerWidth / 2, SAMPLE_Y);
+                navEl.style.pointerEvents = prev;
+            } else {
+                stack = document.elementsFromPoint(window.innerWidth / 2, SAMPLE_Y);
+            }
+
+            let theme = null;
+
+            for (const el of stack) {
+                if (isTransparent(el)) continue; // see through it to what's behind
+                const themed = el.closest("[data-navbar]");
+                if (themed) theme = themed.getAttribute("data-navbar");
+                break; // first opaque thing we hit — stop here either way
+            }
+
+            // Last-resort fallback: body's tag, even if technically "transparent"
+            if (!theme) {
+                theme = document.body.getAttribute("data-navbar");
+            }
+
+            if (theme) setDark(theme !== "light");
         };
 
         checkBackground();
         window.addEventListener("scroll", checkBackground, { passive: true });
         window.addEventListener("resize", checkBackground);
+        window.addEventListener("load", checkBackground);
+
+        const raf1 = requestAnimationFrame(checkBackground);
+        const timeout1 = setTimeout(checkBackground, 300);
+        const timeout2 = setTimeout(checkBackground, 1000);
+
         return () => {
             window.removeEventListener("scroll", checkBackground);
             window.removeEventListener("resize", checkBackground);
+            window.removeEventListener("load", checkBackground);
+            cancelAnimationFrame(raf1);
+            clearTimeout(timeout1);
+            clearTimeout(timeout2);
         };
     }, []);
 
     return (
-        <nav className="fixed inset-x-0 top-0 z-30 w-full font-sans">
+        <nav ref={navRef} className="fixed inset-x-0 top-0 z-30 w-full font-sans">
             <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-10">
                 <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
                     <span

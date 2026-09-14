@@ -19,22 +19,36 @@ const rise = {
 
 export default function PurityShowcase() {
     const videoRef = useRef(null);
+    const sectionRef = useRef(null);
+    const [hasPlayed, setHasPlayed] = useState(false);
 
     useEffect(() => {
         const v = videoRef.current;
-        if (!v) return;
+        const section = sectionRef.current;
+        if (!v || !section) return;
+
         v.muted = true;
-        v.play().catch(() => { });
-    }, []);
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasPlayed) {
+                    v.play().catch(() => { });
+                    setHasPlayed(true);
+                }
+            },
+            { threshold: 0.4 }
+        );
+
+        observer.observe(section);
+        return () => observer.disconnect();
+    }, [hasPlayed]);
 
     return (
-        <section className="mx-auto max-w-6xl px-4 py-8 md:py-10">
+        <section ref={sectionRef} className="mx-auto max-w-6xl px-4 py-8 md:py-10">
             <div data-navbar="dark" className="grid grid-cols-1 overflow-hidden rounded-[32px] bg-[#0a1230] shadow-[0_30px_70px_-35px_rgba(18,48,110,0.35)] md:grid-cols-2">
-                {/* video — plays once, no loop, so it naturally holds on the last frame */}
                 <div className="relative h-[280px] bg-[#0a1230] md:h-auto md:min-h-[480px]">
                     <video
                         ref={videoRef}
-                        autoPlay
                         muted
                         playsInline
                         preload="auto"
@@ -51,7 +65,6 @@ export default function PurityShowcase() {
                     </video>
                 </div>
 
-                {/* copy — dark panel, animates in on mount rather than waiting on the video */}
                 <motion.div
                     initial="hidden"
                     animate="visible"

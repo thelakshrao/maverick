@@ -3,19 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-// Drop the two uploaded photos into your /images folder with these names
-// (they already come out of the upload with the right names):
-import athleteWoman from "@/images/styleimage1.webp"; // woman, blue sky, sunglasses
-import athleteMan from "@/images/styleimage3.webp";   // man on the rower, blue light
+import athleteWoman from "@/images/styleimage1.webp";
+import athleteMan from "@/images/styleimage3.webp";
 import styleproduct1 from "@/images/styleproduct1.png";
 import styleproduct2 from "@/images/styleproduct2.png";
-
-/* -------------------------------------------------------------------- */
-/*  Direction-based reveal system                                       */
-/*  Every element enters from a named edge (left/top/right/bottom) so   */
-/*  the page reads the way you described: things arrive from every side */
-/*  as you scroll, instead of the generic "fade + slide up" every time. */
-/* -------------------------------------------------------------------- */
 
 const OFFSET = 64;
 
@@ -31,14 +22,10 @@ function reveal(edge = "bottom", delay = 0, duration = 0.7) {
     return {
         initial: { opacity: 0, x, y },
         whileInView: { opacity: 1, x: 0, y: 0 },
-        viewport: { once: true, amount: 0.35 },
+        viewport: { once: true, amount: 0.1, margin: "0px 0px -100px 0px" },
         transition: { duration, ease: [0.16, 1, 0.3, 1], delay },
     };
 }
-
-/* -------------------------------------------------------------------- */
-/*  Icons — same construction language as the existing CoaIcon          */
-/* -------------------------------------------------------------------- */
 
 function IconPrecision({ className = "" }) {
     return (
@@ -78,10 +65,6 @@ function IconTrophy({ className = "" }) {
     );
 }
 
-/* -------------------------------------------------------------------- */
-/*  Content                                                              */
-/* -------------------------------------------------------------------- */
-
 const STANDARDS = [
     {
         edge: "left",
@@ -113,8 +96,7 @@ export default function OurStandards() {
     return (
         <main className="bg-[#eef1f6]">
             {/* =================== HERO =================== */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
-                {/* faint product texture — ties every section back to the vials, not just the hero image */}
+            <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
                         src={styleproduct1}
@@ -173,8 +155,7 @@ export default function OurStandards() {
             </section>
 
             {/* =================== STANDARDS GRID =================== */}
-            {/* pulled up over the hero so it reads as one continuous scroll moment */}
-            <section className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 md:-mt-20 md:px-6">
+            <section data-navbar="light" className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 md:-mt-20 md:px-6">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {STANDARDS.map(({ edge, Icon, title, detail }, i) => (
                         <motion.div
@@ -193,7 +174,7 @@ export default function OurStandards() {
             </section>
 
             {/* =================== PROOF SPLIT — testing, dark =================== */}
-            <section className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
+            <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
                         src={styleproduct2}
@@ -253,7 +234,7 @@ export default function OurStandards() {
             </section>
 
             {/* =================== ATHLETE SPLIT — trust, light =================== */}
-            <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+            <section data-navbar="light" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
                 <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
                     <motion.div {...reveal("left", 0.1)} className="relative h-[320px] md:h-[460px]">
                         <div className="relative h-full w-full overflow-hidden rounded-[28px]">
@@ -309,6 +290,7 @@ export default function OurStandards() {
             {/* =================== CLOSING BAND =================== */}
             <motion.section
                 {...reveal("bottom", 0.05, 0.8)}
+                data-navbar="dark"
                 className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#12306e] to-[#050b2e] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
             >
                 <div className="pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden>
