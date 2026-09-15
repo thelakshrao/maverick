@@ -3,10 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import athleteWoman from "@/images/styleimage1.webp";
+import athleteWoman from "@/images/styleimage2.webp";
 import athleteMan from "@/images/styleimage3.webp";
 import styleproduct1 from "@/images/styleproduct1.png";
 import styleproduct2 from "@/images/styleproduct2.png";
+import Navbar from "@/components/Navbar";
 
 const OFFSET = 64;
 
@@ -94,222 +95,225 @@ const STANDARDS = [
 
 export default function OurStandards() {
     return (
-        <main className="bg-[#eef1f6]">
-            {/* =================== HERO =================== */}
-            <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
-                <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
-                    <Image
-                        src={styleproduct1}
-                        alt=""
-                        fill
-                        sizes="100vw"
-                        className="object-cover object-[80%_center]"
+        <>
+            <Navbar />
+            <main className="bg-[#eef1f6]">
+                {/* =================== HERO =================== */}
+                <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
+                    <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
+                        <Image
+                            src={styleproduct1}
+                            alt=""
+                            fill
+                            sizes="100vw"
+                            className="object-cover object-[80%_center]"
+                        />
+                    </div>
+
+                    <div
+                        className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-[#5b8def]/40 blur-3xl"
+                        aria-hidden
                     />
-                </div>
+                    <div
+                        className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[320px] rounded-full bg-[#8fb8ff]/30 blur-3xl"
+                        aria-hidden
+                    />
 
-                <div
-                    className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-[#5b8def]/40 blur-3xl"
-                    aria-hidden
-                />
-                <div
-                    className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[320px] rounded-full bg-[#8fb8ff]/30 blur-3xl"
-                    aria-hidden
-                />
-
-                <div className="relative z-10 mx-auto max-w-4xl px-6 pt-16 text-center md:pt-24">
-                    <motion.p
-                        {...reveal("top", 0.05)}
-                        className="text-xs font-medium uppercase tracking-[0.3em] text-white/60"
-                    >
-                        Our Standards
-                    </motion.p>
-
-                    <h1 className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]">
-                        <motion.span {...reveal("left", 0.15)} className="block font-light">
-                            Quality you can trust,
-                        </motion.span>
-                        <motion.span {...reveal("right", 0.28)} className="block font-bold">
-                            down to the molecule.
-                        </motion.span>
-                    </h1>
-
-                    <motion.p
-                        {...reveal("bottom", 0.42)}
-                        className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/70 md:text-base"
-                    >
-                        From raw material sourcing to final packaging, every step is documented
-                        and independently verified — so what&apos;s on the label is exactly
-                        what&apos;s in the vial.
-                    </motion.p>
-
-                    <motion.div
-                        {...reveal("bottom", 0.55)}
-                        className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-medium uppercase tracking-wide text-white/50"
-                    >
-                        <span>Third-Party Tested</span>
-                        <span className="h-1 w-1 rounded-full bg-white/30" />
-                        <span>cGMP Compliant</span>
-                        <span className="h-1 w-1 rounded-full bg-white/30" />
-                        <span>Full COA on Request</span>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* =================== STANDARDS GRID =================== */}
-            <section data-navbar="light" className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 md:-mt-20 md:px-6">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {STANDARDS.map(({ edge, Icon, title, detail }, i) => (
-                        <motion.div
-                            key={title}
-                            {...reveal(edge, 0.1 + i * 0.08)}
-                            className="rounded-3xl border border-[#12306e]/10 bg-white p-6 shadow-[0_20px_45px_-25px_rgba(18,48,110,0.35)]"
+                    <div className="relative z-10 mx-auto max-w-4xl px-6 pt-16 text-center md:pt-24">
+                        <motion.p
+                            {...reveal("top", 0.05)}
+                            className="text-xs font-medium uppercase tracking-[0.3em] text-white/60"
                         >
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#12306e]/8 text-[#274690]">
-                                <Icon className="h-5 w-5" />
-                            </div>
-                            <h3 className="mt-5 text-[15px] font-bold text-[#12306e]">{title}</h3>
-                            <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">{detail}</p>
-                        </motion.div>
-                    ))}
-                </div>
-            </section>
+                            Our Standards
+                        </motion.p>
 
-            {/* =================== PROOF SPLIT — testing, dark =================== */}
-            <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
-                <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
-                    <Image
-                        src={styleproduct2}
-                        alt=""
-                        fill
-                        sizes="100vw"
-                        className="object-cover object-[20%_center]"
-                    />
-                </div>
+                        <h1 className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]">
+                            <motion.span {...reveal("left", 0.15)} className="block font-light">
+                                Quality you can trust,
+                            </motion.span>
+                            <motion.span {...reveal("right", 0.28)} className="block font-bold">
+                                down to the molecule.
+                            </motion.span>
+                        </h1>
 
-                <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-0 px-6 py-16 md:grid-cols-2 md:py-24">
-                    <motion.div {...reveal("left", 0.1)} className="order-2 md:order-1 mt-8 md:mt-0">
-                        <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/50">
-                            Verified, batch by batch
-                        </p>
-                        <h2 className="mt-4 text-[28px] font-bold leading-tight text-white md:text-[36px]">
-                            Nothing ships until the lab confirms it.
-                        </h2>
-                        <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
-                            Every production run is sent to an independent, third-party lab for
-                            HPLC analysis before it&apos;s cleared for sale. Identity, assay, and
-                            purity are confirmed — not assumed.
-                        </p>
-
-                        <div className="mt-8 flex flex-wrap gap-6">
-                            {[
-                                { value: "99%+", label: "Purity" },
-                                { value: "100%", label: "Batches tested" },
-                                { value: "0", label: "Outsourced blends" },
-                            ].map((stat, i) => (
-                                <motion.div key={stat.label} {...reveal("bottom", 0.3 + i * 0.1)}>
-                                    <div className="text-2xl font-bold text-white">{stat.value}</div>
-                                    <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">
-                                        {stat.label}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </motion.div>
-
-                    <motion.div
-                        {...reveal("right", 0.15)}
-                        className="order-1 md:order-2 relative h-[280px] md:h-[420px]"
-                    >
-                        <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[#5b8def]/20 blur-2xl" />
-                        <div className="relative h-full w-full overflow-hidden rounded-[28px] ring-1 ring-white/10">
-                            <Image
-                                src={athleteMan}
-                                alt="Athlete training, verified by lab-tested performance products"
-                                fill
-                                sizes="(min-width: 768px) 480px, 90vw"
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/70 via-transparent to-transparent" />
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* =================== ATHLETE SPLIT — trust, light =================== */}
-            <section data-navbar="light" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-                <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-                    <motion.div {...reveal("left", 0.1)} className="relative h-[320px] md:h-[460px]">
-                        <div className="relative h-full w-full overflow-hidden rounded-[28px]">
-                            <Image
-                                src={athleteWoman}
-                                alt="Athlete relying on Maveric Lab's verified quality standards"
-                                fill
-                                sizes="(min-width: 768px) 480px, 90vw"
-                                className="object-cover"
-                            />
-                        </div>
+                        <motion.p
+                            {...reveal("bottom", 0.42)}
+                            className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/70 md:text-base"
+                        >
+                            From raw material sourcing to final packaging, every step is documented
+                            and independently verified — so what&apos;s on the label is exactly
+                            what&apos;s in the vial.
+                        </motion.p>
 
                         <motion.div
-                            {...reveal("bottom", 0.4)}
-                            className="absolute -bottom-6 left-6 right-6 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)] md:left-8 md:right-auto md:w-64"
+                            {...reveal("bottom", 0.55)}
+                            className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] font-medium uppercase tracking-wide text-white/50"
                         >
-                            <div className="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-[#12306e]/8 text-[#274690]">
-                                <IconShield className="h-4 w-4" />
-                            </div>
-                            <div>
-                                <div className="text-sm font-bold text-[#12306e]">Batch Verified</div>
-                                <div className="text-[11px] text-[#12306e]/60">Scan · Verify · Track</div>
+                            <span>Third-Party Tested</span>
+                            <span className="h-1 w-1 rounded-full bg-white/30" />
+                            <span>cGMP Compliant</span>
+                            <span className="h-1 w-1 rounded-full bg-white/30" />
+                            <span>Full COA on Request</span>
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* =================== STANDARDS GRID =================== */}
+                <section data-navbar="light" className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 md:-mt-20 md:px-6">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        {STANDARDS.map(({ edge, Icon, title, detail }, i) => (
+                            <motion.div
+                                key={title}
+                                {...reveal(edge, 0.1 + i * 0.08)}
+                                className="rounded-3xl border border-[#12306e]/10 bg-white p-6 shadow-[0_20px_45px_-25px_rgba(18,48,110,0.35)]"
+                            >
+                                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#12306e]/8 text-[#274690]">
+                                    <Icon className="h-5 w-5" />
+                                </div>
+                                <h3 className="mt-5 text-[15px] font-bold text-[#12306e]">{title}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">{detail}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* =================== PROOF SPLIT — testing, dark =================== */}
+                <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
+                    <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
+                        <Image
+                            src={styleproduct2}
+                            alt=""
+                            fill
+                            sizes="100vw"
+                            className="object-cover object-[20%_center]"
+                        />
+                    </div>
+
+                    <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-0 px-6 py-16 md:grid-cols-2 md:py-24">
+                        <motion.div {...reveal("left", 0.1)} className="order-2 md:order-1 mt-8 md:mt-0">
+                            <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/50">
+                                Verified, batch by batch
+                            </p>
+                            <h2 className="mt-4 text-[28px] font-bold leading-tight text-white md:text-[36px]">
+                                Nothing ships until the lab confirms it.
+                            </h2>
+                            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                                Every production run is sent to an independent, third-party lab for
+                                HPLC analysis before it&apos;s cleared for sale. Identity, assay, and
+                                purity are confirmed — not assumed.
+                            </p>
+
+                            <div className="mt-8 flex flex-wrap gap-6">
+                                {[
+                                    { value: "99%+", label: "Purity" },
+                                    { value: "100%", label: "Batches tested" },
+                                    { value: "0", label: "Outsourced blends" },
+                                ].map((stat, i) => (
+                                    <motion.div key={stat.label} {...reveal("bottom", 0.3 + i * 0.1)}>
+                                        <div className="text-2xl font-bold text-white">{stat.value}</div>
+                                        <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">
+                                            {stat.label}
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </motion.div>
-                    </motion.div>
 
-                    <motion.div {...reveal("right", 0.15)}>
-                        <p className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
-                            Trusted by professionals
-                        </p>
-                        <h2 className="mt-4 text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
-                            Formulated to the standard athletes actually train by.
-                        </h2>
-                        <p className="mt-4 max-w-md text-sm leading-relaxed text-[#12306e]/60">
-                            Coaches and competitors don&apos;t gamble on what they put in their
-                            body. Every Maveric Lab product is dosed and documented to hold up
-                            to that scrutiny, with a full Certificate of Analysis available on
-                            request for anything in our range.
-                        </p>
-
-                        <motion.a
-                            {...reveal("bottom", 0.35)}
-                            href="#"
-                            className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#12306e] px-7 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-transform duration-150 ease-out active:scale-95"
+                        <motion.div
+                            {...reveal("right", 0.15)}
+                            className="order-1 md:order-2 relative h-[280px] md:h-[420px]"
                         >
-                            Request a COA
-                            <span aria-hidden>→</span>
-                        </motion.a>
-                    </motion.div>
-                </div>
-            </section>
+                            <div className="pointer-events-none absolute inset-0 rounded-[28px] bg-[#5b8def]/20 blur-2xl" />
+                            <div className="relative h-full w-full overflow-hidden rounded-[28px] ring-1 ring-white/10">
+                                <Image
+                                    src={athleteMan}
+                                    alt="Athlete training, verified by lab-tested performance products"
+                                    fill
+                                    sizes="(min-width: 768px) 480px, 90vw"
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/70 via-transparent to-transparent" />
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
 
-            {/* =================== CLOSING BAND =================== */}
-            <motion.section
-                {...reveal("bottom", 0.05, 0.8)}
-                data-navbar="dark"
-                className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#12306e] to-[#050b2e] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
-            >
-                <div className="pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden>
-                    <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />
-                </div>
+                {/* =================== ATHLETE SPLIT — trust, light =================== */}
+                <section data-navbar="light" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+                    <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+                        <motion.div {...reveal("left", 0.1)} className="relative h-[320px] md:h-[460px]">
+                            <div className="relative h-full w-full overflow-hidden rounded-[28px]">
+                                <Image
+                                    src={athleteWoman}
+                                    alt="Athlete relying on Maveric Lab's verified quality standards"
+                                    fill
+                                    sizes="(min-width: 768px) 480px, 90vw"
+                                    className="object-cover"
+                                />
+                            </div>
 
-                <h2 className="relative text-2xl font-bold text-white md:text-3xl">
-                    Every vial, traceable from source to seal.
-                </h2>
-                <p className="mx-auto mt-3 max-w-md text-sm text-white/60">
-                    See the products behind the standards.
-                </p>
-                <button className="mt-8 inline-flex h-13 items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold uppercase tracking-wide text-[#12306e] shadow-lg transition-transform duration-150 ease-out active:scale-95">
-                    Explore Products
-                    <span aria-hidden>→</span>
-                </button>
-            </motion.section>
-        </main>
+                            <motion.div
+                                {...reveal("bottom", 0.4)}
+                                className="absolute -bottom-6 left-6 right-6 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)] md:left-8 md:right-auto md:w-64"
+                            >
+                                <div className="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-[#12306e]/8 text-[#274690]">
+                                    <IconShield className="h-4 w-4" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-[#12306e]">Batch Verified</div>
+                                    <div className="text-[11px] text-[#12306e]/60">Scan · Verify · Track</div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div {...reveal("right", 0.15)}>
+                            <p className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
+                                Trusted by professionals
+                            </p>
+                            <h2 className="mt-4 text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
+                                Formulated to the standard athletes actually train by.
+                            </h2>
+                            <p className="mt-4 max-w-md text-sm leading-relaxed text-[#12306e]/60">
+                                Coaches and competitors don&apos;t gamble on what they put in their
+                                body. Every Maveric Lab product is dosed and documented to hold up
+                                to that scrutiny, with a full Certificate of Analysis available on
+                                request for anything in our range.
+                            </p>
+
+                            <motion.a
+                                {...reveal("bottom", 0.35)}
+                                href="#"
+                                className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#12306e] px-7 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-transform duration-150 ease-out active:scale-95"
+                            >
+                                Request a COA
+                                <span aria-hidden>→</span>
+                            </motion.a>
+                        </motion.div>
+                    </div>
+                </section>
+
+                {/* =================== CLOSING BAND =================== */}
+                <motion.section
+                    {...reveal("bottom", 0.05, 0.8)}
+                    data-navbar="dark"
+                    className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#12306e] to-[#050b2e] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
+                >
+                    <div className="pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden>
+                        <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />
+                    </div>
+
+                    <h2 className="relative text-2xl font-bold text-white md:text-3xl">
+                        Every vial, traceable from source to seal.
+                    </h2>
+                    <p className="mx-auto mt-3 max-w-md text-sm text-white/60">
+                        See the products behind the standards.
+                    </p>
+                    <button className="mt-8 inline-flex h-13 items-center justify-center gap-2 rounded-full bg-white px-8 text-sm font-semibold uppercase tracking-wide text-[#12306e] shadow-lg transition-transform duration-150 ease-out active:scale-95">
+                        Explore Products
+                        <span aria-hidden>→</span>
+                    </button>
+                </motion.section>
+            </main>
+        </>
     );
 }

@@ -37,6 +37,25 @@ function edgeVariants(edge, distance = 48) {
     };
 }
 
+const headerContainer = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.14,
+            delayChildren: 0.05,
+        },
+    },
+};
+
+const headerRise = {
+    hidden: { opacity: 0, y: 26 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.75, ease: EASE },
+    },
+};
+
 function CoaIcon() {
     return (
         <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
@@ -127,43 +146,51 @@ export default function MaverickStats() {
     return (
         <div
             data-navbar="light"
-            className="w-full max-w-6xl mx-auto bg-white py-8 md:py-12"
+            className="w-full max-w-6xl mx-auto bg-[#eef1f6] py-8 md:py-12"
         >
             <motion.div
-                initial={{ opacity: 0, y: -32 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{
                     once: true,
-                    amount: 0.1,
-                    margin: "0px 0px -100px 0px",
+                    amount: 0.3,
                 }}
-                transition={{
-                    duration: 1.4,
-                    ease: EASE,
-                }}
-                className="text-center mb-5 px-4"
+                variants={headerContainer}
+                className="text-center mb-5 px-4 bg-[#eef1f6]"
             >
-                <h3 className="text-lg md:text-xl font-bold mb-1 text-[#12306e]">
+                <motion.h3
+                    variants={headerRise}
+                    className="text-lg md:text-xl font-bold mb-1 text-[#12306e]"
+                >
                     Why Choose Maveric Lab
-                </h3>
+                </motion.h3>
 
-                <p className="text-xs md:text-sm text-[#12306e]/70 leading-relaxed">
+                <motion.p
+                    variants={headerRise}
+                    className="text-xs md:text-sm text-[#12306e]/70 leading-relaxed"
+                >
                     Every batch tested, verified, and traceable — precision you can trust.
-                </p>
+                </motion.p>
 
-                <p className="text-xs md:text-sm text-[#12306e]/60 leading-relaxed mt-1 max-w-2xl mx-auto">
+                <motion.p
+                    variants={headerRise}
+                    className="text-xs md:text-sm text-[#12306e]/60 leading-relaxed mt-1 max-w-2xl mx-auto"
+                >
                     From raw material sourcing to final packaging, every step is
                     documented and independently verified — so what's on the label is
                     exactly what's in the vial.
-                </p>
+                </motion.p>
 
-                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-[10px] md:text-xs font-medium uppercase tracking-wide text-[#12306e]/50">
+                <motion.div
+                    variants={headerRise}
+                    className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-[10px] md:text-xs font-medium uppercase tracking-wide text-[#12306e]/50"
+                >
                     <span>Third-Party Tested</span>
                     <span className="hidden sm:inline">•</span>
                     <span>cGMP Compliant</span>
                     <span className="hidden sm:inline">•</span>
                     <span>Full COA on Request</span>
-                </div>
+                </motion.div>
             </motion.div>
 
             <div data-navbar="dark" className="md:hidden grid grid-cols-2 px-4">

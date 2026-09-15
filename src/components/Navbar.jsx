@@ -27,10 +27,23 @@ function isTransparent(el) {
     return !hasBgColor && !hasBgImage;
 }
 
+const HIDE_THRESHOLD_PX = 80; // don't start hiding until scrolled past this
+const HIDE_DELTA_PX = 4; // ignore tiny/jittery scroll deltas
+
 export default function Navbar() {
     const [open, setOpen] = useState(false);
     const [dark, setDark] = useState(true);
+    const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const navRef = useRef(null);
+    const openRef = useRef(open);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        openRef.current = open;
+        // Never stay hidden while the mobile menu is open.
+        if (open) setHidden(false);
+    }, [open]);
 
     useEffect(() => {
         const checkBackground = () => {
@@ -67,6 +80,29 @@ export default function Navbar() {
             }
         };
 
+        const checkScroll = () => {
+            const currentY = window.scrollY;
+
+            setScrolled(currentY > 20);
+
+            if (!openRef.current) {
+                if (currentY <= HIDE_THRESHOLD_PX) {
+                    setHidden(false);
+                } else if (currentY > lastScrollY.current + HIDE_DELTA_PX) {
+                    setHidden(true); // scrolling down — hide
+                } else if (currentY < lastScrollY.current - HIDE_DELTA_PX) {
+                    setHidden(false); // scrolling up — reveal
+                }
+            }
+
+            lastScrollY.current = currentY;
+        };
+
+        const update = () => {
+            checkBackground();
+            checkScroll();
+        };
+
         // Instead of guessing when layout has "settled" (after images load,
         // after animations finish, after resize), we just keep checking on
         // a cheap loop for as long as the navbar is mounted. This makes the
@@ -78,7 +114,7 @@ export default function Navbar() {
 
         const loop = (time) => {
             if (time - lastRun >= THROTTLE_MS) {
-                checkBackground();
+                update();
                 lastRun = time;
             }
             rafId = requestAnimationFrame(loop);
@@ -88,16 +124,29 @@ export default function Navbar() {
 
         // Still listen for scroll directly (not throttled) so fast scrolls
         // feel instant rather than snapping on the next 100ms tick.
-        window.addEventListener("scroll", checkBackground, { passive: true });
+        window.addEventListener("scroll", update, { passive: true });
 
         return () => {
             cancelAnimationFrame(rafId);
-            window.removeEventListener("scroll", checkBackground);
+            window.removeEventListener("scroll", update);
         };
     }, []);
 
+    // Once the navbar has its own translucent background (after scrolling),
+    // force the dark/light text scheme to match that background rather than
+    // whatever section happens to be behind it — otherwise a white logo
+    // could land on a near-white bar and disappear.
+    const effectiveDark = dark && !scrolled;
+
     return (
-        <nav ref={navRef} className="fixed inset-x-0 top-0 z-30 w-full font-sans">
+        <nav
+            ref={navRef}
+            className={`fixed inset-x-0 top-0 z-30 w-full font-sans transition-[transform,background-color,backdrop-filter,box-shadow] duration-300 ease-out ${hidden ? "-translate-y-full" : "translate-y-0"
+                } ${scrolled
+                    ? "bg-white/70 backdrop-blur-md shadow-sm"
+                    : "bg-transparent"
+                }`}
+        >
             <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-10">
                 <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
                     <span
@@ -108,7 +157,7 @@ export default function Navbar() {
                             display: "inline-block",
                             width: LOGO_WIDTH,
                             height: LOGO_HEIGHT,
-                            backgroundColor: dark ? "#ffffff" : "#12306e",
+                            backgroundColor: effectiveDark ? "#ffffff" : "#12306e",
                             WebkitMaskImage: `url(${logo.src})`,
                             maskImage: `url(${logo.src})`,
                             WebkitMaskSize: "contain",
@@ -143,15 +192,15 @@ export default function Navbar() {
                 >
                     <div className="flex flex-col items-center justify-center gap-[5px]">
                         <span
-                            className={`block h-[2px] w-5 transition-all duration-200 ${dark ? "bg-white" : "bg-[#12306e]"
+                            className={`block h-[2px] w-5 transition-all duration-200 ${effectiveDark ? "bg-white" : "bg-[#12306e]"
                                 } ${open ? "translate-y-[7px] rotate-45" : ""}`}
                         />
                         <span
-                            className={`block h-[2px] w-5 transition-all duration-200 ${dark ? "bg-white" : "bg-[#12306e]"
+                            className={`block h-[2px] w-5 transition-all duration-200 ${effectiveDark ? "bg-white" : "bg-[#12306e]"
                                 } ${open ? "opacity-0" : "opacity-100"}`}
                         />
                         <span
-                            className={`block h-[2px] w-5 transition-all duration-200 ${dark ? "bg-white" : "bg-[#12306e]"
+                            className={`block h-[2px] w-5 transition-all duration-200 ${effectiveDark ? "bg-white" : "bg-[#12306e]"
                                 } ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
                         />
                     </div>

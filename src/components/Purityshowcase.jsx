@@ -9,13 +9,28 @@ const EASE = [0.16, 1, 0.3, 1];
 
 const container = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
-const rise = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-};
+function edgeVariants(edge, distance = 48) {
+    const offsets = {
+        left: { x: -distance, y: 0 },
+        right: { x: distance, y: 0 },
+        top: { x: 0, y: -distance },
+        bottom: { x: 0, y: distance },
+    };
+    const { x, y } = offsets[edge];
+
+    return {
+        hidden: { opacity: 0, x, y },
+        visible: {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            transition: { duration: 0.7, ease: EASE },
+        },
+    };
+}
 
 export default function PurityShowcase() {
     const videoRef = useRef(null);
@@ -44,9 +59,18 @@ export default function PurityShowcase() {
     }, [hasPlayed]);
 
     return (
-        <section ref={sectionRef} className="mx-auto max-w-6xl px-4 py-8 md:py-10">
-            <div data-navbar="dark" className="grid grid-cols-1 overflow-hidden rounded-[32px] bg-[#0a1230] shadow-[0_30px_70px_-35px_rgba(18,48,110,0.35)] md:grid-cols-2">
-                <div className="relative h-[280px] bg-[#0a1230] md:h-auto md:min-h-[480px]">
+        <section ref={sectionRef} className="mx-auto max-w-6xl bg-[#eef1f6] px-4 py-8 md:py-10">
+            <div
+                data-navbar="dark"
+                className="grid grid-cols-1 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] shadow-[0_30px_70px_-35px_rgba(18,48,110,0.45)] md:grid-cols-2"
+            >
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={edgeVariants("left")}
+                    className="relative h-[280px] md:h-auto md:min-h-[480px]"
+                >
                     <video
                         ref={videoRef}
                         muted
@@ -63,23 +87,24 @@ export default function PurityShowcase() {
                     >
                         <source src={rangeVideo} type="video/mp4" />
                     </video>
-                </div>
+                </motion.div>
 
                 <motion.div
                     initial="hidden"
-                    animate="visible"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
                     variants={container}
-                    className="flex flex-col justify-center bg-[#0a1230] p-8 md:p-14"
+                    className="flex flex-col justify-center p-8 md:p-14"
                 >
                     <motion.p
-                        variants={rise}
+                        variants={edgeVariants("top")}
                         className="text-xs font-medium uppercase tracking-[0.3em] text-white/50"
                     >
                         Our Range
                     </motion.p>
 
                     <motion.h2
-                        variants={rise}
+                        variants={edgeVariants("left")}
                         className="mt-4 text-[30px] font-bold leading-tight text-white md:text-[38px]"
                     >
                         Lab-verified purity in{" "}
@@ -90,8 +115,8 @@ export default function PurityShowcase() {
                     </motion.h2>
 
                     <motion.p
-                        variants={rise}
-                        className="mt-5 max-w-md text-sm leading-relaxed text-white/60"
+                        variants={edgeVariants("right")}
+                        className="mt-5 max-w-md text-sm leading-relaxed text-white/70"
                     >
                         Precision-dosed products formulated for real protocols. Every batch
                         is independently HPLC-analysed to confirm identity, assay, and
@@ -100,7 +125,7 @@ export default function PurityShowcase() {
                     </motion.p>
 
                     <motion.div
-                        variants={rise}
+                        variants={edgeVariants("bottom")}
                         className="mt-8 rounded-2xl border border-white/15 bg-white/[0.06] p-5"
                     >
                         <div className="flex items-center justify-between">
@@ -113,8 +138,9 @@ export default function PurityShowcase() {
                         <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                             <motion.div
                                 initial={{ width: 0 }}
-                                animate={{ width: "99.9%" }}
-                                transition={{ duration: 1, ease: EASE, delay: 0.6 }}
+                                whileInView={{ width: "99.9%" }}
+                                viewport={{ once: true, amount: 0.6 }}
+                                transition={{ duration: 1, ease: EASE, delay: 0.3 }}
                                 className="h-full rounded-full bg-gradient-to-r from-[#5b8def] to-[#8fb8ff]"
                             />
                         </div>
@@ -132,10 +158,10 @@ export default function PurityShowcase() {
 
                     <motion.a
                         href="#"
-                        variants={rise}
+                        variants={edgeVariants("bottom")}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.95 }}
-                        className="mt-8 inline-flex h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 text-xs font-semibold uppercase tracking-wide text-[#0a1230] shadow-lg md:text-sm"
+                        className="mt-8 inline-flex h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 text-xs font-semibold uppercase tracking-wide text-[#12306e] shadow-lg md:text-sm transition-transform duration-150 ease-out active:scale-95"
                     >
                         See how every batch is verified
                         <span aria-hidden>→</span>
