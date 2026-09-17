@@ -6,11 +6,12 @@ import styleproduct1 from "@/images/styleproduct1.png";
 
 const FOOTER_LINKS = [
     {
-        heading: "Company",
+        heading: "Links",
         links: [
             { label: "About", href: "/about" },
-            { label: "Quality", href: "/standards" },
-            { label: "Where to buy", href: "/where-to-buy" },
+            { label: "Quality", href: "/quality" },
+            { label: "Verify Code", href: "/verify-code" },
+            { label: "Calculator", href: "/alculator" },
             { label: "Contact", href: "/contact" },
         ],
     },
@@ -67,7 +68,7 @@ export default function Footer() {
                             <Image
                                 src={logo}
                                 alt="Maveric Lab"
-                                className="h-8 w-auto"
+                                className="h-20 w-auto"
                                 priority
                             />
                             <span className="text-lg font-bold tracking-tight text-white">

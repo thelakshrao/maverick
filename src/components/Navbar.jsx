@@ -2,16 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "../images/logo.png";
 
 const navItems = [
+    { label: "Home", href: "/" },
     { label: "Product", href: "/product" },
+    { label: "Quality", href: "/quality" },
+    { label: "About", href: "/about" },
     { label: "Verify Code", href: "/verify-code" },
     { label: "Calculator", href: "/calculator" },
     { label: "Contact us", href: "/contact" },
 ];
 
-const LOGO_HEIGHT = 36;
+const LOGO_HEIGHT = 86;
 const LOGO_ASPECT = logo.width / logo.height;
 const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASPECT;
 
@@ -38,6 +42,7 @@ export default function Navbar() {
     const navRef = useRef(null);
     const openRef = useRef(open);
     const lastScrollY = useRef(0);
+    const pathname = usePathname();
 
     useEffect(() => {
         openRef.current = open;
@@ -138,6 +143,17 @@ export default function Navbar() {
     // could land on a near-white bar and disappear.
     const effectiveDark = dark && !scrolled;
 
+    // Clicking a link to the page you're already on doesn't trigger a Next.js
+    // navigation (no route change means no scroll restoration), so it just
+    // sits wherever you were scrolled to. This intercepts that one case and
+    // scrolls to top manually; any other link still navigates normally.
+    function handleNavClick(e, href) {
+        if (pathname === href) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }
+
     return (
         <nav
             ref={navRef}
@@ -148,7 +164,14 @@ export default function Navbar() {
                 }`}
         >
             <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-10">
-                <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+                <Link
+                    href="/"
+                    className="flex items-center"
+                    onClick={(e) => {
+                        setOpen(false);
+                        handleNavClick(e, "/");
+                    }}
+                >
                     <span
                         role="img"
                         aria-label="Logo"
@@ -175,6 +198,7 @@ export default function Navbar() {
                         <li key={item.label}>
                             <Link
                                 href={item.href}
+                                onClick={(e) => handleNavClick(e, item.href)}
                                 className="relative text-sm font-medium text-black/80 transition-colors duration-150 hover:text-black after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-black after:transition-all after:duration-200 hover:after:w-full"
                             >
                                 {item.label}
@@ -208,15 +232,18 @@ export default function Navbar() {
             </div>
 
             <div
-                className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+                className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${open ? "max-h-[75vh] opacity-100" : "max-h-0 opacity-0"
                     }`}
             >
-                <ul className="mx-5 mb-4 flex flex-col gap-1 rounded-2xl border border-black/10 bg-white/90 p-4 shadow-lg backdrop-blur-md">
+                <ul className="mx-5 mb-4 flex max-h-[70vh] flex-col gap-1 overflow-y-auto rounded-2xl border border-black/10 bg-white/90 p-4 shadow-lg backdrop-blur-md">
                     {navItems.map((item) => (
                         <li key={item.label}>
                             <Link
                                 href={item.href}
-                                onClick={() => setOpen(false)}
+                                onClick={(e) => {
+                                    setOpen(false);
+                                    handleNavClick(e, item.href);
+                                }}
                                 className="block rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors duration-150 hover:bg-black/5 hover:text-black"
                             >
                                 {item.label}

@@ -235,14 +235,14 @@ export default function MavericVerify() {
                 >
                     <motion.h2
                         variants={edgeVariants("top")}
-                        className="text-[34px] font-bold leading-[1.1] tracking-tight text-[#0b1020] sm:text-[44px] md:text-[52px]"
+                        className="text-[34px] font-bold leading-[1.1] tracking-tight text-[#12306e] sm:text-[44px] md:text-[52px]"
                     >
                         Partner with Maveric.
                     </motion.h2>
 
                     <motion.p
                         variants={edgeVariants("bottom")}
-                        className="mt-6 max-w-2xl text-base leading-relaxed text-[#0b1020]/70 md:text-lg"
+                        className="mt-6 max-w-2xl text-base leading-relaxed text-[#12306e]/70 md:text-lg"
                     >
                         We collaborate with academic institutions, biotech innovators, and
                         patient communities to bring transformative medicines to the world.
@@ -267,7 +267,7 @@ export default function MavericVerify() {
                             href="/about"
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.95 }}
-                            className="inline-flex h-12 items-center justify-center rounded-full border border-[#0b1020]/15 bg-white px-8 text-sm font-semibold text-[#0b1020] shadow-sm transition-transform duration-150 ease-out"
+                            className="inline-flex h-12 items-center justify-center rounded-full border border-[#12306e]/15 bg-white px-8 text-sm font-semibold text-[#12306e] shadow-sm transition-transform duration-150 ease-out"
                         >
                             About Maveric
                         </motion.a>

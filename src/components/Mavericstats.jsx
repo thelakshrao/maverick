@@ -167,14 +167,14 @@ export default function MaverickStats() {
 
                 <motion.p
                     variants={headerRise}
-                    className="text-xs md:text-sm text-[#12306e]/70 leading-relaxed"
+                    className="text-xs md:text-smleading-relaxed text-[#12306e]/70"
                 >
                     Every batch tested, verified, and traceable — precision you can trust.
                 </motion.p>
 
                 <motion.p
                     variants={headerRise}
-                    className="text-xs md:text-sm text-[#12306e]/60 leading-relaxed mt-1 max-w-2xl mx-auto"
+                    className="text-xs md:text-sm  leading-relaxed mt-1 max-w-2xl mx-auto text-[#12306e]/50"
                 >
                     From raw material sourcing to final packaging, every step is
                     documented and independently verified — so what's on the label is
