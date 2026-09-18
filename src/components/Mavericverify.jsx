@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import VerificationModal from "@/components/VerificationModal";
 import athleteWoman from "@/images/styleimage4.webp";
+import styleproduct1 from "@/images/styleproduct1.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -40,22 +41,15 @@ const trustPoints = [
 ];
 
 export default function MavericVerify() {
-    const [step, setStep] = useState(1);
     const [code1, setCode1] = useState("");
     const [code2, setCode2] = useState("");
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    function handleFirstSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        if (!code1.trim()) return;
-        setStep(2);
-    }
-
-    async function handleSecondSubmit(e) {
-        e.preventDefault();
-        if (!code2.trim() || loading) return;
+        if (!code1.trim() || !code2.trim() || loading) return;
 
         setLoading(true);
         try {
@@ -80,7 +74,6 @@ export default function MavericVerify() {
 
     function reset() {
         setIsModalOpen(false);
-        setStep(1);
         setCode1("");
         setCode2("");
         setResult(null);
@@ -92,6 +85,17 @@ export default function MavericVerify() {
                 data-navbar="dark"
                 className="relative w-full overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690]"
             >
+                {/* Background Pattern with Low Opacity */}
+                <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
+                    <Image
+                        src={styleproduct1}
+                        alt=""
+                        fill
+                        sizes="100vw"
+                        className="object-cover object-[70%_center]"
+                    />
+                </div>
+
                 <div
                     className="pointer-events-none absolute -left-32 top-1/4 h-[420px] w-[420px] rounded-full bg-[#5b8def]/30 blur-3xl"
                     aria-hidden
@@ -202,118 +206,74 @@ export default function MavericVerify() {
                                 variants={edgeVariants("bottom")}
                                 className="w-full max-w-[380px] overflow-hidden rounded-2xl border border-white/25 bg-[#12306e]/30 p-6 shadow-2xl backdrop-blur-xl"
                             >
-                                <AnimatePresence mode="wait">
-                                    {step === 1 ? (
-                                        <motion.form
-                                            key="step1"
-                                            initial={{ opacity: 0, x: 24 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -24 }}
-                                            transition={{ duration: 0.3, ease: EASE }}
-                                            onSubmit={handleFirstSubmit}
+                                <form onSubmit={handleSubmit}>
+                                    <p className="text-xs font-semibold uppercase tracking-wide text-white/70">
+                                        Have your codes on hand?
+                                    </p>
+                                    <p className="mt-1 text-[13px] text-white/50">
+                                        Enter both verification codes below.
+                                    </p>
+
+                                    {/* Code 1 */}
+                                    <div className="mt-4 flex overflow-hidden rounded-xl border border-white/20">
+                                        <label
+                                            htmlFor="verify-code-1"
+                                            className="flex w-24 flex-shrink-0 items-center justify-center bg-white/10 px-2 py-3 text-center text-[11px] font-bold uppercase tracking-wide text-white"
                                         >
-                                            <p className="text-xs font-semibold uppercase tracking-wide text-white/70">
-                                                Have a code on hand?
-                                            </p>
-                                            <p className="mt-1 text-[13px] text-white/50">
-                                                Enter your first verification code below.
-                                            </p>
+                                            Code 1
+                                        </label>
+                                        <input
+                                            id="verify-code-1"
+                                            type="text"
+                                            inputMode="text"
+                                            autoComplete="off"
+                                            placeholder="Enter code"
+                                            value={code1}
+                                            onChange={(e) => setCode1(e.target.value)}
+                                            className="w-full bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors focus:bg-white/10"
+                                        />
+                                    </div>
 
-                                            <label htmlFor="verify-code-1" className="sr-only">
-                                                First verification code
-                                            </label>
-                                            <input
-                                                id="verify-code-1"
-                                                type="text"
-                                                inputMode="text"
-                                                autoComplete="off"
-                                                placeholder="e.g. WAJHZX"
-                                                value={code1}
-                                                onChange={(e) => setCode1(e.target.value)}
-                                                className="mt-4 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50 focus:bg-white/15"
-                                            />
-
-                                            <motion.button
-                                                type="submit"
-                                                whileHover={{ scale: 1.02 }}
-                                                whileTap={{ scale: 0.97 }}
-                                                className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white text-sm font-semibold text-[#12306e] shadow-lg transition-transform duration-150 ease-out"
-                                            >
-                                                Continue
-                                                <span aria-hidden>→</span>
-                                            </motion.button>
-
-                                            <p className="mt-4 flex items-start gap-2 rounded-lg border border-amber-300/25 bg-amber-200/10 px-3 py-2 text-[11px] leading-relaxed text-amber-100/90">
-                                                <span aria-hidden>⚠</span>
-                                                <span>
-                                                    Each pair of codes can be verified only
-                                                    once. If they come back as already
-                                                    verified, do not use the product — contact
-                                                    us immediately.
-                                                </span>
-                                            </p>
-                                        </motion.form>
-                                    ) : (
-                                        <motion.form
-                                            key="step2"
-                                            initial={{ opacity: 0, x: 24 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -24 }}
-                                            transition={{ duration: 0.3, ease: EASE }}
-                                            onSubmit={handleSecondSubmit}
+                                    {/* Code 2 */}
+                                    <div className="mt-3 flex overflow-hidden rounded-xl border border-white/20">
+                                        <label
+                                            htmlFor="verify-code-2"
+                                            className="flex w-24 flex-shrink-0 items-center justify-center bg-white/10 px-2 py-3 text-center text-[11px] font-bold uppercase tracking-wide text-white"
                                         >
-                                            <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-300">
-                                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                                                First code received
-                                            </p>
-                                            <p className="mt-1 text-[13px] text-white/50">
-                                                Now enter your second verification code.
-                                            </p>
+                                            Code 2
+                                        </label>
+                                        <input
+                                            id="verify-code-2"
+                                            type="text"
+                                            inputMode="text"
+                                            autoComplete="off"
+                                            placeholder="Enter code"
+                                            value={code2}
+                                            onChange={(e) => setCode2(e.target.value)}
+                                            className="w-full bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors focus:bg-white/10"
+                                        />
+                                    </div>
 
-                                            <label htmlFor="verify-code-2" className="sr-only">
-                                                Second verification code
-                                            </label>
-                                            <input
-                                                id="verify-code-2"
-                                                type="text"
-                                                inputMode="text"
-                                                autoComplete="off"
-                                                placeholder="e.g. 6CPAGS"
-                                                value={code2}
-                                                onChange={(e) => setCode2(e.target.value)}
-                                                className="mt-4 w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50 focus:bg-white/15"
-                                            />
+                                    <motion.button
+                                        type="submit"
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.97 }}
+                                        disabled={loading}
+                                        className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white text-sm font-semibold text-[#12306e] shadow-lg transition-transform duration-150 ease-out disabled:opacity-70"
+                                    >
+                                        {loading ? "Verifying…" : "Verify product"}
+                                    </motion.button>
 
-                                            <motion.button
-                                                type="submit"
-                                                whileHover={{ scale: 1.02 }}
-                                                whileTap={{ scale: 0.97 }}
-                                                disabled={loading}
-                                                className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-white text-sm font-semibold text-[#12306e] shadow-lg transition-transform duration-150 ease-out disabled:opacity-70"
-                                            >
-                                                {loading ? "Verifying…" : "Verify product"}
-                                            </motion.button>
-
-                                            <button
-                                                type="button"
-                                                onClick={() => setStep(1)}
-                                                className="mt-3 w-full text-center text-xs text-white/50"
-                                            >
-                                                ← Back
-                                            </button>
-
-                                            <p className="mt-4 flex items-start gap-2 rounded-lg border border-amber-300/25 bg-amber-200/10 px-3 py-2 text-[11px] leading-relaxed text-amber-100/90">
-                                                <span aria-hidden>⚠</span>
-                                                <span>
-                                                    Each pair of codes can be verified only
-                                                    once. If they come back as already
-                                                    verified, do not use the product — contact
-                                                    us immediately.
-                                                </span>
-                                            </p>
-                                        </motion.form>
-                                    )}
-                                </AnimatePresence>
+                                    <p className="mt-4 flex items-start gap-2 rounded-lg border border-amber-300/25 bg-amber-200/10 px-3 py-2 text-[11px] leading-relaxed text-amber-100/90">
+                                        <span aria-hidden>⚠</span>
+                                        <span>
+                                            Each pair of codes can be verified only
+                                            once. If they come back as already
+                                            verified, do not use the product — contact
+                                            us immediately.
+                                        </span>
+                                    </p>
+                                </form>
                             </motion.div>
                         </motion.div>
                     </motion.div>
@@ -370,7 +330,7 @@ export default function MavericVerify() {
                 </motion.div>
             </section>
 
-            {/* Verification Pop-Up Modal */}
+            {/* Verification Result Pop-Up Modal */}
             <VerificationModal
                 isOpen={isModalOpen}
                 onClose={reset}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VerificationModal from "@/components/VerificationModal";
@@ -22,22 +22,15 @@ const rise = {
 };
 
 export default function VerifyCodePage() {
-    const [step, setStep] = useState(1);
     const [code1, setCode1] = useState("");
     const [code2, setCode2] = useState("");
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    function handleFirstSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        if (!code1.trim()) return;
-        setStep(2);
-    }
-
-    async function handleSecondSubmit(e) {
-        e.preventDefault();
-        if (!code2.trim() || loading) return;
+        if (!code1.trim() || !code2.trim() || loading) return;
 
         setLoading(true);
         try {
@@ -62,7 +55,6 @@ export default function VerifyCodePage() {
 
     function reset() {
         setIsModalOpen(false);
-        setStep(1);
         setCode1("");
         setCode2("");
         setResult(null);
@@ -126,91 +118,73 @@ export default function VerifyCodePage() {
 
                         <div className="relative z-10 bg-white/[0.04] p-7 backdrop-blur-xl md:p-8">
                             <p className="text-xs font-bold uppercase tracking-wide text-white/70">
-                                {step === 1 ? "First verification code" : "Second verification code"}
+                                Enter both codes
                             </p>
                             <p className="mt-2 text-sm leading-relaxed text-white/60">
-                                {step === 1
-                                    ? "Enter the first code printed on your product."
-                                    : "Now enter the second code — we only confirm a match once both are in."}
+                                Enter both codes printed on your product — we confirm a
+                                match once both are in.
                             </p>
 
-                            <AnimatePresence mode="wait">
-                                {step === 1 ? (
-                                    <motion.form
-                                        key="step1"
-                                        initial={{ opacity: 0, x: 24 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -24 }}
-                                        transition={{ duration: 0.3, ease: EASE }}
-                                        onSubmit={handleFirstSubmit}
-                                        className="mt-6"
+                            <form onSubmit={handleSubmit} className="mt-6 space-y-3">
+                                {/* Code 1 */}
+                                <div className="flex overflow-hidden rounded-2xl border border-white/25">
+                                    <label
+                                        htmlFor="verify-code-1"
+                                        className="flex w-28 flex-shrink-0 items-center justify-center bg-white/10 px-2 py-4 text-center text-xs font-bold uppercase tracking-wide text-white"
                                     >
-                                        <input
-                                            type="text"
-                                            value={code1}
-                                            onChange={(e) => setCode1(e.target.value)}
-                                            placeholder="e.g. WAJHZX"
-                                            autoComplete="off"
-                                            className="w-full rounded-2xl border border-white/25 bg-white/10 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50"
+                                        Code 1
+                                    </label>
+                                    <input
+                                        id="verify-code-1"
+                                        type="text"
+                                        value={code1}
+                                        onChange={(e) => setCode1(e.target.value)}
+                                        placeholder="Enter code"
+                                        autoComplete="off"
+                                        className="w-full bg-white/5 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:bg-white/10"
+                                    />
+                                </div>
+
+                                {/* Code 2 */}
+                                <div className="flex overflow-hidden rounded-2xl border border-white/25">
+                                    <label
+                                        htmlFor="verify-code-2"
+                                        className="flex w-28 flex-shrink-0 items-center justify-center bg-white/10 px-2 py-4 text-center text-xs font-bold uppercase tracking-wide text-white"
+                                    >
+                                        Code 2
+                                    </label>
+                                    <input
+                                        id="verify-code-2"
+                                        type="text"
+                                        value={code2}
+                                        onChange={(e) => setCode2(e.target.value)}
+                                        placeholder="Enter code"
+                                        autoComplete="off"
+                                        className="w-full bg-white/5 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:bg-white/10"
+                                    />
+                                </div>
+
+                                <motion.button
+                                    type="submit"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    disabled={loading}
+                                    className="flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg disabled:opacity-70"
+                                >
+                                    {loading ? (
+                                        <motion.span
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                                            className="h-4 w-4 rounded-full border-2 border-[#12306e]/30 border-t-[#12306e]"
                                         />
-                                        <motion.button
-                                            type="submit"
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.97 }}
-                                            className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg"
-                                        >
-                                            Continue
+                                    ) : (
+                                        <>
+                                            Verify product
                                             <span aria-hidden>→</span>
-                                        </motion.button>
-                                    </motion.form>
-                                ) : (
-                                    <motion.form
-                                        key="step2"
-                                        initial={{ opacity: 0, x: 24 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -24 }}
-                                        transition={{ duration: 0.3, ease: EASE }}
-                                        onSubmit={handleSecondSubmit}
-                                        className="mt-6"
-                                    >
-                                        <input
-                                            type="text"
-                                            value={code2}
-                                            onChange={(e) => setCode2(e.target.value)}
-                                            placeholder="e.g. 6CPAGS"
-                                            autoComplete="off"
-                                            className="w-full rounded-2xl border border-white/25 bg-white/10 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50"
-                                        />
-                                        <motion.button
-                                            type="submit"
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.97 }}
-                                            disabled={loading}
-                                            className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg disabled:opacity-70"
-                                        >
-                                            {loading ? (
-                                                <motion.span
-                                                    animate={{ rotate: 360 }}
-                                                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                                                    className="h-4 w-4 rounded-full border-2 border-[#12306e]/30 border-t-[#12306e]"
-                                                />
-                                            ) : (
-                                                <>
-                                                    Verify product
-                                                    <span aria-hidden>→</span>
-                                                </>
-                                            )}
-                                        </motion.button>
-                                        <button
-                                            type="button"
-                                            onClick={() => setStep(1)}
-                                            className="mt-3 w-full text-center text-xs text-white/50"
-                                        >
-                                            ← Back
-                                        </button>
-                                    </motion.form>
-                                )}
-                            </AnimatePresence>
+                                        </>
+                                    )}
+                                </motion.button>
+                            </form>
 
                             <div className="mt-5 flex items-start gap-2.5 rounded-xl border border-amber-300/25 bg-amber-300/[0.06] px-4 py-3.5 text-xs leading-relaxed text-amber-100/90">
                                 <span aria-hidden className="mt-0.5">⚠</span>
