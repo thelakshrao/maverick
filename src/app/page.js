@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
-    <main className="w-full min-h-screen bg-[#eef1f6] overflow-x-hidden">
+    <main className="w-full min-h-screen bg-[#eef1f6]">
       <Navbar />
       <Home />
       <MavericStats />

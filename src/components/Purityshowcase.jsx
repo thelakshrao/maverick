@@ -157,7 +157,7 @@ export default function PurityShowcase() {
                     </motion.div>
 
                     <motion.a
-                        href="#"
+                        href="/quality"
                         variants={edgeVariants("bottom")}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.95 }}

@@ -153,7 +153,7 @@ export default function MaverickStats() {
                 whileInView="visible"
                 viewport={{
                     once: true,
-                    amount: 0.3,
+                    amount: 0,
                 }}
                 variants={headerContainer}
                 className="text-center mb-5 px-4 bg-[#eef1f6]"
@@ -206,8 +206,7 @@ export default function MaverickStats() {
                             whileInView="visible"
                             viewport={{
                                 once: true,
-                                amount: 0.1,
-                                margin: "0px 0px -100px 0px",
+                                amount: 0,
                             }}
                             variants={edgeVariants(s.edge)}
                             whileTap={{ scale: 0.97 }}
@@ -271,8 +270,7 @@ export default function MaverickStats() {
                         }}
                         viewport={{
                             once: true,
-                            amount: 0.1,
-                            margin: "0px 0px -100px 0px",
+                            amount: 0,
                         }}
                         transition={{
                             duration: 0.7,
@@ -301,8 +299,7 @@ export default function MaverickStats() {
                     }}
                     viewport={{
                         once: true,
-                        amount: 0.1,
-                        margin: "0px 0px -100px 0px",
+                        amount: 0,
                     }}
                     transition={{
                         duration: 0.8,
@@ -335,8 +332,7 @@ export default function MaverickStats() {
                                 whileInView="visible"
                                 viewport={{
                                     once: true,
-                                    amount: 0.1,
-                                    margin: "0px 0px -100px 0px",
+                                    amount: 0,
                                 }}
                                 variants={edgeVariants(s.edge)}
                                 whileHover={{

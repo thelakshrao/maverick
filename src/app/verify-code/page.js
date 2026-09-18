@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import VerificationModal from "@/components/VerificationModal";
 import heroProduct from "@/images/heroproduct.png";
 import styleproduct1 from "@/images/styleproduct1.png";
 
@@ -21,18 +22,50 @@ const rise = {
 };
 
 export default function VerifyCodePage() {
-    const [code, setCode] = useState("");
-    const [status, setStatus] = useState("idle"); // idle | checking | valid | invalid
+    const [step, setStep] = useState(1);
+    const [code1, setCode1] = useState("");
+    const [code2, setCode2] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    function handleVerify(e) {
+    function handleFirstSubmit(e) {
         e.preventDefault();
-        if (!code.trim()) return;
-        setStatus("checking");
-        // Wire this up to your real verification endpoint —
-        // this is just the UI state machine.
-        setTimeout(() => {
-            setStatus(code.trim().length >= 6 ? "valid" : "invalid");
-        }, 900);
+        if (!code1.trim()) return;
+        setStep(2);
+    }
+
+    async function handleSecondSubmit(e) {
+        e.preventDefault();
+        if (!code2.trim() || loading) return;
+
+        setLoading(true);
+        try {
+            const res = await fetch("/api/verify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code1, code2 }),
+            });
+            const data = await res.json();
+            const validStatus = ["genuine", "used", "invalid", "error"].includes(data.status)
+                ? data.status
+                : "error";
+            setResult(validStatus);
+            setIsModalOpen(true);
+        } catch {
+            setResult("error");
+            setIsModalOpen(true);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function reset() {
+        setIsModalOpen(false);
+        setStep(1);
+        setCode1("");
+        setCode2("");
+        setResult(null);
     }
 
     return (
@@ -40,8 +73,6 @@ export default function VerifyCodePage() {
             data-navbar="dark"
             className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]"
         >
-            {/* faint product texture — same trick as the rest of the site,
-          instead of a busy foreground image or floating text */}
             <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                 <Image
                     src={styleproduct1}
@@ -82,7 +113,6 @@ export default function VerifyCodePage() {
                         variants={rise}
                         className="relative overflow-hidden rounded-[28px] border border-white/20 shadow-[0_40px_80px_-30px_rgba(5,11,46,0.6)]"
                     >
-                        {/* frosted product photo behind the glass */}
                         <div className="absolute inset-0">
                             <Image
                                 src={heroProduct}
@@ -96,72 +126,89 @@ export default function VerifyCodePage() {
 
                         <div className="relative z-10 bg-white/[0.04] p-7 backdrop-blur-xl md:p-8">
                             <p className="text-xs font-bold uppercase tracking-wide text-white/70">
-                                Have a code on hand?
+                                {step === 1 ? "First verification code" : "Second verification code"}
                             </p>
                             <p className="mt-2 text-sm leading-relaxed text-white/60">
-                                Enter it below to verify this product right now.
+                                {step === 1
+                                    ? "Enter the first code printed on your product."
+                                    : "Now enter the second code — we only confirm a match once both are in."}
                             </p>
 
-                            <form onSubmit={handleVerify} className="mt-6">
-                                <input
-                                    type="text"
-                                    value={code}
-                                    onChange={(e) => {
-                                        setCode(e.target.value);
-                                        if (status !== "idle") setStatus("idle");
-                                    }}
-                                    placeholder="e.g. ML238843"
-                                    className="w-full rounded-2xl border border-white/25 bg-white/10 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50"
-                                />
-
-                                <motion.button
-                                    type="submit"
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.97 }}
-                                    disabled={status === "checking"}
-                                    className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg disabled:opacity-70"
-                                >
-                                    {status === "checking" ? (
-                                        <motion.span
-                                            animate={{ rotate: 360 }}
-                                            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                                            className="h-4 w-4 rounded-full border-2 border-[#12306e]/30 border-t-[#12306e]"
-                                        />
-                                    ) : (
-                                        <>
-                                            Verify product
-                                            <span aria-hidden>→</span>
-                                        </>
-                                    )}
-                                </motion.button>
-                            </form>
-
                             <AnimatePresence mode="wait">
-                                {status === "valid" && (
-                                    <motion.div
-                                        key="valid"
-                                        initial={{ opacity: 0, y: -8 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -8 }}
-                                        transition={{ duration: 0.4, ease: EASE }}
-                                        className="mt-4 flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-200"
+                                {step === 1 ? (
+                                    <motion.form
+                                        key="step1"
+                                        initial={{ opacity: 0, x: 24 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -24 }}
+                                        transition={{ duration: 0.3, ease: EASE }}
+                                        onSubmit={handleFirstSubmit}
+                                        className="mt-6"
                                     >
-                                        <span className="h-1.5 w-1.5 flex-none rounded-full bg-emerald-400" />
-                                        Verified — this code is genuine and hasn&apos;t been used before.
-                                    </motion.div>
-                                )}
-                                {status === "invalid" && (
-                                    <motion.div
-                                        key="invalid"
-                                        initial={{ opacity: 0, y: -8 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -8 }}
-                                        transition={{ duration: 0.4, ease: EASE }}
-                                        className="mt-4 flex items-center gap-2 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm font-medium text-red-200"
+                                        <input
+                                            type="text"
+                                            value={code1}
+                                            onChange={(e) => setCode1(e.target.value)}
+                                            placeholder="e.g. WAJHZX"
+                                            autoComplete="off"
+                                            className="w-full rounded-2xl border border-white/25 bg-white/10 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50"
+                                        />
+                                        <motion.button
+                                            type="submit"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.97 }}
+                                            className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg"
+                                        >
+                                            Continue
+                                            <span aria-hidden>→</span>
+                                        </motion.button>
+                                    </motion.form>
+                                ) : (
+                                    <motion.form
+                                        key="step2"
+                                        initial={{ opacity: 0, x: 24 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -24 }}
+                                        transition={{ duration: 0.3, ease: EASE }}
+                                        onSubmit={handleSecondSubmit}
+                                        className="mt-6"
                                     >
-                                        <span className="h-1.5 w-1.5 flex-none rounded-full bg-red-400" />
-                                        We couldn&apos;t match that code — double-check it and try again.
-                                    </motion.div>
+                                        <input
+                                            type="text"
+                                            value={code2}
+                                            onChange={(e) => setCode2(e.target.value)}
+                                            placeholder="e.g. 6CPAGS"
+                                            autoComplete="off"
+                                            className="w-full rounded-2xl border border-white/25 bg-white/10 px-5 py-4 text-sm text-white placeholder-white/40 outline-none transition-colors focus:border-white/50"
+                                        />
+                                        <motion.button
+                                            type="submit"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.97 }}
+                                            disabled={loading}
+                                            className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg disabled:opacity-70"
+                                        >
+                                            {loading ? (
+                                                <motion.span
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                                                    className="h-4 w-4 rounded-full border-2 border-[#12306e]/30 border-t-[#12306e]"
+                                                />
+                                            ) : (
+                                                <>
+                                                    Verify product
+                                                    <span aria-hidden>→</span>
+                                                </>
+                                            )}
+                                        </motion.button>
+                                        <button
+                                            type="button"
+                                            onClick={() => setStep(1)}
+                                            className="mt-3 w-full text-center text-xs text-white/50"
+                                        >
+                                            ← Back
+                                        </button>
+                                    </motion.form>
                                 )}
                             </AnimatePresence>
 
@@ -189,6 +236,14 @@ export default function VerifyCodePage() {
             </div>
 
             <Footer />
+
+            {/* Verification Pop-Up Modal */}
+            <VerificationModal
+                isOpen={isModalOpen}
+                onClose={reset}
+                result={result}
+                codes={{ code1, code2 }}
+            />
         </main>
     );
 }

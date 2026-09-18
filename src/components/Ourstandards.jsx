@@ -279,10 +279,10 @@ export default function OurStandards() {
 
                         <motion.a
                             {...reveal("bottom", 0.35)}
-                            href="#"
+                            href="/quality"
                             className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#12306e] px-7 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition-transform duration-150 ease-out active:scale-95"
                         >
-                            Request a COA
+                            See How
                             <span aria-hidden>→</span>
                         </motion.a>
                     </motion.div>
