@@ -89,7 +89,6 @@ export default function Home() {
         const ctx = canvas.getContext("2d", { alpha: false });
         if (!ctx) return;
 
-        // Find exact target frame or nearest loaded frame
         let img = imagesRef.current.get(targetIndex);
         if (!img || !img.complete || img.naturalWidth === 0) {
             let nearestIndex = null;
@@ -116,7 +115,6 @@ export default function Home() {
         const ch = canvas.height;
         if (!cw || !ch) return;
 
-        // object-fit: cover math
         const imgW = img.naturalWidth || 1920;
         const imgH = img.naturalHeight || 1080;
         const imgAspect = imgW / imgH;
@@ -176,7 +174,6 @@ export default function Home() {
         }
     }, [drawFrame]);
 
-    // Scroll & resize listeners throttled with requestAnimationFrame
     useEffect(() => {
         let rafId = null;
 
@@ -204,7 +201,6 @@ export default function Home() {
         };
     }, [updateFrameFromScroll, resizeCanvas]);
 
-    // Progressive priority image loading
     useEffect(() => {
         let isMounted = true;
 
@@ -230,7 +226,6 @@ export default function Home() {
             });
         };
 
-        // 1. Preload & paint frame 1 immediately
         loadSingleFrame(1).then(() => {
             if (!isMounted) return;
             resizeCanvas();
@@ -238,16 +233,13 @@ export default function Home() {
             setInitialReady(true);
         });
 
-        // Eagerly preload frame 180 (final frame) immediately after frame 1
         loadSingleFrame(TOTAL_FRAMES);
 
-        // 2. Eagerly load priority batch (frames 2 to 25)
         const priorityPromises = [];
         for (let i = 2; i <= PRIORITY_FRAMES; i++) {
             priorityPromises.push(loadSingleFrame(i));
         }
 
-        // 3. Asynchronously load remaining frames (26 to 180) in background
         Promise.all(priorityPromises).then(() => {
             if (!isMounted) return;
 
@@ -280,7 +272,6 @@ export default function Home() {
         };
     }, [drawFrame, resizeCanvas]);
 
-    // Responsive container resize observer
     useEffect(() => {
         const container = stickyContainerRef.current;
         if (!container || typeof ResizeObserver === "undefined") return;
@@ -303,7 +294,6 @@ export default function Home() {
             />
             <main className="min-h-screen bg-[#eef1f6]">
 
-                {/* ===================== DESKTOP ===================== */}
                 <div
                     ref={desktopWrapperRef}
                     className="relative hidden md:block h-[170vh] w-full"
@@ -313,18 +303,15 @@ export default function Home() {
                         data-navbar="dark"
                         className="sticky top-0 h-screen w-full overflow-hidden bg-[#050b2e]"
                     >
-                        {/* Scroll-driven canvas background */}
                         <canvas
                             ref={canvasRef}
                             className="absolute inset-0 h-full w-full pointer-events-none object-cover"
                         />
 
-                        {/* Brand gradient and contrast overlays to protect left-aligned text legibility */}
                         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-[#050b2e] via-[#050b2e]/90 via-35% to-transparent" />
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-36 z-10 bg-gradient-to-b from-[#050b2e]/90 via-[#050b2e]/50 to-transparent" />
                         <div className="pointer-events-none absolute left-0 top-1/4 h-[480px] w-[480px] rounded-full bg-[#3f7ee8]/15 blur-3xl z-10" />
 
-                        {/* MAVERICK Wordmark */}
                         <motion.div
                             initial="hidden"
                             animate="visible"
@@ -337,7 +324,6 @@ export default function Home() {
                             </span>
                         </motion.div>
 
-                        {/* Left-anchored Text & UI block */}
                         <motion.div
                             initial="hidden"
                             animate="visible"
@@ -427,7 +413,6 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* ===================== MOBILE ===================== */}
                 <div data-navbar="dark" className="md:hidden relative w-full overflow-hidden bg-gradient-to-b from-[#050b2e] via-[#12306e] to-[#3f7ee8]">
 
                     <motion.div

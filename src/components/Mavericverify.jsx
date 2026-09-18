@@ -85,7 +85,6 @@ export default function MavericVerify() {
                 data-navbar="dark"
                 className="relative w-full overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690]"
             >
-                {/* Background Pattern with Low Opacity */}
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
                         src={styleproduct1}
@@ -214,7 +213,6 @@ export default function MavericVerify() {
                                         Enter both verification codes below.
                                     </p>
 
-                                    {/* Code 1 */}
                                     <div className="mt-4 flex overflow-hidden rounded-xl border border-white/20">
                                         <label
                                             htmlFor="verify-code-1"
@@ -234,7 +232,6 @@ export default function MavericVerify() {
                                         />
                                     </div>
 
-                                    {/* Code 2 */}
                                     <div className="mt-3 flex overflow-hidden rounded-xl border border-white/20">
                                         <label
                                             htmlFor="verify-code-2"
@@ -330,7 +327,6 @@ export default function MavericVerify() {
                 </motion.div>
             </section>
 
-            {/* Verification Result Pop-Up Modal */}
             <VerificationModal
                 isOpen={isModalOpen}
                 onClose={reset}

@@ -15,10 +15,6 @@ import coaSealMacro from "@/images/quality-coa-seal.jpg";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/* -------------------------------------------------------------------- */
-/*  Shared motion helpers — same language as the rest of the site.       */
-/* -------------------------------------------------------------------- */
-
 const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
@@ -95,7 +91,7 @@ const POINTS = [
 
 export default function ContactPage() {
     const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-    const [status, setStatus] = useState("idle"); // idle | sending | sent
+    const [status, setStatus] = useState("idle");
 
     function update(field) {
         return (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
@@ -105,8 +101,6 @@ export default function ContactPage() {
         e.preventDefault();
         if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
         setStatus("sending");
-        // Wire this up to your real endpoint (API route, email service, CRM,
-        // etc). This is just the UI state machine.
         setTimeout(() => setStatus("sent"), 1000);
     }
 
@@ -120,7 +114,6 @@ export default function ContactPage() {
                 </div>
 
                 <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2 md:gap-12">
-                    {/* =================== LEFT: collage + points =================== */}
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={container}>
                         <motion.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
                             Get in touch
@@ -136,8 +129,6 @@ export default function ContactPage() {
                             who can actually help.
                         </motion.p>
 
-                        {/* mobile collage — simple 2x2 grid, the layered desktop
-                collage below is too fussy to reflow at narrow widths */}
                         <motion.div
                             variants={container}
                             className="mt-8 grid grid-cols-2 gap-3 sm:hidden"
@@ -158,7 +149,6 @@ export default function ContactPage() {
                             ))}
                         </motion.div>
 
-                        {/* photo collage */}
                         <motion.div
                             variants={edgeVariants("bottom")}
                             className="relative mt-12 hidden h-[380px] sm:block md:h-[420px]"
@@ -204,7 +194,6 @@ export default function ContactPage() {
                             </motion.div>
                         </motion.div>
 
-                        {/* points */}
                         <motion.div variants={container} className="mt-10 space-y-5 sm:mt-8">
                             {POINTS.map(({ Icon, title, detail }) => (
                                 <motion.div key={title} variants={edgeVariants("left")} className="flex items-start gap-4">
@@ -220,7 +209,6 @@ export default function ContactPage() {
                         </motion.div>
                     </motion.div>
 
-                    {/* =================== RIGHT: form =================== */}
                     <motion.div
                         initial="hidden"
                         whileInView="visible"

@@ -27,7 +27,6 @@ export default function DisclaimerModal() {
     return (
         <AnimatePresence>
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-                {/* Backdrop */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -36,7 +35,6 @@ export default function DisclaimerModal() {
                     className="absolute inset-0 bg-slate-950/70 backdrop-blur-md"
                 />
 
-                {/* Disclaimer Box */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 15 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -44,7 +42,6 @@ export default function DisclaimerModal() {
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                     className="relative z-10 max-h-[85vh] w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
                 >
-                    {/* Background product image, low opacity */}
                     <div className="pointer-events-none absolute inset-0 z-0">
                         <Image
                             src={productImage}
@@ -53,11 +50,9 @@ export default function DisclaimerModal() {
                             className="object-cover opacity-50"
                             priority
                         />
-                        {/* soft white wash so text stays readable */}
                         <div className="absolute inset-0 bg-white/50" />
                     </div>
 
-                    {/* Content sits above the background image */}
                     <div className="relative z-10 max-h-[85vh] overflow-y-auto p-6 md:p-8">
                         <div className="space-y-4 text-xs leading-relaxed text-slate-700 md:text-sm">
                             <div>

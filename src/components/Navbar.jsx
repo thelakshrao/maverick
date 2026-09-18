@@ -20,7 +20,7 @@ const LOGO_ASPECT = logo.width / logo.height;
 const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASPECT;
 
 const SAMPLE_Y = 40;
-const THROTTLE_MS = 100; // ~10 checks/sec — cheap enough to run forever
+const THROTTLE_MS = 100;
 
 function isTransparent(el) {
     const cs = getComputedStyle(el);
@@ -31,8 +31,8 @@ function isTransparent(el) {
     return !hasBgColor && !hasBgImage;
 }
 
-const HIDE_THRESHOLD_PX = 80; // don't start hiding until scrolled past this
-const HIDE_DELTA_PX = 4; // ignore tiny/jittery scroll deltas
+const HIDE_THRESHOLD_PX = 80;
+const HIDE_DELTA_PX = 4;
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
@@ -46,7 +46,6 @@ export default function Navbar() {
 
     useEffect(() => {
         openRef.current = open;
-        // Never stay hidden while the mobile menu is open.
         if (open) setHidden(false);
     }, [open]);
 
@@ -94,9 +93,9 @@ export default function Navbar() {
                 if (currentY <= HIDE_THRESHOLD_PX) {
                     setHidden(false);
                 } else if (currentY > lastScrollY.current + HIDE_DELTA_PX) {
-                    setHidden(true); // scrolling down — hide
+                    setHidden(true);
                 } else if (currentY < lastScrollY.current - HIDE_DELTA_PX) {
-                    setHidden(false); // scrolling up — reveal
+                    setHidden(false);
                 }
             }
 
@@ -108,12 +107,6 @@ export default function Navbar() {
             checkScroll();
         };
 
-        // Instead of guessing when layout has "settled" (after images load,
-        // after animations finish, after resize), we just keep checking on
-        // a cheap loop for as long as the navbar is mounted. This makes the
-        // navbar self-correct immediately after ANY layout shift — image
-        // load, font load, animation, resize — without ever needing the
-        // user to scroll to "wake it up".
         let rafId;
         let lastRun = 0;
 
@@ -127,8 +120,6 @@ export default function Navbar() {
 
         rafId = requestAnimationFrame(loop);
 
-        // Still listen for scroll directly (not throttled) so fast scrolls
-        // feel instant rather than snapping on the next 100ms tick.
         window.addEventListener("scroll", update, { passive: true });
 
         return () => {
@@ -137,16 +128,8 @@ export default function Navbar() {
         };
     }, []);
 
-    // Once the navbar has its own translucent background (after scrolling),
-    // force the dark/light text scheme to match that background rather than
-    // whatever section happens to be behind it — otherwise a white logo
-    // could land on a near-white bar and disappear.
     const effectiveDark = dark && !scrolled;
 
-    // Clicking a link to the page you're already on doesn't trigger a Next.js
-    // navigation (no route change means no scroll restoration), so it just
-    // sits wherever you were scrolled to. This intercepts that one case and
-    // scrolls to top manually; any other link still navigates normally.
     function handleNavClick(e, href) {
         if (pathname === href) {
             e.preventDefault();

@@ -95,7 +95,6 @@ const STANDARDS = [
 export default function OurStandards() {
     return (
         <main className="bg-[#eef1f6]">
-            {/* =================== HERO =================== */}
             <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
@@ -155,7 +154,6 @@ export default function OurStandards() {
                 </div>
             </section>
 
-            {/* =================== STANDARDS GRID =================== */}
             <section data-navbar="light" className="relative z-10 mx-auto -mt-14 max-w-6xl px-4 md:-mt-20 md:px-6">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {STANDARDS.map(({ edge, Icon, title, detail }, i) => (
@@ -174,7 +172,6 @@ export default function OurStandards() {
                 </div>
             </section>
 
-            {/* =================== PROOF SPLIT — testing, dark =================== */}
             <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
@@ -235,7 +232,6 @@ export default function OurStandards() {
                 </div>
             </section>
 
-            {/* =================== ATHLETE SPLIT — trust, light =================== */}
             <section data-navbar="light" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
                 <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
                     <motion.div {...reveal("left", 0.1)} className="relative h-[320px] md:h-[460px]">
@@ -289,7 +285,6 @@ export default function OurStandards() {
                 </div>
             </section>
 
-            {/* =================== CLOSING BAND =================== */}
             <motion.section
                 {...reveal("bottom", 0.05, 0.8)}
                 data-navbar="dark"

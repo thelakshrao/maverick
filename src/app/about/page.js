@@ -14,12 +14,6 @@ import athleteMan from "@/images/styleimage6.webp";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/* -------------------------------------------------------------------- */
-/*  Shared motion helpers — same language as the Quality page: every     */
-/*  element declares which edge it flies in from, staggered by a parent  */
-/*  container, plus a couple of springy accents for extra polish.        */
-/* -------------------------------------------------------------------- */
-
 const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
@@ -65,9 +59,6 @@ function FloatingOrb({ className, duration = 8, delay = 0, driftX = 12, driftY =
     );
 }
 
-/* -------------------------------------------------------------------- */
-/*  Icons                                                                */
-/* -------------------------------------------------------------------- */
 
 function IconShield({ className = "" }) {
     return (
@@ -108,9 +99,6 @@ function IconHeadset({ className = "" }) {
     );
 }
 
-/* -------------------------------------------------------------------- */
-/*  Content                                                              */
-/* -------------------------------------------------------------------- */
 
 const STATS = [
     { value: "99%+", label: "Average verified purity" },
@@ -119,8 +107,6 @@ const STATS = [
     { value: "1-of-1", label: "Unique code per unit" },
 ];
 
-// "How our team works" — replaces a generic headshot grid with the actual
-// hand-off between the people who get a batch from raw material to your door.
 const TEAM_STEPS = [
     {
         Icon: IconFlask,
@@ -149,7 +135,6 @@ export default function AboutPage() {
         <main className="w-full min-h-screen bg-[#eef1f6] overflow-x-hidden">
             <Navbar />
 
-            {/* =================== HERO =================== */}
             <section
                 data-navbar="dark"
                 className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pt-32 pb-24 md:pt-40 md:pb-32"
@@ -232,7 +217,6 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* =================== OUR APPROACH (replaces a generic "Our Story") =================== */}
             <section data-navbar="light" className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
                 <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.04]" aria-hidden>
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-[70%_center]" />
@@ -278,7 +262,6 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* =================== THE PROOF (dark stat card) =================== */}
             <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690]">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-[30%_center]" />
@@ -338,7 +321,6 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* =================== HOW OUR TEAM WORKS (steps, not headshots) =================== */}
             <section data-navbar="light" className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
                 <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.04]" aria-hidden>
                     <Image src={styleproduct2} alt="" fill sizes="100vw" className="object-cover object-[85%_center]" />
@@ -400,7 +382,6 @@ export default function AboutPage() {
                 </motion.ol>
             </section>
 
-            {/* =================== PARTNER CTA =================== */}
             <section className="relative mx-auto max-w-5xl px-6 pb-24 pt-4 text-center md:pb-32">
                 <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05]" aria-hidden>
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />

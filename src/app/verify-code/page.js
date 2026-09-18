@@ -126,7 +126,6 @@ export default function VerifyCodePage() {
                             </p>
 
                             <form onSubmit={handleSubmit} className="mt-6 space-y-3">
-                                {/* Code 1 */}
                                 <div className="flex overflow-hidden rounded-2xl border border-white/25">
                                     <label
                                         htmlFor="verify-code-1"
@@ -145,7 +144,6 @@ export default function VerifyCodePage() {
                                     />
                                 </div>
 
-                                {/* Code 2 */}
                                 <div className="flex overflow-hidden rounded-2xl border border-white/25">
                                     <label
                                         htmlFor="verify-code-2"
@@ -211,7 +209,6 @@ export default function VerifyCodePage() {
 
             <Footer />
 
-            {/* Verification Pop-Up Modal */}
             <VerificationModal
                 isOpen={isModalOpen}
                 onClose={reset}

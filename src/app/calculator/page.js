@@ -329,7 +329,6 @@ export default function CalculatorPage() {
         <>
             <Navbar />
             <main className="w-full bg-[#eef1f6] overflow-x-clip">
-                {/* =================== HERO =================== */}
                 <section
                     data-navbar="dark"
                     className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-28"
@@ -378,7 +377,6 @@ export default function CalculatorPage() {
                     </div>
                 </section>
 
-                {/* =================== INTRO =================== */}
                 <section
                     data-navbar="light"
                     className="relative z-10 mx-auto -mt-16 max-w-6xl px-4 md:-mt-24 md:px-6"
@@ -409,8 +407,6 @@ export default function CalculatorPage() {
                         </motion.div>
                     </div>
                 </section>
-
-                {/* =================== CALCULATOR =================== */}
                 <section className="relative mx-auto mt-16 max-w-6xl px-4 pb-20 md:mt-24 md:px-6 md:pb-28">
                     <div className="hidden lg:block absolute -left-16 top-1/2 -translate-y-1/2 -z-10 opacity-[0.12] pointer-events-none select-none">
                         <Image src={styleproduct1} alt="" width={380} height={380} className="object-contain" />
