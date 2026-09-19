@@ -1,10 +1,15 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
+});
 
 export const runtime = "nodejs";
 
 const CODES_PATH = path.join(process.cwd(), "data", "verification-codes.json");
-const USED_PATH = path.join(process.cwd(), "data", "verification-used.json");
 
 let codesByPair = null;
 
@@ -21,17 +26,6 @@ async function loadCodes() {
 
 function normalize(code) {
     return String(code || "").trim().toUpperCase();
-}
-
-let queue = Promise.resolve();
-
-function withLock(fn) {
-    const result = queue.then(fn, fn);
-    queue = result.then(
-        () => undefined,
-        () => undefined
-    );
-    return result;
 }
 
 export async function POST(request) {
@@ -57,24 +51,22 @@ export async function POST(request) {
             return Response.json({ status: "invalid" });
         }
 
-        const result = await withLock(async () => {
-            const usedRaw = await fs
-                .readFile(USED_PATH, "utf-8")
-                .catch(() => "{}");
-            const used = JSON.parse(usedRaw || "{}");
+        const key = `verified:${serial}`;
+        const existing = await redis.get(key);
 
-            if (used[serial]) {
-                return { status: "used", serial, usedAt: used[serial].usedAt };
-            }
+        if (existing) {
+            return Response.json({ status: "used", serial, usedAt: existing.usedAt });
+        }
 
-            const usedAt = new Date().toISOString();
-            used[serial] = { usedAt };
-            await fs.writeFile(USED_PATH, JSON.stringify(used, null, 2));
+        const usedAt = new Date().toISOString();
+        const wasSet = await redis.set(key, { usedAt }, { nx: true });
 
-            return { status: "genuine", serial, usedAt };
-        });
+        if (!wasSet) {
+            const race = await redis.get(key);
+            return Response.json({ status: "used", serial, usedAt: race?.usedAt });
+        }
 
-        return Response.json(result);
+        return Response.json({ status: "genuine", serial, usedAt });
     } catch (err) {
         console.error("verify api error", err);
         return Response.json({ status: "error" }, { status: 500 });
