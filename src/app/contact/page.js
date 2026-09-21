@@ -105,7 +105,7 @@ export default function ContactPage() {
     }
 
     return (
-        <main className="w-full min-h-screen overflow-x-hidden bg-[#eef1f6]">
+        <main className="w-full min-h-dvh overflow-x-hidden bg-[#eef1f6]">
             <Navbar />
 
             <section data-navbar="light" className="relative mx-auto max-w-6xl px-6 pt-32 pb-20 md:pt-40 md:pb-28">

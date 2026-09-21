@@ -132,7 +132,7 @@ const TEAM_STEPS = [
 
 export default function AboutPage() {
     return (
-        <main className="w-full min-h-screen bg-[#eef1f6] overflow-x-hidden">
+        <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
             <Navbar />
 
             <section

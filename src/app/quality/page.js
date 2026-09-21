@@ -184,7 +184,7 @@ const COA_EXPLAINER = [
 
 export default function QualityPage() {
     return (
-        <main className="w-full min-h-screen bg-[#eef1f6] overflow-x-hidden">
+        <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
             <Navbar />
 
             <section

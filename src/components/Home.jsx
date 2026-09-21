@@ -292,7 +292,7 @@ export default function Home() {
                 as="image"
                 type="image/webp"
             />
-            <main className="min-h-screen bg-[#eef1f6]">
+            <main className="min-h-dvh bg-[#eef1f6]">
 
                 <div
                     ref={desktopWrapperRef}
@@ -420,14 +420,14 @@ export default function Home() {
                         animate="visible"
                         variants={fadeIn}
                         transition={{ delay: 0.3, duration: 1.2 }}
-                        className="pointer-events-none absolute -inset-10 z-0 opacity-[0.04]"
+                        className="pointer-events-none absolute -inset-10 z-0 opacity-50"
                     >
                         <Image
                             src={heroProduct}
                             alt=""
                             fill
                             sizes="500px"
-                            className="object-contain object-center"
+                            className="object-contain object-center opacity-50"
                         />
                     </motion.div>
 

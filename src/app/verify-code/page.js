@@ -63,7 +63,7 @@ export default function VerifyCodePage() {
     return (
         <main
             data-navbar="dark"
-            className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]"
+            className="relative min-h-dvh overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]"
         >
             <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                 <Image
@@ -85,7 +85,7 @@ export default function VerifyCodePage() {
 
             <Navbar />
 
-            <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-28">
+            <div className="relative z-10 flex min-h-dvh items-center justify-center px-4 py-28">
                 <motion.div
                     initial="hidden"
                     animate="visible"
