@@ -3,26 +3,17 @@ import Link from "next/link";
 
 import logo from "@/images/logo.png";
 import styleproduct1 from "@/images/styleproduct1.png";
+import { categories } from "@/data/products";
 
-const FOOTER_LINKS = [
+const LINK_COLUMNS = [
     {
         heading: "Links",
         links: [
             { label: "About", href: "/about" },
             { label: "Quality", href: "/quality" },
             { label: "Verify Code", href: "/verify-code" },
-            { label: "Calculator", href: "/alculator" },
+            { label: "Calculator", href: "/calculator" },
             { label: "Contact", href: "/contact" },
-        ],
-    },
-    {
-        heading: "Products",
-        links: [
-            { label: "All products", href: "/products" },
-            { label: "Vials", href: "/products/vials" },
-            { label: "Orals", href: "/products/orals" },
-            { label: "Oils", href: "/products/oils" },
-            { label: "Nasal sprays", href: "/products/nasal-sprays" },
         ],
     },
     {
@@ -32,6 +23,19 @@ const FOOTER_LINKS = [
             { label: "Terms", href: "/terms" },
         ],
     },
+];
+
+// Products column is built from real category data, not hardcoded —
+// add "Peptides" (or anything else) to `categories` in data/products.js
+// and it shows up here automatically, with no dead links.
+const productLinks = [
+    { label: "All products", href: "/product" },
+    ...categories
+        .filter((c) => c !== "All")
+        .map((c) => ({
+            label: c,
+            href: `/product?category=${encodeURIComponent(c)}`,
+        })),
 ];
 
 export default function Footer() {
@@ -82,7 +86,25 @@ export default function Footer() {
                         </p>
                     </div>
 
-                    {FOOTER_LINKS.map((column) => (
+                    <div>
+                        <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#8fb8ff]">
+                            Products
+                        </p>
+                        <ul className="mt-5 space-y-3.5">
+                            {productLinks.map((link) => (
+                                <li key={link.label}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-white/65 transition-colors duration-150 hover:text-white"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {LINK_COLUMNS.map((column) => (
                         <div key={column.heading}>
                             <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#8fb8ff]">
                                 {column.heading}

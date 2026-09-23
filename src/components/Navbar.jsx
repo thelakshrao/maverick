@@ -4,10 +4,23 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "../images/logo.png";
+import { categories } from "@/data/products";
 
 const navItems = [
     { label: "Home", href: "/" },
-    { label: "Product", href: "/product" },
+    {
+        label: "Product",
+        href: "/product",
+        dropdown: [
+            { label: "All Products", href: "/product" },
+            ...categories
+                .filter((c) => c !== "All")
+                .map((c) => ({
+                    label: c,
+                    href: `/product?category=${encodeURIComponent(c)}`,
+                })),
+        ],
+    },
     { label: "Quality", href: "/quality" },
     { label: "About", href: "/about" },
     { label: "Verify Code", href: "/verify-code" },
@@ -39,6 +52,8 @@ export default function Navbar() {
     const [dark, setDark] = useState(true);
     const [scrolled, setScrolled] = useState(false);
     const [hidden, setHidden] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
     const navRef = useRef(null);
     const openRef = useRef(open);
     const lastScrollY = useRef(0);
@@ -178,14 +193,51 @@ export default function Navbar() {
 
                 <ul className="hidden md:flex items-center gap-8 rounded-full border border-black/10 bg-white/70 px-8 py-3 shadow-sm backdrop-blur-md">
                     {navItems.map((item) => (
-                        <li key={item.label}>
+                        <li
+                            key={item.label}
+                            className="relative"
+                            onMouseEnter={() => item.dropdown && setOpenDropdown(item.label)}
+                            onMouseLeave={() => item.dropdown && setOpenDropdown(null)}
+                        >
                             <Link
                                 href={item.href}
                                 onClick={(e) => handleNavClick(e, item.href)}
-                                className="relative text-sm font-medium text-black/80 transition-colors duration-150 hover:text-black after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-black after:transition-all after:duration-200 hover:after:w-full"
+                                className="relative flex items-center gap-1 text-sm font-medium text-black/80 transition-colors duration-150 hover:text-black after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-black after:transition-all after:duration-200 hover:after:w-full"
                             >
                                 {item.label}
+                                {item.dropdown && (
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        className={`h-3 w-3 transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`}
+                                    >
+                                        <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                )}
                             </Link>
+
+                            {item.dropdown && (
+                                <div
+                                    className={`absolute left-1/2 top-full mt-3 w-48 -translate-x-1/2 overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-lg backdrop-blur-md transition-all duration-200 ease-out ${openDropdown === item.label
+                                        ? "pointer-events-auto translate-y-0 opacity-100"
+                                        : "pointer-events-none -translate-y-1 opacity-0"
+                                        }`}
+                                >
+                                    <ul className="py-2">
+                                        {item.dropdown.map((sub) => (
+                                            <li key={sub.label}>
+                                                <Link
+                                                    href={sub.href}
+                                                    onClick={() => setOpenDropdown(null)}
+                                                    className="block px-4 py-2.5 text-sm text-black/70 transition-colors duration-150 hover:bg-black/5 hover:text-black"
+                                                >
+                                                    {sub.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -221,16 +273,60 @@ export default function Navbar() {
                 <ul className="mx-5 mb-4 flex max-h-[70vh] flex-col gap-1 overflow-y-auto rounded-2xl border border-black/10 bg-white/90 p-4 shadow-lg backdrop-blur-md">
                     {navItems.map((item) => (
                         <li key={item.label}>
-                            <Link
-                                href={item.href}
-                                onClick={(e) => {
-                                    setOpen(false);
-                                    handleNavClick(e, item.href);
-                                }}
-                                className="block rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors duration-150 hover:bg-black/5 hover:text-black"
-                            >
-                                {item.label}
-                            </Link>
+                            {item.dropdown ? (
+                                <>
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setOpenMobileDropdown((v) =>
+                                                v === item.label ? null : item.label
+                                            )
+                                        }
+                                        className="flex w-full items-center justify-between rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors duration-150 hover:bg-black/5 hover:text-black"
+                                    >
+                                        {item.label}
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            className={`h-3.5 w-3.5 transition-transform duration-200 ${openMobileDropdown === item.label ? "rotate-180" : ""
+                                                }`}
+                                        >
+                                            <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        className={`overflow-hidden pl-3 transition-[max-height,opacity] duration-200 ease-out ${openMobileDropdown === item.label
+                                            ? "max-h-60 opacity-100"
+                                            : "max-h-0 opacity-0"
+                                            }`}
+                                    >
+                                        {item.dropdown.map((sub) => (
+                                            <Link
+                                                key={sub.label}
+                                                href={sub.href}
+                                                onClick={() => {
+                                                    setOpen(false);
+                                                    setOpenMobileDropdown(null);
+                                                }}
+                                                className="block rounded-xl px-3 py-2.5 text-sm text-black/65 transition-colors duration-150 hover:bg-black/5 hover:text-black"
+                                            >
+                                                {sub.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <Link
+                                    href={item.href}
+                                    onClick={(e) => {
+                                        setOpen(false);
+                                        handleNavClick(e, item.href);
+                                    }}
+                                    className="block rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors duration-150 hover:bg-black/5 hover:text-black"
+                                >
+                                    {item.label}
+                                </Link>
+                            )}
                         </li>
                     ))}
                 </ul>

@@ -8,11 +8,11 @@ import { products } from "@/data/products";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-const FEATURED_COUNT = 3;
+const FEATURED_COUNT = 6;
 
 const container = {
     hidden: {},
-    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
 };
 
 const rise = {
@@ -38,8 +38,8 @@ export default function Product() {
     const [selected, setSelected] = useState(null);
 
     useEffect(() => {
-        // Reshuffle client-side after mount — same 3 cards already on
-        // screen, just re-ordered, so there's no layout/height change.
+        // Reshuffle client-side after mount — same cards already on
+        // screen, just re-ordered/re-picked, so there's no layout jump.
         const count = Math.min(FEATURED_COUNT, products.length);
         setFeatured(shuffle(products).slice(0, count));
     }, []);
