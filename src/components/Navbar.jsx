@@ -9,15 +9,15 @@ import { categories } from "@/data/products";
 const navItems = [
     { label: "Home", href: "/" },
     {
-        label: "Product",
-        href: "/product",
+        label: "Products",
+        href: "/products",
         dropdown: [
-            { label: "All Products", href: "/product" },
+            { label: "All Products", href: "/products" },
             ...categories
                 .filter((c) => c !== "All")
                 .map((c) => ({
                     label: c,
-                    href: `/product?category=${encodeURIComponent(c)}`,
+                    href: `/products?category=${encodeURIComponent(c)}`,
                 })),
         ],
     },
@@ -56,6 +56,14 @@ export default function Navbar() {
     const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
     const navRef = useRef(null);
     const openRef = useRef(open);
+    // Mirrors openDropdown so the scroll-driven auto-hide loop (which runs
+    // outside React's render cycle, inside a rAF callback) can check "is a
+    // desktop dropdown currently open" without going stale. Without this,
+    // the navbar could slide itself off-screen out from under an open
+    // dropdown on the very next scroll tick — including a tiny residual
+    // momentum-scroll tick that fires after the user has already stopped
+    // scrolling and started moving the mouse toward the panel.
+    const openDropdownRef = useRef(null);
     const lastScrollY = useRef(0);
     const pathname = usePathname();
 
@@ -63,6 +71,11 @@ export default function Navbar() {
         openRef.current = open;
         if (open) setHidden(false);
     }, [open]);
+
+    useEffect(() => {
+        openDropdownRef.current = openDropdown;
+        if (openDropdown) setHidden(false);
+    }, [openDropdown]);
 
     useEffect(() => {
         const checkBackground = () => {
@@ -104,7 +117,11 @@ export default function Navbar() {
 
             setScrolled(currentY > 20);
 
-            if (!openRef.current) {
+            // Never let the navbar hide itself while the mobile menu OR a
+            // desktop dropdown is open — otherwise a scroll tick (including
+            // trackpad momentum settling after the user has already lifted
+            // their fingers) can slide the whole nav away mid-hover.
+            if (!openRef.current && !openDropdownRef.current) {
                 if (currentY <= HIDE_THRESHOLD_PX) {
                     setHidden(false);
                 } else if (currentY > lastScrollY.current + HIDE_DELTA_PX) {
@@ -217,25 +234,36 @@ export default function Navbar() {
                             </Link>
 
                             {item.dropdown && (
+                                // The outer element owns positioning AND a
+                                // top padding (not a margin) that closes the
+                                // gap to the trigger. Because it's padding,
+                                // it's part of this element's own hit-testable
+                                // box, so the mouse never crosses "dead"
+                                // space between the link and the panel on
+                                // its way down — eliminating the other way
+                                // this dropdown could lose hover and close
+                                // before the user reaches it.
                                 <div
-                                    className={`absolute left-1/2 top-full mt-3 w-48 -translate-x-1/2 overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-lg backdrop-blur-md transition-all duration-200 ease-out ${openDropdown === item.label
+                                    className={`absolute left-1/2 top-full w-48 -translate-x-1/2 pt-3 transition-all duration-200 ease-out ${openDropdown === item.label
                                         ? "pointer-events-auto translate-y-0 opacity-100"
                                         : "pointer-events-none -translate-y-1 opacity-0"
                                         }`}
                                 >
-                                    <ul className="py-2">
-                                        {item.dropdown.map((sub) => (
-                                            <li key={sub.label}>
-                                                <Link
-                                                    href={sub.href}
-                                                    onClick={() => setOpenDropdown(null)}
-                                                    className="block px-4 py-2.5 text-sm text-black/70 transition-colors duration-150 hover:bg-black/5 hover:text-black"
-                                                >
-                                                    {sub.label}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-lg backdrop-blur-md">
+                                        <ul className="py-2">
+                                            {item.dropdown.map((sub) => (
+                                                <li key={sub.label}>
+                                                    <Link
+                                                        href={sub.href}
+                                                        onClick={() => setOpenDropdown(null)}
+                                                        className="block px-4 py-2.5 text-sm text-black/70 transition-colors duration-150 hover:bg-black/5 hover:text-black"
+                                                    >
+                                                        {sub.label}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             )}
                         </li>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, notFound } from "next/navigation";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -15,13 +15,22 @@ const rise = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 
+// Benefit strings are written as "Bold lead-in — rest of the sentence".
+// Split on the em dash so the lead-in can be rendered bold, like the
+// reference site does.
+function splitBenefit(text) {
+    const idx = text.indexOf("—");
+    if (idx === -1) return { lead: null, rest: text };
+    return {
+        lead: text.slice(0, idx).trim(),
+        rest: text.slice(idx + 1).trim(),
+    };
+}
+
 export default function ProductDetailPage() {
     const { id } = useParams();
     const product = products.find((p) => p.id === id);
 
-    // Next.js can't call the real notFound() helper from inside a client
-    // component render, so fall back to a friendly inline empty state if
-    // the slug doesn't match anything in data/products.js.
     if (!product) {
         return (
             <main data-navbar="light" className="min-h-screen bg-[#f6f7fb]">
@@ -53,10 +62,30 @@ export default function ProductDetailPage() {
         .slice(0, 3);
 
     return (
-        <main data-navbar="light" className="min-h-screen bg-[#f6f7fb]">
+        <main
+            data-navbar="light"
+            className="relative min-h-screen overflow-hidden bg-[#f6f7fb]"
+        >
+            {/* Decorative low-opacity watermark of the product itself, sitting
+                behind the Specifications / Benefits / How It Works copy so the
+                large empty right-hand column isn't bare. Purely decorative,
+                so it's aria-hidden and never intercepts clicks. */}
+            <div
+                className="pointer-events-none absolute right-[-10%] top-[520px] h-[900px] w-[900px] opacity-[0.05] sm:h-[1100px] sm:w-[1100px]"
+                aria-hidden
+            >
+                <Image
+                    src={product.image}
+                    alt=""
+                    fill
+                    sizes="1100px"
+                    className="object-contain"
+                />
+            </div>
+
             <Navbar />
 
-            <section className="mx-auto max-w-6xl px-6 pt-28 pb-24 sm:px-10 md:pt-36">
+            <section className="relative mx-auto max-w-6xl px-6 pt-28 pb-24 sm:px-10 md:pt-36">
                 {/* Breadcrumb */}
                 <motion.nav
                     initial="hidden"
@@ -109,36 +138,11 @@ export default function ProductDetailPage() {
                         <p className="mt-2 text-lg text-[#5b6488]">{product.compound}</p>
 
                         <p className="mt-6 text-base leading-relaxed text-[#4a5578]">
-                            {product.description}
+                            {product.subtitle}
                         </p>
-
-                        {/* Specs */}
-                        <dl className="mt-8 grid grid-cols-2 gap-4 border-t border-[#e4e7f3] pt-6 sm:grid-cols-3">
-                            <div>
-                                <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
-                                    Concentration
-                                </dt>
-                                <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
-                                    {product.dose}
-                                </dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
-                                    Format
-                                </dt>
-                                <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
-                                    {product.size}
-                                </dd>
-                            </div>
-                            <div>
-                                <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
-                                    Testing
-                                </dt>
-                                <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
-                                    HPLC-verified
-                                </dd>
-                            </div>
-                        </dl>
+                        <p className="mt-4 text-base leading-relaxed text-[#4a5578]">
+                            {product.overview}
+                        </p>
 
                         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                             <Link
@@ -158,9 +162,141 @@ export default function ProductDetailPage() {
                     </motion.div>
                 </div>
 
+                {/* Specifications */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={rise}
+                    className="mt-20"
+                >
+                    <h2 className="text-xl font-bold text-[#0b1a4a]">Specifications</h2>
+                    <dl className="mt-6 grid grid-cols-2 gap-6 rounded-3xl border border-[#e4e7f3] bg-white p-6 sm:grid-cols-3 lg:grid-cols-5 sm:p-8">
+                        <div>
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
+                                Dosage
+                            </dt>
+                            <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
+                                {product.dose}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
+                                Half-Life
+                            </dt>
+                            <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
+                                {product.halfLife}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
+                                Administration
+                            </dt>
+                            <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
+                                {product.administration}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
+                                Chemical Structure
+                            </dt>
+                            <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
+                                {product.formula}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt className="text-xs font-semibold uppercase tracking-wide text-[#7079a0]">
+                                Format
+                            </dt>
+                            <dd className="mt-1 text-sm font-semibold text-[#0b1a4a]">
+                                {product.size}
+                            </dd>
+                        </div>
+                    </dl>
+                </motion.div>
+
+                {/* Research Benefits */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={rise}
+                    className="mt-16"
+                >
+                    <h2 className="text-xl font-bold text-[#0b1a4a]">
+                        Research Benefits
+                    </h2>
+                    <ul className="mt-6 space-y-4">
+                        {product.benefits.map((b, i) => {
+                            const { lead, rest } = splitBenefit(b);
+                            return (
+                                <li key={i} className="flex gap-3">
+                                    <span
+                                        className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#3459c9]"
+                                        aria-hidden
+                                    />
+                                    <p className="text-base leading-relaxed text-[#4a5578]">
+                                        {lead && (
+                                            <span className="font-semibold text-[#0b1a4a]">
+                                                {lead}
+                                            </span>
+                                        )}
+                                        {lead ? ` — ${rest}` : rest}
+                                    </p>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </motion.div>
+
+                {/* How It Works */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={rise}
+                    className="mt-16"
+                >
+                    <h2 className="text-xl font-bold text-[#0b1a4a]">How It Works</h2>
+                    <p className="mt-6 text-base leading-relaxed text-[#4a5578]">
+                        {product.mechanism}
+                    </p>
+                </motion.div>
+
+                {/* For Research Use Only */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={rise}
+                    className="mt-16 rounded-3xl border border-[#f0d9a8] bg-[#fdf8ee] p-6 sm:p-8"
+                >
+                    <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#b3791e]">
+                        <span aria-hidden>⚠</span>
+                        For Research Use Only
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-[#5b4a2e]">
+                        This product is supplied strictly for in-vitro laboratory and
+                        preclinical research use. It is not a drug, food, dietary
+                        supplement, or cosmetic, and is not intended for human or animal
+                        consumption, diagnosis, treatment, or prevention of any disease.{" "}
+                        <span className="font-semibold text-[#3d3120]">
+                            {product.compound}
+                        </span>{" "}
+                        must be handled only by qualified individuals trained in proper
+                        laboratory safety procedures.
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-[#5b4a2e]">
+                        By purchasing, the buyer confirms this product is being acquired
+                        for legitimate research purposes and assumes full responsibility
+                        for its handling, storage, and use in compliance with all
+                        applicable local, national, and international laws.
+                    </p>
+                </motion.div>
+
                 {/* Related products */}
                 {related.length > 0 && (
-                    <div className="mt-24">
+                    <div className="mt-20">
                         <h2 className="text-xl font-bold text-[#0b1a4a]">
                             You may also like
                         </h2>

@@ -1,5 +1,5 @@
 import MavericStats from "@/components/Mavericstats";
-import Home from "../components/Home";
+import Home from "@/components/Home";
 import OurStandards from "@/components/Ourstandards";
 import PurityShowcase from "@/components/Purityshowcase";
 import Navbar from "@/components/Navbar";

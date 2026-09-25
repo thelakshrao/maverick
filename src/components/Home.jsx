@@ -296,7 +296,7 @@ export default function Home() {
 
                 <div
                     ref={desktopWrapperRef}
-                    className="relative hidden md:block h-[170vh] w-full"
+                    className="relative hidden md:block h-[100vh] w-full"
                 >
                     <div
                         ref={stickyContainerRef}
