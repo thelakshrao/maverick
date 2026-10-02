@@ -167,14 +167,14 @@ export default function MaverickStats() {
 
                 <motion.p
                     variants={headerRise}
-                    className="text-xs md:text-smleading-relaxed text-[#12306e]/70"
+                    className="text-xs md:text-sm leading-relaxed text-[#12306e]/70"
                 >
                     Every batch tested, verified, and traceable — precision you can trust.
                 </motion.p>
 
                 <motion.p
                     variants={headerRise}
-                    className="text-xs md:text-sm  leading-relaxed mt-1 max-w-2xl mx-auto text-[#12306e]/50"
+                    className="text-xs md:text-sm leading-relaxed mt-1 max-w-2xl mx-auto text-[#12306e]/50"
                 >
                     From raw material sourcing to final packaging, every step is
                     documented and independently verified — so what's on the label is
@@ -210,7 +210,7 @@ export default function MaverickStats() {
                             }}
                             variants={edgeVariants(s.edge)}
                             whileTap={{ scale: 0.97 }}
-                            className={`relative overflow-hidden bg-[#12306e] p-5 h-40 flex flex-col justify-center ${cornerClass[i]}`}
+                            className={`relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] p-5 h-40 flex flex-col justify-center ${cornerClass[i]}`}
                         >
                             <div
                                 className="absolute inset-0 opacity-20 pointer-events-none"
@@ -247,7 +247,7 @@ export default function MaverickStats() {
           relative w-full overflow-hidden
           rounded-[32px]
           md:h-[25vh]
-          bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]
+          bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da]
         "
             >
                 <div className="absolute inset-0 h-full overflow-hidden">

@@ -95,7 +95,7 @@ const STANDARDS = [
 export default function OurStandards() {
     return (
         <main className="bg-[#eef1f6]">
-            <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pb-24">
+            <section data-navbar="dark" className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] pb-24">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
                         src={styleproduct1}
@@ -107,11 +107,11 @@ export default function OurStandards() {
                 </div>
 
                 <div
-                    className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-[#5b8def]/40 blur-3xl"
+                    className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-[#3f7ee8]/15 blur-3xl"
                     aria-hidden
                 />
                 <div
-                    className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[320px] rounded-full bg-[#8fb8ff]/30 blur-3xl"
+                    className="pointer-events-none absolute right-0 bottom-0 h-[320px] w-[320px] rounded-full bg-[#a9c4ff]/20 blur-3xl"
                     aria-hidden
                 />
 
@@ -172,7 +172,7 @@ export default function OurStandards() {
                 </div>
             </section>
 
-            <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32">
+            <section data-navbar="dark" className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] md:mt-32">
                 <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                     <Image
                         src={styleproduct2}
@@ -288,7 +288,7 @@ export default function OurStandards() {
             <motion.section
                 {...reveal("bottom", 0.05, 0.8)}
                 data-navbar="dark"
-                className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#12306e] to-[#050b2e] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
+                className="relative mx-4 mb-16 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] px-6 py-14 text-center md:mx-auto md:max-w-6xl md:py-20"
             >
                 <div className="pointer-events-none absolute inset-0 opacity-[0.07]" aria-hidden>
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />

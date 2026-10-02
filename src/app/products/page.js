@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ParticleLogo from "@/components/ParticleLogo";
+import logoIcon from "@/images/logo1.png";
 import { products } from "@/data/products";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -21,8 +23,6 @@ const rise = {
 
 const oilsOnly = products.filter((p) => p.category === "Oils");
 
-// Truncate a description to a two-line-ish excerpt, same treatment
-// Quanta uses on its listing cards.
 function excerpt(text, max = 92) {
     if (text.length <= max) return text;
     return text.slice(0, max).replace(/\s+\S*$/, "") + "…";
@@ -34,33 +34,43 @@ export default function ProductsPage() {
             <Navbar />
 
             <section className="mx-auto max-w-7xl px-6 pt-28 pb-24 sm:px-10 md:pt-36">
-                <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={container}
-                    className="max-w-2xl"
-                >
-                    <motion.p
-                        variants={rise}
-                        className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3459c9]"
+                <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-10">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={container}
+                        className="max-w-2xl"
                     >
-                        Injectable Oils
-                    </motion.p>
-                    <motion.h1
-                        variants={rise}
-                        className="mt-4 text-4xl font-bold text-[#0b1a4a] sm:text-5xl"
-                    >
-                        Pharmaceutical-grade oil compounds
-                    </motion.h1>
-                    <motion.p
-                        variants={rise}
-                        className="mt-4 text-base leading-relaxed text-[#4a5578]"
-                    >
-                        Every batch is HPLC-tested for identity, purity, and concentration
-                        before release. USP/BP grade raw materials, multi-dose sterile
-                        vials, tamper-evident seals. Choose a product to see full specs.
-                    </motion.p>
-                </motion.div>
+                        <motion.p
+                            variants={rise}
+                            className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3459c9]"
+                        >
+                            Injectable Oils
+                        </motion.p>
+                        <motion.h1
+                            variants={rise}
+                            className="mt-4 text-4xl font-bold text-[#0b1a4a] sm:text-5xl"
+                        >
+                            Pharmaceutical-grade oil compounds
+                        </motion.h1>
+                        <motion.p
+                            variants={rise}
+                            className="mt-4 text-base leading-relaxed text-[#4a5578]"
+                        >
+                            Every batch is HPLC-tested for identity, purity, and concentration
+                            before release. USP/BP grade raw materials, multi-dose sterile
+                            vials, tamper-evident seals. Choose a product to see full specs.
+                        </motion.p>
+                    </motion.div>
+
+                    <ParticleLogo
+                        theme="light"
+                        desktopLogo={logoIcon}
+                        desktopCount={7000}
+                        mobileCount={4000}
+                        className="relative h-56 w-full md:h-[340px] md:w-[400px] md:shrink-0"
+                    />
+                </div>
 
                 <motion.div
                     initial="hidden"
