@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -50,7 +50,7 @@ const cardHover = {
 
 function FloatingOrb({ className, duration = 8, delay = 0, driftX = 12, driftY = 20 }) {
     return (
-        <motion.div
+        <m.div
             aria-hidden
             className={`pointer-events-none absolute rounded-full blur-3xl ${className}`}
             animate={{ y: [0, -driftY, 0], x: [0, driftX, 0] }}
@@ -132,7 +132,8 @@ const TEAM_STEPS = [
 
 export default function AboutPage() {
     return (
-        <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
+        <LazyMotion features={domAnimation}>
+            <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
             <Navbar />
 
             <section
@@ -146,12 +147,12 @@ export default function AboutPage() {
                 <FloatingOrb className="right-0 bottom-0 h-[320px] w-[320px] bg-[#8fb8ff]/30" duration={11} delay={1.2} driftX={-14} driftY={16} />
 
                 <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 md:grid-cols-2">
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container}>
-                        <motion.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-white/60">
+                    <m.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container}>
+                        <m.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-white/60">
                             About Maveric Lab
-                        </motion.p>
+                        </m.p>
 
-                        <motion.h1 variants={edgeVariants("left")} className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]">
+                        <m.h1 variants={edgeVariants("left")} className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]">
                             <span className="block font-light">Built for people</span>
                             <span className="block font-bold">
                                 who don&apos;t{" "}
@@ -160,26 +161,26 @@ export default function AboutPage() {
                                 </span>
                                 .
                             </span>
-                        </motion.h1>
+                        </m.h1>
 
-                        <motion.p variants={edgeVariants("right")} className="mt-6 max-w-md text-sm leading-relaxed text-white/70 md:text-base">
+                        <m.p variants={edgeVariants("right")} className="mt-6 max-w-md text-sm leading-relaxed text-white/70 md:text-base">
                             Maveric Lab exists for the athletes, coaches, and researchers
                             who need to know exactly what&apos;s in the vial — not take
                             someone&apos;s word for it. Everything we make, we make to be
                             checked.
-                        </motion.p>
+                        </m.p>
 
-                        <motion.div variants={container} className="mt-12 grid max-w-md grid-cols-2 gap-x-6 gap-y-8">
+                        <m.div variants={container} className="mt-12 grid max-w-md grid-cols-2 gap-x-6 gap-y-8">
                             {STATS.map((stat) => (
-                                <motion.div key={stat.label} variants={popIn}>
+                                <m.div key={stat.label} variants={popIn}>
                                     <div className="text-2xl font-bold text-white md:text-3xl">{stat.value}</div>
                                     <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">{stat.label}</div>
-                                </motion.div>
+                                </m.div>
                             ))}
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
 
-                    <motion.div
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
@@ -192,14 +193,14 @@ export default function AboutPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/60 via-transparent to-transparent" />
                         </div>
 
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 16, scale: 0.9 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, amount: 0.6 }}
                             transition={{ delay: 0.5, type: "spring", stiffness: 130, damping: 16 }}
                             className="absolute -bottom-6 left-6 right-6 sm:left-8 sm:right-auto sm:w-64"
                         >
-                            <motion.div
+                            <m.div
                                 animate={{ y: [0, -6, 0] }}
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
                                 className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)]"
@@ -211,9 +212,9 @@ export default function AboutPage() {
                                     <div className="text-sm font-bold text-[#12306e]">Batch Verified</div>
                                     <div className="text-[11px] text-[#12306e]/60">Scan · Verify · Track</div>
                                 </div>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
+                            </m.div>
+                        </m.div>
+                    </m.div>
                 </div>
             </section>
 
@@ -222,7 +223,7 @@ export default function AboutPage() {
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-[70%_center]" />
                 </div>
                 <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-                    <motion.div
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
@@ -232,33 +233,33 @@ export default function AboutPage() {
                         <div className="relative h-full w-full overflow-hidden rounded-[28px]">
                             <Image src={athleteMan} alt="Training hard is easier when you trust what you're taking" fill sizes="(min-width: 768px) 480px, 90vw" className="object-cover" />
                         </div>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container} className="order-1 md:order-2">
-                        <motion.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
+                    <m.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container} className="order-1 md:order-2">
+                        <m.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
                             Our approach
-                        </motion.p>
+                        </m.p>
 
-                        <motion.h2 variants={edgeVariants("right")} className="mt-4 text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
+                        <m.h2 variants={edgeVariants("right")} className="mt-4 text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
                             We&apos;d rather prove it than promise it.
-                        </motion.h2>
+                        </m.h2>
 
-                        <motion.p variants={edgeVariants("bottom")} className="mt-4 max-w-md text-sm leading-relaxed text-[#12306e]/60">
+                        <m.p variants={edgeVariants("bottom")} className="mt-4 max-w-md text-sm leading-relaxed text-[#12306e]/60">
                             Most labels ask you to take them on faith. Ours doesn&apos;t
                             have to — every batch carries a code you can check yourself,
                             against results from a lab that has no reason to protect us.
                             If it doesn&apos;t pass, it doesn&apos;t ship. That&apos;s the
                             whole approach.
-                        </motion.p>
+                        </m.p>
 
-                        <motion.div variants={edgeVariants("bottom")} className="mt-6 flex flex-wrap gap-3">
+                        <m.div variants={edgeVariants("bottom")} className="mt-6 flex flex-wrap gap-3">
                             {["No outsourced blends", "No shortcuts", "No unverifiable claims"].map((tag) => (
                                 <span key={tag} className="rounded-full border border-[#12306e]/15 px-4 py-1.5 text-xs font-medium text-[#12306e]/70">
                                     {tag}
                                 </span>
                             ))}
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 </div>
             </section>
 
@@ -270,23 +271,23 @@ export default function AboutPage() {
 
                 <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
                     <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1.1fr_1fr]">
-                        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container}>
-                            <motion.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-white/50">
+                        <m.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container}>
+                            <m.p variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-white/50">
                                 Science &amp; quality
-                            </motion.p>
+                            </m.p>
 
-                            <motion.h2 variants={edgeVariants("left")} className="mt-4 max-w-xl text-[28px] font-bold leading-tight text-white md:text-[36px]">
+                            <m.h2 variants={edgeVariants("left")} className="mt-4 max-w-xl text-[28px] font-bold leading-tight text-white md:text-[36px]">
                                 The proof is in the batch.
-                            </motion.h2>
+                            </m.h2>
 
-                            <motion.p variants={edgeVariants("right")} className="mt-4 max-w-xl text-sm leading-relaxed text-white/60">
+                            <m.p variants={edgeVariants("right")} className="mt-4 max-w-xl text-sm leading-relaxed text-white/60">
                                 Every product is made under pharmaceutical-grade conditions,
                                 HPLC-tested, independently verified, and sealed with a code
                                 you can check yourself. See exactly how — or confirm a
                                 product you already have.
-                            </motion.p>
+                            </m.p>
 
-                            <motion.div variants={edgeVariants("bottom")} className="mt-8 flex flex-wrap gap-3">
+                            <m.div variants={edgeVariants("bottom")} className="mt-8 flex flex-wrap gap-3">
                                 <Link
                                     href="/quality"
                                     className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#12306e] shadow-lg transition-transform duration-150 ease-out active:scale-95"
@@ -300,12 +301,12 @@ export default function AboutPage() {
                                 >
                                     Verify a product
                                 </Link>
-                            </motion.div>
-                        </motion.div>
+                            </m.div>
+                        </m.div>
 
-                        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container} className="grid grid-cols-2 gap-4">
+                        <m.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={container} className="grid grid-cols-2 gap-4">
                             {STATS.map((stat, i) => (
-                                <motion.div
+                                <m.div
                                     key={stat.label}
                                     variants={edgeVariants(["left", "top", "bottom", "right"][i])}
                                     whileHover={{ y: -4, backgroundColor: "rgba(255,255,255,0.08)" }}
@@ -314,9 +315,9 @@ export default function AboutPage() {
                                 >
                                     <div className="text-2xl font-bold text-white md:text-3xl">{stat.value}</div>
                                     <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">{stat.label}</div>
-                                </motion.div>
+                                </m.div>
                             ))}
-                        </motion.div>
+                        </m.div>
                     </div>
                 </div>
             </section>
@@ -325,28 +326,28 @@ export default function AboutPage() {
                 <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.04]" aria-hidden>
                     <Image src={styleproduct2} alt="" fill sizes="100vw" className="object-cover object-[85%_center]" />
                 </div>
-                <motion.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
+                <m.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("top")} className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50">
                     The people behind it
-                </motion.p>
+                </m.p>
 
-                <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("left")} className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
+                <m.h2 initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("left")} className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]">
                     How our team gets you a verified batch.
-                </motion.h2>
+                </m.h2>
 
-                <motion.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("right")} className="mt-4 max-w-xl text-sm leading-relaxed text-[#12306e]/60">
+                <m.p initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={edgeVariants("right")} className="mt-4 max-w-xl text-sm leading-relaxed text-[#12306e]/60">
                     No headshots or titles competing for attention — just the hand-off
                     that happens on every single batch, from formulation to the person
                     who answers when you check a code.
-                </motion.p>
+                </m.p>
 
-                <motion.ol
+                <m.ol
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
                     variants={container}
                     className="relative mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
                 >
-                    <motion.div
+                    <m.div
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
                         viewport={{ once: true, amount: 0.4 }}
@@ -357,13 +358,13 @@ export default function AboutPage() {
                     />
 
                     {TEAM_STEPS.map(({ Icon, title, detail }, i) => (
-                        <motion.li
+                        <m.li
                             key={title}
                             variants={edgeVariants(i % 2 === 0 ? "bottom" : "top")}
                             whileHover={cardHover}
                             className="relative rounded-2xl border border-[#12306e]/10 bg-white p-6"
                         >
-                            <motion.div
+                            <m.div
                                 initial={{ scale: 0 }}
                                 whileInView={{ scale: 1 }}
                                 viewport={{ once: true, amount: 0.6 }}
@@ -371,22 +372,22 @@ export default function AboutPage() {
                                 className="flex h-10 w-10 items-center justify-center rounded-full bg-[#12306e]/8 text-sm font-bold text-[#274690]"
                             >
                                 {i + 1}
-                            </motion.div>
+                            </m.div>
                             <div className="mt-4 flex h-9 w-9 items-center justify-center rounded-xl bg-[#12306e]/8 text-[#274690]">
                                 <Icon className="h-4 w-4" />
                             </div>
                             <h3 className="mt-3 text-sm font-bold text-[#12306e]">{title}</h3>
                             <p className="mt-2 text-xs leading-relaxed text-[#12306e]/60">{detail}</p>
-                        </motion.li>
+                        </m.li>
                     ))}
-                </motion.ol>
+                </m.ol>
             </section>
 
             <section className="relative mx-auto max-w-5xl px-6 pb-24 pt-4 text-center md:pb-32">
                 <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05]" aria-hidden>
                     <Image src={styleproduct1} alt="" fill sizes="100vw" className="object-cover object-center" />
                 </div>
-                <motion.h2
+                <m.h2
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.4 }}
@@ -394,9 +395,9 @@ export default function AboutPage() {
                     className="text-[32px] font-bold leading-tight text-[#12306e] md:text-[44px]"
                 >
                     Partner with Maveric.
-                </motion.h2>
+                </m.h2>
 
-                <motion.p
+                <m.p
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.4 }}
@@ -407,35 +408,36 @@ export default function AboutPage() {
                     patient communities to bring transformative medicines to the world.
                     We also work with established pharmaceutical vendors looking to
                     become official Maveric stockists.
-                </motion.p>
+                </m.p>
 
-                <motion.div
+                <m.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.4 }}
                     variants={container}
                     className="mt-8 flex flex-wrap items-center justify-center gap-3"
                 >
-                    <motion.div variants={popIn}>
+                    <m.div variants={popIn}>
                         <Link
                             href="/contact"
                             className="inline-flex h-12 items-center justify-center rounded-full bg-[#12306e] px-7 text-sm font-semibold text-white shadow-lg transition-transform duration-150 ease-out active:scale-95"
                         >
                             Get in touch
                         </Link>
-                    </motion.div>
-                    <motion.div variants={popIn}>
+                    </m.div>
+                    <m.div variants={popIn}>
                         <Link
                             href="/"
                             className="inline-flex h-12 items-center justify-center rounded-full border border-[#12306e]/15 bg-white px-7 text-sm font-semibold text-[#12306e] shadow-sm transition-transform duration-150 ease-out active:scale-95"
                         >
                             Maveric
                         </Link>
-                    </motion.div>
-                </motion.div>
+                    </m.div>
+                </m.div>
             </section>
 
             <Footer />
-        </main>
+            </main>
+        </LazyMotion>
     );
 }

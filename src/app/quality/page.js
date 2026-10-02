@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 
 import Navbar from "@/components/Navbar";
 import MavericVerify from "@/components/Mavericverify";
@@ -56,7 +56,7 @@ const cardHover = {
 
 function FloatingOrb({ className, duration = 8, delay = 0, driftX = 12, driftY = 20 }) {
     return (
-        <motion.div
+        <m.div
             aria-hidden
             className={`pointer-events-none absolute rounded-full blur-3xl ${className}`}
             animate={{ y: [0, -driftY, 0], x: [0, driftX, 0] }}
@@ -184,7 +184,8 @@ const COA_EXPLAINER = [
 
 export default function QualityPage() {
     return (
-        <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
+        <LazyMotion features={domAnimation}>
+            <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
             <Navbar />
 
             <section
@@ -213,20 +214,20 @@ export default function QualityPage() {
                 />
 
                 <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 md:grid-cols-2">
-                    <motion.div
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
                         variants={container}
                     >
-                        <motion.p
+                        <m.p
                             variants={edgeVariants("top")}
                             className="text-xs font-medium uppercase tracking-[0.3em] text-white/60"
                         >
                             Quality &amp; Testing
-                        </motion.p>
+                        </m.p>
 
-                        <motion.h1
+                        <m.h1
                             variants={edgeVariants("left")}
                             className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]"
                         >
@@ -238,35 +239,35 @@ export default function QualityPage() {
                                 </span>
                                 .
                             </span>
-                        </motion.h1>
+                        </m.h1>
 
-                        <motion.p
+                        <m.p
                             variants={edgeVariants("right")}
                             className="mt-6 max-w-md text-sm leading-relaxed text-white/70 md:text-base"
                         >
                             Every Maveric Lab product is made in-house under
                             pharmaceutical-grade conditions and independently tested —
                             so what&apos;s on the label is what&apos;s inside, every time.
-                        </motion.p>
+                        </m.p>
 
-                        <motion.div
+                        <m.div
                             variants={container}
                             className="mt-12 grid max-w-md grid-cols-2 gap-x-6 gap-y-8"
                         >
                             {STATS.map((stat) => (
-                                <motion.div key={stat.label} variants={popIn}>
+                                <m.div key={stat.label} variants={popIn}>
                                     <div className="text-2xl font-bold text-white md:text-3xl">
                                         {stat.value}
                                     </div>
                                     <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">
                                         {stat.label}
                                     </div>
-                                </motion.div>
+                                </m.div>
                             ))}
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
 
-                    <motion.div
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
@@ -286,14 +287,14 @@ export default function QualityPage() {
                             <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/60 via-transparent to-transparent" />
                         </div>
 
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 16, scale: 0.9 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, amount: 0.6 }}
                             transition={{ delay: 0.5, type: "spring", stiffness: 130, damping: 16 }}
                             className="absolute -bottom-6 left-6 right-6 sm:left-8 sm:right-auto sm:w-64"
                         >
-                            <motion.div
+                            <m.div
                                 animate={{ y: [0, -6, 0] }}
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
                                 className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)]"
@@ -309,9 +310,9 @@ export default function QualityPage() {
                                         Scan · Verify · Track
                                     </div>
                                 </div>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
+                            </m.div>
+                        </m.div>
+                    </m.div>
                 </div>
             </section>
 
@@ -319,7 +320,7 @@ export default function QualityPage() {
                 data-navbar="light"
                 className="relative z-10 mx-auto mt-24 max-w-6xl px-4 md:mt-32 md:px-6"
             >
-                <motion.p
+                <m.p
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -327,11 +328,11 @@ export default function QualityPage() {
                     className="mb-4 text-center text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50 md:text-left"
                 >
                     Our standards
-                </motion.p>
+                </m.p>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {PROMISES.map(({ edge, Icon, title, detail }, i) => (
-                        <motion.div
+                        <m.div
                             key={title}
                             initial="hidden"
                             whileInView="visible"
@@ -341,16 +342,16 @@ export default function QualityPage() {
                             transition={{ delay: i * 0.06 }}
                             className="rounded-3xl border border-[#12306e]/10 bg-white p-6 shadow-[0_20px_45px_-25px_rgba(18,48,110,0.35)]"
                         >
-                            <motion.div
+                            <m.div
                                 whileHover={{ rotate: 8, scale: 1.08 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
                                 className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#12306e]/8 text-[#274690]"
                             >
                                 <Icon className="h-5 w-5" />
-                            </motion.div>
+                            </m.div>
                             <h3 className="mt-5 text-[15px] font-bold text-[#12306e]">{title}</h3>
                             <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">{detail}</p>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
             </section>
@@ -367,7 +368,7 @@ export default function QualityPage() {
                 <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
                     <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
                         <div>
-                            <motion.p
+                            <m.p
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
@@ -375,9 +376,9 @@ export default function QualityPage() {
                                 className="text-xs font-medium uppercase tracking-[0.3em] text-white/50"
                             >
                                 The process
-                            </motion.p>
+                            </m.p>
 
-                            <motion.h2
+                            <m.h2
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
@@ -385,9 +386,9 @@ export default function QualityPage() {
                                 className="mt-4 max-w-xl text-[28px] font-bold leading-tight text-white md:text-[36px]"
                             >
                                 How every batch is proven.
-                            </motion.h2>
+                            </m.h2>
 
-                            <motion.p
+                            <m.p
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
@@ -396,10 +397,10 @@ export default function QualityPage() {
                             >
                                 From raw material to a sealed, verifiable unit — five
                                 steps, none of them skipped.
-                            </motion.p>
+                            </m.p>
                         </div>
 
-                        <motion.div
+                        <m.div
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.3 }}
@@ -416,17 +417,17 @@ export default function QualityPage() {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/50 via-transparent to-transparent" />
                             </div>
-                        </motion.div>
+                        </m.div>
                     </div>
 
-                    <motion.ol
+                    <m.ol
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
                         variants={container}
                         className="relative mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4"
                     >
-                        <motion.div
+                        <m.div
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true, amount: 0.4 }}
@@ -437,14 +438,14 @@ export default function QualityPage() {
                         />
 
                         {PROCESS_STEPS.map((step, i) => (
-                            <motion.li
+                            <m.li
                                 key={step.title}
                                 variants={edgeVariants(i % 2 === 0 ? "bottom" : "top")}
                                 whileHover={{ y: -6, backgroundColor: "rgba(255,255,255,0.07)" }}
                                 transition={{ type: "spring", stiffness: 260, damping: 18 }}
                                 className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-5"
                             >
-                                <motion.div
+                                <m.div
                                     initial={{ scale: 0 }}
                                     whileInView={{ scale: 1 }}
                                     viewport={{ once: true, amount: 0.6 }}
@@ -452,21 +453,21 @@ export default function QualityPage() {
                                     className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white"
                                 >
                                     {i + 1}
-                                </motion.div>
+                                </m.div>
                                 <h3 className="mt-4 text-sm font-semibold text-white">
                                     {step.title}
                                 </h3>
                                 <p className="mt-2 text-xs leading-relaxed text-white/55">
                                     {step.detail}
                                 </p>
-                            </motion.li>
+                            </m.li>
                         ))}
-                    </motion.ol>
+                    </m.ol>
                 </div>
             </section>
 
             <section className="mx-auto max-w-5xl px-6 py-20 md:py-28">
-                <motion.p
+                <m.p
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -474,9 +475,9 @@ export default function QualityPage() {
                     className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
                 >
                     Certificate of Analysis
-                </motion.p>
+                </m.p>
 
-                <motion.h2
+                <m.h2
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -484,10 +485,10 @@ export default function QualityPage() {
                     className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
                 >
                     What a sample COA looks like.
-                </motion.h2>
+                </m.h2>
 
                 <div className="relative mt-10">
-                    <motion.div
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
@@ -505,14 +506,14 @@ export default function QualityPage() {
                                 </p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <motion.div
+                                <m.div
                                     animate={{ scale: [1, 1.06, 1] }}
                                     transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                                     className="hidden items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 sm:inline-flex"
                                 >
                                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                                     PASS
-                                </motion.div>
+                                </m.div>
                                 <div className="relative h-12 w-12 flex-none overflow-hidden rounded-xl ring-1 ring-[#12306e]/10 sm:hidden">
                                     <Image
                                         src={coaSealMacro}
@@ -551,7 +552,7 @@ export default function QualityPage() {
                                 </thead>
                                 <tbody>
                                     {COA_ROWS.map((row, i) => (
-                                        <motion.tr
+                                        <m.tr
                                             key={row.test}
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
@@ -562,7 +563,7 @@ export default function QualityPage() {
                                             <td className="px-6 py-3 font-medium sm:px-8">{row.test}</td>
                                             <td className="px-6 py-3 text-[#12306e]/60 sm:px-8">{row.spec}</td>
                                             <td className="px-6 py-3 font-semibold sm:px-8">{row.result}</td>
-                                        </motion.tr>
+                                        </m.tr>
                                     ))}
                                 </tbody>
                             </table>
@@ -572,9 +573,9 @@ export default function QualityPage() {
                             Analysed by an independent laboratory. Representative sample
                             shown for illustration.
                         </p>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
                         whileInView={{ opacity: 1, scale: 1, rotate: -6 }}
                         viewport={{ once: true, amount: 0.5 }}
@@ -589,12 +590,12 @@ export default function QualityPage() {
                             sizes="160px"
                             className="object-cover"
                         />
-                    </motion.div>
+                    </m.div>
                 </div>
             </section>
 
             <section className="mx-auto max-w-5xl px-6 pb-20 md:pb-28">
-                <motion.p
+                <m.p
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -602,9 +603,9 @@ export default function QualityPage() {
                     className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
                 >
                     Read the proof
-                </motion.p>
+                </m.p>
 
-                <motion.h2
+                <m.h2
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
@@ -612,9 +613,9 @@ export default function QualityPage() {
                     className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
                 >
                     What a Certificate of Analysis tells you.
-                </motion.h2>
+                </m.h2>
 
-                <motion.div
+                <m.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
@@ -622,7 +623,7 @@ export default function QualityPage() {
                     className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3"
                 >
                     {COA_EXPLAINER.map((item, i) => (
-                        <motion.div
+                        <m.div
                             key={item.title}
                             variants={edgeVariants(i === 0 ? "left" : i === 1 ? "bottom" : "right")}
                             whileHover={cardHover}
@@ -632,14 +633,15 @@ export default function QualityPage() {
                             <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">
                                 {item.detail}
                             </p>
-                        </motion.div>
+                        </m.div>
                     ))}
-                </motion.div>
+                </m.div>
             </section>
 
             <MavericVerify />
 
             <Footer />
-        </main>
+            </main>
+        </LazyMotion>
     );
 }

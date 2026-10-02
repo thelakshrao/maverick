@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VerificationModal from "@/components/VerificationModal";
@@ -61,10 +61,11 @@ export default function VerifyCodePage() {
     }
 
     return (
-        <main
-            data-navbar="dark"
-            className="relative min-h-dvh overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]"
-        >
+        <LazyMotion features={domAnimation}>
+            <main
+                data-navbar="dark"
+                className="relative min-h-dvh overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8]"
+            >
             <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
                 <Image
                     src={styleproduct1}
@@ -86,22 +87,22 @@ export default function VerifyCodePage() {
             <Navbar />
 
             <div className="relative z-10 flex min-h-dvh items-center justify-center px-4 py-28">
-                <motion.div
+                <m.div
                     initial="hidden"
                     animate="visible"
                     variants={container}
                     className="w-full max-w-md"
                 >
-                    <motion.div variants={rise} className="mb-6 text-center">
+                    <m.div variants={rise} className="mb-6 text-center">
                         <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/50">
                             Product Verification
                         </p>
                         <h1 className="mt-3 text-2xl font-bold text-white md:text-3xl">
                             Is your vial the real thing?
                         </h1>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.div
+                    <m.div
                         variants={rise}
                         className="relative overflow-hidden rounded-[28px] border border-white/20 shadow-[0_40px_80px_-30px_rgba(5,11,46,0.6)]"
                     >
@@ -162,7 +163,7 @@ export default function VerifyCodePage() {
                                     />
                                 </div>
 
-                                <motion.button
+                                <m.button
                                     type="submit"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.97 }}
@@ -170,7 +171,7 @@ export default function VerifyCodePage() {
                                     className="flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-white text-sm font-semibold text-[#12306e] shadow-lg disabled:opacity-70"
                                 >
                                     {loading ? (
-                                        <motion.span
+                                        <m.span
                                             animate={{ rotate: 360 }}
                                             transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                                             className="h-4 w-4 rounded-full border-2 border-[#12306e]/30 border-t-[#12306e]"
@@ -181,7 +182,7 @@ export default function VerifyCodePage() {
                                             <span aria-hidden>→</span>
                                         </>
                                     )}
-                                </motion.button>
+                                </m.button>
                             </form>
 
                             <div className="mt-5 flex items-start gap-2.5 rounded-xl border border-amber-300/25 bg-amber-300/[0.06] px-4 py-3.5 text-xs leading-relaxed text-amber-100/90">
@@ -193,9 +194,9 @@ export default function VerifyCodePage() {
                                 </span>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.p
+                    <m.p
                         variants={rise}
                         className="mt-6 text-center text-xs text-white/50"
                     >
@@ -203,8 +204,8 @@ export default function VerifyCodePage() {
                         <a href="/contact" className="font-medium text-white underline underline-offset-2">
                             Contact support
                         </a>
-                    </motion.p>
-                </motion.div>
+                    </m.p>
+                </m.div>
             </div>
 
             <Footer />
@@ -215,6 +216,7 @@ export default function VerifyCodePage() {
                 result={result}
                 codes={{ code1, code2 }}
             />
-        </main>
+            </main>
+        </LazyMotion>
     );
 }

@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import man1 from "@/images/man1.png";
-import styleproduct1 from "@/images/styleproduct1.png";
 import logo from "@/images/logo.png";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -142,190 +141,71 @@ const cornerClass = [
     "rounded-br-3xl",
 ];
 
+// CSS gradient replaces styleproduct1 decorative inline background images in the mobile grid —
+// the image was inlined via backgroundImage style at 20% opacity, serving no semantic purpose.
+const CARD_GRADIENTS = [
+    "radial-gradient(ellipse 120% 120% at -20% -20%, rgba(91,141,239,0.35) 0%, transparent 60%)",
+    "radial-gradient(ellipse 120% 120% at 120% -20%, rgba(169,196,255,0.30) 0%, transparent 60%)",
+    "radial-gradient(ellipse 120% 120% at -20% 120%, rgba(63,126,232,0.30) 0%, transparent 60%)",
+    "radial-gradient(ellipse 120% 120% at 120% 120%, rgba(91,141,239,0.25) 0%, transparent 60%)",
+];
+
 export default function MaverickStats() {
     return (
-        <div
-            data-navbar="light"
-            className="w-full max-w-6xl mx-auto bg-[#eef1f6] py-8 md:py-12"
-        >
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{
-                    once: true,
-                    amount: 0,
-                }}
-                variants={headerContainer}
-                className="text-center mb-5 px-4 bg-[#eef1f6]"
+        <LazyMotion features={domAnimation} strict>
+            <div
+                data-navbar="light"
+                className="w-full max-w-6xl mx-auto bg-[#eef1f6] py-8 md:py-12"
             >
-                <motion.h3
-                    variants={headerRise}
-                    className="text-lg md:text-xl font-bold mb-1 text-[#12306e]"
-                >
-                    Why Choose Maveric Lab
-                </motion.h3>
-
-                <motion.p
-                    variants={headerRise}
-                    className="text-xs md:text-sm leading-relaxed text-[#12306e]/70"
-                >
-                    Every batch tested, verified, and traceable — precision you can trust.
-                </motion.p>
-
-                <motion.p
-                    variants={headerRise}
-                    className="text-xs md:text-sm leading-relaxed mt-1 max-w-2xl mx-auto text-[#12306e]/50"
-                >
-                    From raw material sourcing to final packaging, every step is
-                    documented and independently verified — so what's on the label is
-                    exactly what's in the vial.
-                </motion.p>
-
-                <motion.div
-                    variants={headerRise}
-                    className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-[10px] md:text-xs font-medium uppercase tracking-wide text-[#12306e]/50"
-                >
-                    <span>Third-Party Tested</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span>cGMP Compliant</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span>Full COA on Request</span>
-                </motion.div>
-            </motion.div>
-
-            <div data-navbar="dark" className="md:hidden grid grid-cols-2 px-4">
-                {allStats.map((s, i) => {
-                    const col = i % 2;
-                    const row = Math.floor(i / 2);
-
-                    return (
-                        <motion.div
-                            key={s.title}
-                            custom={i}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{
-                                once: true,
-                                amount: 0,
-                            }}
-                            variants={edgeVariants(s.edge)}
-                            whileTap={{ scale: 0.97 }}
-                            className={`relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] p-5 h-40 flex flex-col justify-center ${cornerClass[i]}`}
-                        >
-                            <div
-                                className="absolute inset-0 opacity-20 pointer-events-none"
-                                style={{
-                                    backgroundImage: `url(${styleproduct1.src})`,
-                                    backgroundSize: "200% 200%",
-                                    backgroundPosition: `${col * 100}% ${row * 100}%`,
-                                    backgroundRepeat: "no-repeat",
-                                }}
-                            />
-
-                            <div className="relative z-10 text-white">
-                                {s.icon ? (
-                                    <CoaIcon />
-                                ) : (
-                                    <div className="text-2xl font-bold leading-none">
-                                        {s.value}
-                                    </div>
-                                )}
-
-                                <div className="text-xs font-semibold mt-2">{s.title}</div>
-
-                                <div className="text-[10px] opacity-75 mt-1">{s.detail}</div>
-                            </div>
-                        </motion.div>
-                    );
-                })}
-            </div>
-
-            <section
-                data-navbar="dark"
-                className="
-          hidden md:flex
-          relative w-full overflow-hidden
-          rounded-[32px]
-          md:h-[25vh]
-          bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da]
-        "
-            >
-                <div className="absolute inset-0 h-full overflow-hidden">
-                    <Image
-                        src={styleproduct1}
-                        alt=""
-                        fill
-                        sizes="(min-width: 768px) 600px, 100vw"
-                        className="object-contain object-[5%_bottom] opacity-40"
-                    />
-
-                    <motion.div
-                        initial={{
-                            opacity: 0,
-                            x: -40,
-                        }}
-                        whileInView={{
-                            opacity: 1,
-                            x: 0,
-                        }}
-                        viewport={{
-                            once: true,
-                            amount: 0,
-                        }}
-                        transition={{
-                            duration: 0.7,
-                            ease: EASE,
-                        }}
-                        className="absolute inset-0 z-[1]"
-                    >
-                        <Image
-                            src={man1}
-                            alt=""
-                            fill
-                            sizes="(min-width: 768px) 600px, 100vw"
-                            className="object-contain object-[5%_bottom]"
-                        />
-                    </motion.div>
-                </div>
-
-                <motion.div
-                    initial={{
-                        opacity: 0,
-                        scale: 0.85,
-                    }}
-                    whileInView={{
-                        opacity: 0.18,
-                        scale: 1,
-                    }}
+                <m.div
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{
                         once: true,
                         amount: 0,
                     }}
-                    transition={{
-                        duration: 0.8,
-                        ease: EASE,
-                    }}
-                    className="absolute top-5 right-5 w-[50px] h-[50px] z-[2]"
+                    variants={headerContainer}
+                    className="text-center mb-5 px-4 bg-[#eef1f6]"
                 >
-                    <Image
-                        src={logo}
-                        alt=""
-                        fill
-                        sizes="50px"
-                        className="object-contain"
-                    />
-                </motion.div>
+                    <m.h3
+                        variants={headerRise}
+                        className="text-lg md:text-xl font-bold mb-1 text-[#12306e]"
+                    >
+                        Why Choose Maveric Lab
+                    </m.h3>
 
-                <div
-                    className="
-            absolute inset-y-0 right-0
-            w-[62%] z-[2]
-            flex items-center justify-end pr-14
-          "
-                >
-                    <div className="flex flex-nowrap justify-center gap-3">
-                        {allStats.map((s, i) => (
-                            <motion.div
+                    <m.p
+                        variants={headerRise}
+                        className="text-xs md:text-sm leading-relaxed text-[#12306e]/70"
+                    >
+                        Every batch tested, verified, and traceable — precision you can trust.
+                    </m.p>
+
+                    <m.p
+                        variants={headerRise}
+                        className="text-xs md:text-sm leading-relaxed mt-1 max-w-2xl mx-auto text-[#12306e]/50"
+                    >
+                        From raw material sourcing to final packaging, every step is
+                        documented and independently verified — so what's on the label is
+                        exactly what's in the vial.
+                    </m.p>
+
+                    <m.div
+                        variants={headerRise}
+                        className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-[10px] md:text-xs font-medium uppercase tracking-wide text-[#12306e]/50"
+                    >
+                        <span>Third-Party Tested</span>
+                        <span className="hidden sm:inline">•</span>
+                        <span>cGMP Compliant</span>
+                        <span className="hidden sm:inline">•</span>
+                        <span>Full COA on Request</span>
+                    </m.div>
+                </m.div>
+
+                <div data-navbar="dark" className="md:hidden grid grid-cols-2 px-4">
+                    {allStats.map((s, i) => {
+                        return (
+                            <m.div
                                 key={s.title}
                                 custom={i}
                                 initial="hidden"
@@ -335,11 +215,127 @@ export default function MaverickStats() {
                                     amount: 0,
                                 }}
                                 variants={edgeVariants(s.edge)}
-                                whileHover={{
-                                    y: -6,
-                                    borderColor: "rgba(255,255,255,0.5)",
-                                }}
-                                className="
+                                whileTap={{ scale: 0.97 }}
+                                className={`relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da] p-5 h-40 flex flex-col justify-center ${cornerClass[i]}`}
+                            >
+                                {/* CSS radial gradient replaces styleproduct1 inline background image */}
+                                <div
+                                    className="absolute inset-0 pointer-events-none"
+                                    aria-hidden
+                                    style={{ background: CARD_GRADIENTS[i] }}
+                                />
+
+                                <div className="relative z-10 text-white">
+                                    {s.icon ? (
+                                        <CoaIcon />
+                                    ) : (
+                                        <div className="text-2xl font-bold leading-none">
+                                            {s.value}
+                                        </div>
+                                    )}
+
+                                    <div className="text-xs font-semibold mt-2">{s.title}</div>
+
+                                    <div className="text-[10px] opacity-75 mt-1">{s.detail}</div>
+                                </div>
+                            </m.div>
+                        );
+                    })}
+                </div>
+
+                <section
+                    data-navbar="dark"
+                    className="
+          hidden md:flex
+          relative w-full overflow-hidden
+          rounded-[32px]
+          md:h-[25vh]
+          bg-gradient-to-br from-[#050b2e] via-[#16337f] to-[#4a77da]
+        "
+                >
+                    <div className="absolute inset-0 h-full overflow-hidden">
+                        {/* man1.png is decorative but adds visual weight on desktop — kept but with accurate sizes */}
+                        <m.div
+                            initial={{
+                                opacity: 0,
+                                x: -40,
+                            }}
+                            whileInView={{
+                                opacity: 1,
+                                x: 0,
+                            }}
+                            viewport={{
+                                once: true,
+                                amount: 0,
+                            }}
+                            transition={{
+                                duration: 0.7,
+                                ease: EASE,
+                            }}
+                            className="absolute inset-0 z-[1]"
+                        >
+                            <Image
+                                src={man1}
+                                alt=""
+                                fill
+                                sizes="(min-width: 768px) 40vw, 0px"
+                                className="object-contain object-[5%_bottom]"
+                            />
+                        </m.div>
+                    </div>
+
+                    <m.div
+                        initial={{
+                            opacity: 0,
+                            scale: 0.85,
+                        }}
+                        whileInView={{
+                            opacity: 0.18,
+                            scale: 1,
+                        }}
+                        viewport={{
+                            once: true,
+                            amount: 0,
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            ease: EASE,
+                        }}
+                        className="absolute top-5 right-5 w-[50px] h-[50px] z-[2]"
+                    >
+                        <Image
+                            src={logo}
+                            alt=""
+                            fill
+                            sizes="50px"
+                            className="object-contain"
+                        />
+                    </m.div>
+
+                    <div
+                        className="
+            absolute inset-y-0 right-0
+            w-[62%] z-[2]
+            flex items-center justify-end pr-14
+          "
+                    >
+                        <div className="flex flex-nowrap justify-center gap-3">
+                            {allStats.map((s, i) => (
+                                <m.div
+                                    key={s.title}
+                                    custom={i}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{
+                                        once: true,
+                                        amount: 0,
+                                    }}
+                                    variants={edgeVariants(s.edge)}
+                                    whileHover={{
+                                        y: -6,
+                                        borderColor: "rgba(255,255,255,0.5)",
+                                    }}
+                                    className="
                   flex-none
                   w-36 h-32
                   p-4
@@ -347,26 +343,26 @@ export default function MaverickStats() {
                   border border-white/[0.28]
                   rounded-xl
                   text-white
-                  backdrop-blur-sm
                   flex flex-col justify-center
                 "
-                            >
-                                {s.icon ? (
-                                    <CoaIcon />
-                                ) : (
-                                    <div className="text-xl font-bold leading-none">
-                                        {s.value}
-                                    </div>
-                                )}
+                                >
+                                    {s.icon ? (
+                                        <CoaIcon />
+                                    ) : (
+                                        <div className="text-xl font-bold leading-none">
+                                            {s.value}
+                                        </div>
+                                    )}
 
-                                <div className="text-[11px] font-semibold mt-1">{s.title}</div>
+                                    <div className="text-[11px] font-semibold mt-1">{s.title}</div>
 
-                                <div className="text-[9px] opacity-75 mt-1">{s.detail}</div>
-                            </motion.div>
-                        ))}
+                                    <div className="text-[9px] opacity-75 mt-1">{s.detail}</div>
+                                </m.div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+        </LazyMotion>
     );
 }

@@ -143,12 +143,18 @@ export default function ParticleLogo({
         let baseSize = 4;
         let data = null;
         let particles = [];
+        // Visibility state: both must be true to run the RAF loop.
+        let isVisible = true;   // Intersection Observer
+        let isTabVisible = !document.hidden; // Page Visibility API
         const mouse = { x: -9999, y: -9999, active: false };
         const tilt = { x: 0, y: 0, tx: 0, ty: 0 };
 
+        // Cap device pixel ratio: 2 on desktop, 1.5 on mobile to limit canvas pixel count.
+        const MAX_DPR = isMobile ? 1.5 : 2;
+
         const layout = () => {
             const sr = stage.getBoundingClientRect();
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
             W = sr.width + MARGIN * 2;
             H = sr.height + MARGIN * 2;
             canvas.width = Math.round(W * dpr);
@@ -236,6 +242,12 @@ export default function ParticleLogo({
 
                 const frame = (now) => {
                     if (!alive) return;
+                    // Pause the loop when not visible or tab is hidden — saves ~100% GPU on mobile.
+                    if (!isVisible || !isTabVisible) {
+                        raf = requestAnimationFrame(frame);
+                        last = now; // reset dt so particles don't leap on resume
+                        return;
+                    }
                     raf = requestAnimationFrame(frame);
                     const dt = Math.min((now - last) / 16.667, 2.5);
                     last = now;
@@ -293,6 +305,21 @@ export default function ParticleLogo({
             })
             .catch((err) => console.error(err.message));
 
+        // Intersection Observer — pause when the canvas is not in the viewport.
+        const io = new IntersectionObserver(
+            (entries) => {
+                isVisible = entries[0].isIntersecting;
+            },
+            { threshold: 0 }
+        );
+        io.observe(stage);
+
+        // Page Visibility API — pause when the browser tab is hidden.
+        const onVisibilityChange = () => {
+            isTabVisible = !document.hidden;
+        };
+        document.addEventListener("visibilitychange", onVisibilityChange);
+
         const ro = new ResizeObserver(layout);
         ro.observe(stage);
         window.addEventListener("pointermove", onMove, { passive: true });
@@ -306,6 +333,8 @@ export default function ParticleLogo({
             alive = false;
             cancelAnimationFrame(raf);
             ro.disconnect();
+            io.disconnect();
+            document.removeEventListener("visibilitychange", onVisibilityChange);
             window.removeEventListener("pointermove", onMove);
             window.removeEventListener("pointerdown", onMove);
             window.removeEventListener("pointerup", onLeave);

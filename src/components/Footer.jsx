@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/images/logo.png";
-import styleproduct1 from "@/images/styleproduct1.png";
 import { categories } from "@/data/products";
 
 const LINK_COLUMNS = [
@@ -29,12 +28,12 @@ const LINK_COLUMNS = [
 // add "Peptides" (or anything else) to `categories` in data/products.js
 // and it shows up here automatically, with no dead links.
 const productLinks = [
-    { label: "All products", href: "/product" },
+    { label: "All products", href: "/products" },
     ...categories
         .filter((c) => c !== "All")
         .map((c) => ({
             label: c,
-            href: `/product?category=${encodeURIComponent(c)}`,
+            href: `/products?category=${encodeURIComponent(c)}`,
         })),
 ];
 
@@ -46,23 +45,15 @@ export default function Footer() {
             data-navbar="dark"
             className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#1b3f8c]"
         >
-            <div className="pointer-events-none absolute inset-0 opacity-[0.06]" aria-hidden>
-                <Image
-                    src={styleproduct1}
-                    alt=""
-                    fill
-                    sizes="100vw"
-                    className="object-cover object-[80%_center]"
-                />
-            </div>
-
+            {/* CSS radial gradients replace the blur-3xl divs and styleproduct1 decorative image
+                — eliminates two large paint layers and an unnecessary image request */}
             <div
-                className="pointer-events-none absolute -left-24 top-0 h-[360px] w-[360px] rounded-full bg-[#5b8def]/20 blur-3xl"
+                className="pointer-events-none absolute inset-0"
                 aria-hidden
-            />
-            <div
-                className="pointer-events-none absolute right-0 bottom-0 h-[300px] w-[300px] rounded-full bg-[#3f7ee8]/20 blur-3xl"
-                aria-hidden
+                style={{
+                    background:
+                        "radial-gradient(ellipse 50% 60% at -5% 0%, rgba(91,141,239,0.22) 0%, transparent 80%), radial-gradient(ellipse 40% 50% at 105% 100%, rgba(63,126,232,0.18) 0%, transparent 70%)",
+                }}
             />
 
             <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-10 md:pt-20">
