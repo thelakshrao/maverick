@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -149,7 +149,7 @@ function ProductCard({ product }) {
     );
 }
 
-export default function ProductsPage() {
+function ProductsContent() {
     const searchParams = useSearchParams();
     const categoryParam = searchParams.get("category");
 
@@ -365,5 +365,13 @@ export default function ProductsPage() {
                 <Footer />
             </main>
         </LazyMotion>
+    );
+}
+
+export default function ProductsPage() {
+    return (
+        <Suspense fallback={<main className="min-h-screen bg-[#f6f7fb]" />}>
+            <ProductsContent />
+        </Suspense>
     );
 }
