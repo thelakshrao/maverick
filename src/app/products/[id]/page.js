@@ -98,8 +98,11 @@ export default function ProductDetailPage() {
                         Products
                     </Link>
                     <span aria-hidden>/</span>
-                    <Link href="/products" className="hover:text-[#3459c9]">
-                        Oils
+                    <Link
+                        href={`/products?category=${encodeURIComponent(product.category)}`}
+                        className="hover:text-[#3459c9]"
+                    >
+                        {product.category}
                     </Link>
                     <span aria-hidden>/</span>
                     <span className="text-[#0b1a4a]">{product.name}</span>
@@ -156,7 +159,7 @@ export default function ProductDetailPage() {
                                 href="/products"
                                 className="inline-flex h-12 items-center justify-center rounded-xl border border-[#d7dcef] px-6 text-sm font-semibold text-[#0b1a4a] transition-colors hover:bg-white"
                             >
-                                ← Back to all oils
+                                ← Back to all {product.category.toLowerCase()}
                             </Link>
                         </div>
                     </motion.div>
@@ -318,7 +321,7 @@ export default function ProductDetailPage() {
                                     </div>
                                     <div className="px-2 pb-2 pt-5">
                                         <p className="text-xs font-semibold uppercase tracking-wide text-[#3459c9]">
-                                            Oils
+                                            {oil.category}
                                         </p>
                                         <h3 className="mt-1 text-lg font-bold text-[#0b1a4a]">
                                             {oil.name}

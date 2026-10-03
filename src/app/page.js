@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import MavericVerify from "@/components/Mavericverify";
 import Footer from "@/components/Footer";
 import DisclaimerModal from "@/components/DisclaimerModal";
+import Product from "@/components/Product";
 
 export default function Page() {
   return (
@@ -14,6 +15,7 @@ export default function Page() {
       <Navbar />
       <Home />
       <MavericStats />
+      <Product />
       <OurStandards />
       <PurityShowcase />
       <MavericVerify />

@@ -10,6 +10,16 @@ import winstrol100 from "@/images/oils/winstrol-100.png";
 import equipoise250 from "@/images/oils/equipoise-250.png";
 import masteron100 from "@/images/oils/masteron-100.png";
 
+import anavar10 from "@/images/orals/anavar-10.png";
+import arimidex1 from "@/images/orals/arimidex-1.png";
+import clen40 from "@/images/orals/clen-40.png";
+import anadrol50 from "@/images/orals/anadrol-50.png";
+import enclomiphene50 from "@/images/orals/enclomiphene-50.png";
+import stana10 from "@/images/orals/stana-10.png";
+import udiliv300 from "@/images/orals/udiliv-300.png";
+import danabol10 from "@/images/orals/danabol-10.png";
+import t340 from "@/images/orals/t3-40.png";
+
 export const products = [
     {
         id: "test-p-100",
@@ -295,6 +305,240 @@ export const products = [
         mechanism:
             "Drostanolone's 2-methyl group is the key structural difference from unmodified dihydrotestosterone, and is what gives it measurable metabolic stability relative to non-methylated dihydrotestosterone derivatives. Combined with the short propionate ester, serum drostanolone rises and clears quickly relative to longer-estered compounds in this catalogue.",
     },
+    {
+        id: "anavar-10",
+        name: "Anavar 10",
+        compound: "Oxandrolone",
+        dose: "10 MG/TAB",
+        size: "100 Tablets",
+        category: "Orals",
+        image: anavar10,
+        description:
+            "A mild, dihydrotestosterone-derived oral compound studied for lean tissue retention and strength with a comparatively low impact on natural hormone suppression. Dosed at 10mg per tablet, independently verified via high-performance liquid chromatography.",
+        subtitle:
+            "A mild oral compound valued for a favorable strength-to-side-effect profile.",
+        overview:
+            "Oxandrolone is a dihydrotestosterone-derived oral compound that does not aromatize to estrogen and carries one of the mildest anabolic:androgenic profiles among 17-alpha-alkylated orals studied in the literature. It is frequently referenced in research on lean tissue retention and strength where a lower-impact oral option is the variable of interest.",
+        halfLife: "~9–10 hours",
+        administration: "Oral",
+        formula: "C19H30O3",
+        benefits: [
+            "Mild profile — one of the better-tolerated 17-alpha-alkylated orals in comparative literature",
+            "Cannot be aromatized to estrogen",
+            "Frequently referenced in strength and lean-tissue retention research",
+            "Comparatively low impact on the hypothalamic-pituitary-gonadal axis relative to other oral compounds",
+        ],
+        mechanism:
+            "Oxandrolone carries a 17-alpha-alkyl group that allows it to survive first-pass liver metabolism when taken orally, but it is otherwise a dihydrotestosterone derivative and cannot be converted to estrogen by aromatase. Its binding affinity for the androgen receptor is comparatively mild relative to other 17-alpha-alkylated compounds, which is the structural basis for its reputation as a lower-impact oral option in the research literature.",
+    },
+    {
+        id: "arimidex-1",
+        name: "Arimidex 1",
+        compound: "Anastrozole",
+        dose: "1 MG/TAB",
+        size: "30 Tablets",
+        category: "Orals",
+        image: arimidex1,
+        description:
+            "A selective aromatase inhibitor studied for its ability to suppress estrogen conversion in research protocols involving aromatizable compounds. Dosed at 1mg per tablet, batch-verified for identity and purity.",
+        subtitle:
+            "A selective aromatase inhibitor used to study estrogen suppression.",
+        overview:
+            "Anastrozole is not an anabolic-androgenic steroid but an ancillary compound: a selective, non-steroidal aromatase inhibitor studied for its ability to block the conversion of testosterone and other aromatizable compounds into estrogen. It's a frequent reference compound in research examining estrogen-related side effects of aromatizable esters.",
+        halfLife: "~2 days",
+        administration: "Oral",
+        formula: "C17H19N5",
+        benefits: [
+            "Selective inhibition of the aromatase enzyme rather than estrogen receptor blockade",
+            "Frequently used as a reference ancillary compound in aromatization research",
+            "Non-steroidal structure, structurally distinct from the anabolic compounds it's often studied alongside",
+            "Well-characterized dose-response relationship in the pharmacological literature",
+        ],
+        mechanism:
+            "Anastrozole works by reversibly binding the aromatase enzyme, the enzyme responsible for converting androgens into estrogens in peripheral tissue. By occupying this enzyme, it reduces circulating estrogen levels produced from aromatizable compounds, rather than acting on the androgen receptor directly — a distinct mechanism from the anabolic compounds it's frequently studied alongside.",
+    },
+    {
+        id: "clen-40",
+        name: "Clen 40",
+        compound: "Clenbuterol",
+        dose: "40 MCG/TAB",
+        size: "100 Tablets",
+        category: "Orals",
+        image: clen40,
+        description:
+            "A beta-2 adrenergic agonist studied for its thermogenic and bronchodilating properties. Dosed at 40mcg per tablet, independently tested via high-performance liquid chromatography for identity and purity.",
+        subtitle:
+            "A beta-2 agonist studied for thermogenic and bronchodilating effects.",
+        overview:
+            "Clenbuterol is not a steroid but a beta-2 adrenergic agonist, originally developed as a bronchodilator and frequently referenced in research on thermogenesis and fat metabolism due to its stimulatory effect on beta-2 receptors. It has a notably long active window relative to its dosing interval, a property widely documented in the pharmacological literature.",
+        halfLife: "~36 hours",
+        administration: "Oral",
+        formula: "C12H18Cl2N2O",
+        benefits: [
+            "Potent beta-2 adrenergic receptor agonist activity",
+            "Long active window relative to dosing interval, well documented in the literature",
+            "Originally characterized as a bronchodilator, with secondary thermogenic properties frequently studied",
+            "Structurally distinct from anabolic-androgenic steroids — no interaction with the androgen receptor",
+        ],
+        mechanism:
+            "Clenbuterol selectively stimulates beta-2 adrenergic receptors, which are found in smooth muscle tissue including the airways and in adipose tissue. Activation of these receptors relaxes bronchial smooth muscle, the basis for its original use as a bronchodilator, and increases the rate of lipolysis in fat cells, which is why it's frequently referenced in thermogenesis research.",
+    },
+    {
+        id: "anadrol-50",
+        name: "Anadrol 50",
+        compound: "Oxymetholone",
+        dose: "50 MG/TAB",
+        size: "50 Tablets",
+        category: "Orals",
+        image: anadrol50,
+        description:
+            "A potent oral anabolic compound studied for rapid gains in mass and strength over short research windows. Dosed at 50mg per tablet, batch-verified for purity before release.",
+        subtitle:
+            "A potent oral compound studied for rapid mass and strength changes.",
+        overview:
+            "Oxymetholone is one of the most potent oral anabolic-androgenic steroids referenced in the literature, valued in research for producing rapid changes in mass and strength over comparatively short windows. Despite a dihydrotestosterone-related backbone, it does carry some estrogenic activity through a pathway distinct from classical aromatization, a point frequently discussed in comparative oral-compound research.",
+        halfLife: "~8–9 hours",
+        administration: "Oral",
+        formula: "C21H32O3",
+        benefits: [
+            "Among the most potent oral anabolic-androgenic steroids studied in the literature",
+            "Rapid onset of measurable effects relative to other oral compounds",
+            "Frequently used as a high-potency reference compound in oral-dosing studies",
+            "Distinct estrogenic pathway from classical aromatization, a point of interest in comparative research",
+        ],
+        mechanism:
+            "Oxymetholone is a 17-alpha-alkylated dihydrotestosterone derivative, which allows oral bioavailability but also means it is processed by the liver on every pass, a metabolic burden well documented in the literature. Its estrogenic activity is not primarily driven by aromatase conversion but is thought to involve the compound or its metabolites interacting with the estrogen receptor directly, a mechanism that distinguishes it from aromatizable testosterone-based compounds.",
+    },
+    {
+        id: "enclomiphene-50",
+        name: "Enclomiphene 50",
+        compound: "Enclomiphene Citrate",
+        dose: "50 MG/TAB",
+        size: "30 Tablets",
+        category: "Orals",
+        image: enclomiphene50,
+        description:
+            "A selective estrogen receptor modulator studied for its effect on the hypothalamic-pituitary-gonadal axis. Dosed at 50mg per tablet, independently verified for identity and purity.",
+        subtitle:
+            "A selective estrogen receptor modulator studied for hormonal axis research.",
+        overview:
+            "Enclomiphene Citrate is the trans-isomer of clomiphene citrate, a selective estrogen receptor modulator studied for its ability to block estrogen receptors in the hypothalamus, which in research models increases the signaling that drives the body's own hormone production. It is frequently referenced in post-cycle and hormonal-recovery research distinct from anabolic-androgenic steroid compounds.",
+        halfLife: "~10 hours",
+        administration: "Oral",
+        formula: "C26H28ClNO",
+        benefits: [
+            "Selective estrogen receptor modulator activity, distinct from aromatase inhibition",
+            "Frequently studied for its effect on endogenous hormone signaling",
+            "The active trans-isomer of clomiphene citrate, isolated for a more targeted research profile",
+            "Non-steroidal structure, structurally distinct from the anabolic-androgenic steroids it's often studied alongside",
+        ],
+        mechanism:
+            "Enclomiphene works by blocking estrogen receptors in the hypothalamus. Because the hypothalamus uses circulating estrogen as a feedback signal to regulate downstream hormone production, blocking that receptor leads the body to interpret estrogen levels as lower than they are, increasing the signaling cascade that drives endogenous hormone production — the basis for its frequent use in hormonal-recovery research.",
+    },
+    {
+        id: "stana-10",
+        name: "Stana 10",
+        compound: "Stanozolol",
+        dose: "10 MG/TAB",
+        size: "100 Tablets",
+        category: "Orals",
+        image: stana10,
+        description:
+            "An oral, 17-alpha-alkylated form of stanozolol studied for lean, dry changes in physique without significant water retention. Dosed at 10mg per tablet, independently lab-verified before release.",
+        subtitle:
+            "An oral form of stanozolol studied for lean, dry physique changes.",
+        overview:
+            "This oral tablet carries the same stanozolol molecule found in injectable preparations, but formulated with a 17-alpha-alkyl group so it survives oral administration and first-pass liver metabolism. Like its injectable counterpart, it carries the distinctive fused pyrazole ring in place of the standard steroid A-ring ketone and cannot be aromatized to estrogen.",
+        halfLife: "~9 hours",
+        administration: "Oral",
+        formula: "C21H32N2O",
+        benefits: [
+            "Same fused pyrazole-ring structure as the injectable form, now orally bioavailable",
+            "Not aromatizable to estrogen",
+            "Frequently referenced in lean-tissue, low-water-retention research comparisons",
+            "Short, fast-clearing activity window consistent with oral dosing studies",
+        ],
+        mechanism:
+            "The 17-alpha-alkyl group added to this oral version allows the stanozolol molecule to resist being broken down on its first pass through the liver, which is what makes oral administration viable. The underlying pyrazole-ring structure — the same feature found in the injectable form — remains the primary driver of its receptor behavior and its inability to aromatize to estrogen.",
+    },
+    {
+        id: "udiliv-300",
+        name: "Udiliv 300",
+        compound: "Ursodeoxycholic Acid",
+        dose: "300 MG/TAB",
+        size: "30 Tablets",
+        category: "Orals",
+        image: udiliv300,
+        description:
+            "A naturally occurring bile acid studied as a supportive compound for liver function during research protocols involving hepatically metabolized compounds. Dosed at 300mg per tablet, independently verified for purity.",
+        subtitle:
+            "A bile acid studied for its supportive role in liver-function research.",
+        overview:
+            "Ursodeoxycholic Acid is a naturally occurring bile acid, structurally unrelated to anabolic-androgenic steroids, studied for its role in altering bile composition and supporting hepatocyte function. It's frequently included in research protocols alongside orally active, liver-metabolized compounds as a supportive reference agent rather than a primary compound of interest.",
+        halfLife: "~4–6 days",
+        administration: "Oral",
+        formula: "C24H40O4",
+        benefits: [
+            "A naturally occurring bile acid, structurally distinct from anabolic-androgenic steroids",
+            "Studied for its role in supporting hepatocyte function during research protocols",
+            "Frequently used as a supportive reference agent alongside hepatically metabolized compounds",
+            "Well-characterized pharmacokinetic profile in the hepatology literature",
+        ],
+        mechanism:
+            "Ursodeoxycholic acid works by changing the composition of bile to be less damaging to liver cell membranes and by reducing the proportion of more cytotoxic bile acids in circulation. This supportive, non-hormonal mechanism is why it's frequently referenced as an adjunct compound in research protocols involving substances that place a metabolic burden on the liver, rather than as a primary research compound itself.",
+    },
+    {
+        id: "danabol-10",
+        name: "Danabol 10",
+        compound: "Metandienone",
+        dose: "10 MG/TAB",
+        size: "100 Tablets",
+        category: "Orals",
+        image: danabol10,
+        description:
+            "A fast-acting oral anabolic compound and one of the most widely referenced oral anabolic-androgenic steroids in the literature. Dosed at 10mg per tablet, batch-verified for identity and purity.",
+        subtitle:
+            "A fast-acting, extensively studied oral anabolic compound.",
+        overview:
+            "Metandienone, commonly known by the brand name Dianabol, is one of the earliest and most extensively documented oral anabolic-androgenic steroids in the research literature. It is a testosterone derivative with an added double bond that both slows its metabolism and allows for some aromatization to estrogen, a combination that produces its characteristically fast onset of measurable effects.",
+        halfLife: "~4.5–6 hours",
+        administration: "Oral",
+        formula: "C20H28O2",
+        benefits: [
+            "One of the most extensively documented oral anabolic-androgenic steroids in the literature",
+            "Fast onset of measurable effects relative to longer-estered injectable compounds",
+            "Frequently used as a historical reference compound in oral-steroid research",
+            "Well-characterized aromatization and metabolic pathway",
+        ],
+        mechanism:
+            "Metandienone's added carbon-1,2 double bond slows its breakdown relative to unmodified testosterone while still permitting some conversion to estrogen via aromatase, unlike many other 17-alpha-alkylated orals. Combined with its 17-alpha-alkylation for oral bioavailability, this structural profile is what produces the fast, pronounced onset of effects it is most referenced for in the literature.",
+    },
+    {
+        id: "t3-40",
+        name: "T3 40",
+        compound: "Triiodothyronine",
+        dose: "40 MCG/TAB",
+        size: "100 Tablets",
+        category: "Orals",
+        image: t340,
+        description:
+            "A synthetic form of the thyroid hormone triiodothyronine, studied for its role in regulating metabolic rate during research protocols. Dosed at 40mcg per tablet, independently verified for purity.",
+        subtitle:
+            "A synthetic thyroid hormone studied for its role in metabolic rate.",
+        overview:
+            "Triiodothyronine, commonly abbreviated T3, is the synthetic form of one of the body's two primary thyroid hormones and is structurally unrelated to anabolic-androgenic steroids. It is frequently referenced in metabolic-rate research due to its direct, fast-acting influence on cellular metabolism, in contrast to the body's naturally slower-converting precursor hormone, thyroxine.",
+        halfLife: "~1 day",
+        administration: "Oral",
+        formula: "C15H12I3NO4",
+        benefits: [
+            "Direct, fast-acting thyroid hormone activity, unlike the slower-converting precursor hormone",
+            "Frequently referenced in metabolic-rate and energy-expenditure research",
+            "Structurally unrelated to anabolic-androgenic steroids",
+            "Well-characterized receptor-binding behavior in the endocrinology literature",
+        ],
+        mechanism:
+            "Triiodothyronine binds directly to thyroid hormone receptors inside the cell nucleus, where it influences the transcription of genes that regulate metabolic rate. Because it is the already-active form of thyroid hormone — rather than thyroxine, which the body must first convert into triiodothyronine — its effects on metabolism are faster and more direct, which is the basis for its frequent use in metabolic-rate research.",
+    },
 ];
 
-export const categories = ["All", "Oils"];
+export const categories = ["All", "Oils", "Orals"];
