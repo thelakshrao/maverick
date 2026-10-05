@@ -141,8 +141,6 @@ const cornerClass = [
     "rounded-br-3xl",
 ];
 
-// CSS gradient replaces styleproduct1 decorative inline background images in the mobile grid —
-// the image was inlined via backgroundImage style at 20% opacity, serving no semantic purpose.
 const CARD_GRADIENTS = [
     "radial-gradient(ellipse 120% 120% at -20% -20%, rgba(91,141,239,0.35) 0%, transparent 60%)",
     "radial-gradient(ellipse 120% 120% at 120% -20%, rgba(169,196,255,0.30) 0%, transparent 60%)",
@@ -171,7 +169,7 @@ export default function MaverickStats() {
                         variants={headerRise}
                         className="text-lg md:text-xl font-bold mb-1 text-[#12306e]"
                     >
-                        Why Choose Maveric Lab
+                        Why Choose Maverick Lab
                     </m.h3>
 
                     <m.p

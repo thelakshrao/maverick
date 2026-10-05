@@ -62,12 +62,12 @@ export default function Footer() {
                         <Link href="/" className="inline-flex items-center gap-2.5">
                             <Image
                                 src={logo}
-                                alt="Maveric Lab"
+                                alt="Maverick Lab"
                                 className="h-20 w-auto"
                                 priority
                             />
                             <span className="text-lg font-bold tracking-tight text-white">
-                                MAVERIC
+                                Maverick
                             </span>
                         </Link>
                         <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">
@@ -118,7 +118,7 @@ export default function Footer() {
 
                 <div className="mt-14 border-t border-white/10 pt-6">
                     <div className="flex flex-col gap-3 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
-                        <p>&copy; {year} Maveric Lab. All rights reserved.</p>
+                        <p>&copy; {year} Maverick Lab. All rights reserved.</p>
                         <p>
                             Based in Malta. For investigational use. Not all products
                             are available in all regions.

@@ -11,10 +11,11 @@ import ParticleLogo from "@/components/ParticleLogo";
 import logoIcon from "@/images/logo1.png";
 import oilsFeatured from "@/images/category/oils-featured.png";
 import oralsFeatured from "@/images/category/orals-featured.png";
+import peptidesFeatured from "@/images/peptides/hgh-100.png";
 import { products, categories } from "@/data/products";
 
 const EASE = [0.16, 1, 0.3, 1];
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 9;
 
 const container = {
     hidden: {},
@@ -43,6 +44,7 @@ function shuffle(arr) {
 const CATEGORY_TILES = [
     { category: "Oils", image: oilsFeatured },
     { category: "Orals", image: oralsFeatured },
+    { category: "Peptides", image: peptidesFeatured },
 ];
 
 const CATEGORY_COPY = {
@@ -58,13 +60,19 @@ const CATEGORY_COPY = {
         intro:
             "Every batch is verified via high-performance liquid chromatography for identity, purity, and concentration before release. Precision-dosed tablets, tamper-evident packaging, full batch traceability.",
     },
+    Peptides: {
+        eyebrow: "Peptides",
+        title: "High-purity research peptides",
+        intro:
+            "Every batch is verified via high-performance liquid chromatography for identity, purity, and concentration before release. Lyophilized, nitrogen-filled vials with tamper-evident packaging and full batch traceability.",
+    },
 };
 
 const DEFAULT_COPY = {
     eyebrow: "Our Products",
     title: "Every form, one standard.",
     intro:
-        "Precision-dosed products formulated for real protocols and verified in every batch. Every compound is manufactured under strict quality controls, tested by high-performance liquid chromatography for identity, purity, and concentration, and released only after it meets our specification. Sterile multi-dose vials and precision-dosed tablets are sealed with tamper-evident packaging, and every batch is fully traceable from raw material to finished product. Whether you are looking for injectable oils or oral tablets, each product page lists the compound, strength, and presentation so you know exactly what you are getting. Choose a category to explore the range, or search by name or compound to find something specific.",
+        "Precision-dosed products formulated for real protocols and verified in every batch. Every compound is manufactured under strict quality controls, tested by high-performance liquid chromatography for identity, purity, and concentration, and released only after it meets our specification. Sterile multi-dose vials, precision-dosed tablets, and lyophilized peptide vials are sealed with tamper-evident packaging, and every batch is fully traceable from raw material to finished product. Whether you are looking for injectable oils, oral tablets, or research peptides, each product page lists the compound, strength, and presentation so you know exactly what you are getting. Choose a category to explore the range, or search by name or compound to find something specific.",
 };
 
 function Pagination({ page, totalPages, onChange }) {
@@ -160,8 +168,11 @@ function ProductsContent() {
 
     const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
+    const [randomizedAll, setRandomizedAll] = useState(products);
 
-    const randomizedAll = useMemo(() => shuffle(products), []);
+    useEffect(() => {
+        setRandomizedAll(shuffle(products));
+    }, []);
 
     const isSearching = query.trim().length > 0;
 
@@ -245,7 +256,7 @@ function ProductsContent() {
                     </div>
 
                     {!activeCategory && (
-                        <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {CATEGORY_TILES.map(({ category, image }) => {
                                 const count = products.filter((p) => p.category === category).length;
                                 return (

@@ -39,7 +39,7 @@ const trustPoints = [
     { title: "Lab-linked", detail: "Tied to that unit's actual COA" },
 ];
 
-export default function MavericVerify() {
+export default function MaverickVerify() {
     const [code1, setCode1] = useState("");
     const [code2, setCode2] = useState("");
     const [loading, setLoading] = useState(false);
@@ -108,14 +108,14 @@ export default function MavericVerify() {
                                 className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.3em] text-white/50"
                             >
                                 <span className="h-px w-6 bg-white/30" aria-hidden />
-                                Maveric Verify
+                                Maverick Verify
                             </m.p>
 
                             <m.h2
                                 variants={edgeVariants("left")}
                                 className="mt-6 max-w-lg text-[36px] font-bold leading-[1.1] text-white sm:text-[44px] md:text-[52px]"
                             >
-                                Genuine Maveric,{" "}
+                                Genuine Maverick,{" "}
                                 <span className="bg-gradient-to-r from-[#8fb8ff] via-[#a9a0ff] to-[#5b8def] bg-clip-text text-transparent">
                                     verified
                                 </span>{" "}
@@ -180,7 +180,7 @@ export default function MavericVerify() {
                         >
                             <Image
                                 src={athleteWoman}
-                                alt="Hand holding a verified Maveric Lab Tesamoreline vial"
+                                alt="Hand holding a verified Maverick Lab Tesamoreline vial"
                                 fill
                                 sizes="(min-width: 768px) 50vw, 100vw"
                                 className="object-cover object-center"
@@ -280,7 +280,7 @@ export default function MavericVerify() {
                             variants={edgeVariants("top")}
                             className="text-[34px] font-bold leading-[1.1] tracking-tight text-[#12306e] sm:text-[44px] md:text-[52px]"
                         >
-                            Partner with Maveric.
+                            Partner with Maverick.
                         </m.h2>
 
                         <m.p
@@ -290,7 +290,7 @@ export default function MavericVerify() {
                             We collaborate with academic institutions, biotech innovators, and
                             patient communities to bring transformative medicines to the world.
                             We also work with established pharmaceutical vendors looking to
-                            become official Maveric stockists.
+                            become official Maverick stockists.
                         </m.p>
 
                         <m.div
@@ -312,7 +312,7 @@ export default function MavericVerify() {
                                 whileTap={{ scale: 0.95 }}
                                 className="inline-flex h-12 items-center justify-center rounded-full border border-[#12306e]/15 bg-white px-8 text-sm font-semibold text-[#12306e] shadow-sm transition-transform duration-150 ease-out"
                             >
-                                About Maveric
+                                About Maverick
                             </m.a>
                         </m.div>
                     </m.div>

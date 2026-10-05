@@ -48,10 +48,10 @@ const COPY = {
     intro: {
         title1: "Why Accurate Peptide Dosing Matters",
         body1:
-            "Accurate dosing matters because even small calculation errors can lead to large differences in the final amount measured. The Maveric Lab Dosage Calculator helps support safer, more reliable preparation by giving you a quick reference for your dosing needs — useful for anyone who wants a consistent process and fewer manual mistakes. A well-structured calculation tool also builds confidence when handling sensitive materials that require exact measurement. It is not a replacement for professional advice, but it can be a helpful support resource. Used carefully, it promotes better planning, clearer dosing decisions, and more efficient peptide handling overall.",
+            "Accurate dosing matters because even small calculation errors can lead to large differences in the final amount measured. The Maverick Lab Dosage Calculator helps support safer, more reliable preparation by giving you a quick reference for your dosing needs — useful for anyone who wants a consistent process and fewer manual mistakes. A well-structured calculation tool also builds confidence when handling sensitive materials that require exact measurement. It is not a replacement for professional advice, but it can be a helpful support resource. Used carefully, it promotes better planning, clearer dosing decisions, and more efficient peptide handling overall.",
         title2: "Simple, User-Friendly Support for Daily Use",
         body2:
-            "The Maveric Lab Dosage Calculator is built for practical use and clear understanding. It focuses on simplicity so you can get answers without complex steps or confusing formulas — useful for routine calculations, quick checks, and basic planning before preparation. The clean approach fits anyone who wants a dependable tool for everyday workflows, and helps improve consistency by turning repeated calculations into an easy process. For anyone seeking a straightforward way to estimate peptide dosage, this calculator offers a helpful balance of speed, clarity, and usability while keeping the focus on accurate measurement.",
+            "The Maverick Lab Dosage Calculator is built for practical use and clear understanding. It focuses on simplicity so you can get answers without complex steps or confusing formulas — useful for routine calculations, quick checks, and basic planning before preparation. The clean approach fits anyone who wants a dependable tool for everyday workflows, and helps improve consistency by turning repeated calculations into an easy process. For anyone seeking a straightforward way to estimate peptide dosage, this calculator offers a helpful balance of speed, clarity, and usability while keeping the focus on accurate measurement.",
     },
     form: {
         syringeQuestion: "1. What type of syringe are you using?",
@@ -223,8 +223,8 @@ function OptionRow({
                     type="button"
                     onClick={() => onSelect(String(opt))}
                     className={`py-1.5 px-1.5 rounded-xl border text-xs font-bold transition flex flex-col items-center justify-center leading-none ${selected === String(opt) && selected !== "other"
-                            ? "bg-[#12306e]/8 border-[#12306e] text-[#12306e] shadow-2xs"
-                            : "bg-white border-[#12306e]/15 text-slate-700 hover:border-[#12306e]/40"
+                        ? "bg-[#12306e]/8 border-[#12306e] text-[#12306e] shadow-2xs"
+                        : "bg-white border-[#12306e]/15 text-slate-700 hover:border-[#12306e]/40"
                         }`}
                 >
                     <span>{opt}</span>
@@ -239,8 +239,8 @@ function OptionRow({
                 type="button"
                 onClick={() => onSelect("other")}
                 className={`py-1.5 px-1.5 rounded-xl border text-xs font-bold transition flex items-center justify-center ${selected === "other"
-                        ? "bg-[#12306e]/8 border-[#12306e] text-[#12306e] shadow-2xs"
-                        : "bg-white border-[#12306e]/15 text-slate-700 hover:border-[#12306e]/40"
+                    ? "bg-[#12306e]/8 border-[#12306e] text-[#12306e] shadow-2xs"
+                    : "bg-white border-[#12306e]/15 text-slate-700 hover:border-[#12306e]/40"
                     }`}
             >
                 {otherLabel}
@@ -431,8 +431,8 @@ export default function CalculatorPage() {
                                             type="button"
                                             onClick={() => setSyringeType(s.id)}
                                             className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-left transition ${syringeType === s.id
-                                                    ? "bg-[#12306e]/8 border-[#12306e]"
-                                                    : "bg-white border-[#12306e]/15 hover:border-[#12306e]/40"
+                                                ? "bg-[#12306e]/8 border-[#12306e]"
+                                                : "bg-white border-[#12306e]/15 hover:border-[#12306e]/40"
                                                 }`}
                                         >
                                             <span
@@ -489,8 +489,8 @@ export default function CalculatorPage() {
                                                 type="button"
                                                 onClick={() => handleUnitChange(u)}
                                                 className={`px-2.5 py-0.5 text-[10px] font-bold transition ${doseUnit === u
-                                                        ? "bg-[#12306e] text-white"
-                                                        : "bg-white text-[#12306e]/50 hover:bg-[#12306e]/5"
+                                                    ? "bg-[#12306e] text-white"
+                                                    : "bg-white text-[#12306e]/50 hover:bg-[#12306e]/5"
                                                     }`}
                                             >
                                                 {u}

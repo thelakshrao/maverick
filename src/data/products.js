@@ -20,6 +20,11 @@ import udiliv300 from "@/images/orals/udiliv-300.png";
 import danabol10 from "@/images/orals/danabol-10.png";
 import t340 from "@/images/orals/t3-40.png";
 
+import igf1lr31 from "@/images/peptides/igf1-lr3-1.png";
+import hgh100 from "@/images/peptides/hgh-100.png";
+import frag17619120 from "@/images/peptides/frag-176-191-20.png";
+
+
 export const products = [
     {
         id: "test-p-100",
@@ -539,6 +544,85 @@ export const products = [
         mechanism:
             "Triiodothyronine binds directly to thyroid hormone receptors inside the cell nucleus, where it influences the transcription of genes that regulate metabolic rate. Because it is the already-active form of thyroid hormone — rather than thyroxine, which the body must first convert into triiodothyronine — its effects on metabolism are faster and more direct, which is the basis for its frequent use in metabolic-rate research.",
     },
+
+    {
+        id: "igf1-lr3-1",
+        name: "IGF-1 LR3 1MG",
+        compound: "Insulin-like Growth Factor-1 Long R3",
+        dose: "100 MCG/VIAL",
+        size: "10 Vials (1 MG total)",
+        category: "Peptides",
+        image: igf1lr31,
+        description:
+            "A long-acting analogue of insulin-like growth factor-1 studied for its extended activity and reduced binding to IGF-binding proteins. Supplied as 10 nitrogen-filled vials of 100mcg each, batch-verified for identity and purity.",
+        subtitle:
+            "A modified IGF-1 analogue engineered for a longer active window.",
+        overview:
+            "IGF-1 LR3 is an 83-amino-acid analogue of human insulin-like growth factor-1, modified with an arginine substitution at position 3 and a 13-amino-acid N-terminal extension. These changes sharply reduce its affinity for IGF-binding proteins, which in research models leaves more of the peptide free to engage the IGF-1 receptor and extends its activity compared with native IGF-1.",
+        halfLife: "~20–30 hours",
+        administration: "Injectable (lyophilized, reconstituted)",
+        formula: "C400H625N111O115S9",
+        benefits: [
+            "Extended activity window — substantially longer than native IGF-1 in the literature",
+            "Reduced IGF-binding-protein affinity — more free peptide available to the receptor",
+            "Well-characterized IGF-1 receptor signalling in cell-culture and preclinical models",
+            "Frequently used as a reference analogue in growth-factor signalling research",
+        ],
+        mechanism:
+            "IGF-1 LR3 binds the IGF-1 receptor and activates downstream PI3K/Akt and MAPK signalling pathways involved in cell growth, proliferation, and protein synthesis. Its N-terminal extension and arginine substitution at position 3 weaken its binding to IGF-binding proteins, which normally sequester native IGF-1 — this is the structural basis for its longer-lasting activity in research models.",
+    },
+    {
+        id: "hgh-100",
+        name: "HGH 100 IU",
+        compound: "Somatropin",
+        dose: "10 IU/VIAL",
+        size: "10 Vials (100 IU total)",
+        category: "Peptides",
+        image: hgh100,
+        description:
+            "A recombinant human growth hormone studied across metabolic and growth-signalling research. Supplied as 10 nitrogen-filled vials of 10IU each, batch-verified for identity and purity.",
+        subtitle:
+            "A recombinant 191-amino-acid growth hormone, the reference standard in GH research.",
+        overview:
+            "Somatropin is the recombinant form of human growth hormone, a 191-amino-acid, single-chain protein identical in sequence to the pituitary-derived hormone. It is one of the most extensively characterized peptide hormones in the endocrinology literature and serves as the primary reference compound in growth hormone signalling research.",
+        halfLife: "~3–4 hours (subcutaneous)",
+        administration: "Injectable (lyophilized, reconstituted)",
+        formula: "C990H1528N262O300S7",
+        benefits: [
+            "Identical amino-acid sequence to endogenous human growth hormone",
+            "Extensively documented pharmacokinetics and receptor biology",
+            "Stimulates hepatic IGF-1 production, a key readout in GH-axis research",
+            "Standard reference compound for growth-hormone signalling studies",
+        ],
+        mechanism:
+            "Somatropin binds the growth hormone receptor, triggering JAK2/STAT5 signalling in target tissues. A major downstream effect is the stimulation of IGF-1 synthesis in the liver, which mediates many of the growth-promoting effects attributed to GH, while GH itself also acts directly on adipose tissue and metabolism.",
+    },
+    {
+        id: "frag-176-191-20",
+        name: "HGH Fragment 176-191",
+        compound: "HGH Fragment 176-191",
+        dose: "2 MG/VIAL",
+        size: "10 Vials (20 MG total)",
+        category: "Peptides",
+        image: frag17619120,
+        description:
+            "A modified C-terminal fragment of human growth hormone studied for its role in lipid metabolism. Supplied as 10 nitrogen-filled vials of 2mg each, batch-verified for identity and purity.",
+        subtitle:
+            "A 16-amino-acid GH fragment studied for lipid-metabolism research.",
+        overview:
+            "HGH Fragment 176-191 corresponds to the C-terminal region of the growth hormone molecule (amino acids 176 to 191). It has been studied as an isolated fragment because, in research models, it appears to retain GH's effects on lipid metabolism without the hormone's growth-promoting or insulin-antagonizing activity.",
+        halfLife: "Short-acting (under ~1 hour)",
+        administration: "Injectable (lyophilized, reconstituted)",
+        formula: "C78H125N23O23S2",
+        benefits: [
+            "Isolated fragment of the GH molecule — does not carry the full hormone's activity profile",
+            "Studied for effects on lipolysis and fat metabolism in preclinical models",
+            "Reported not to alter IGF-1 levels or glucose handling in the literature",
+            "Small, well-defined peptide suited to structure-activity research",
+        ],
+        mechanism:
+            "In preclinical studies the fragment is reported to stimulate lipolysis and inhibit lipogenesis in adipose tissue, mimicking the metabolic action of native GH on fat cells without binding the GH receptor in the same way as the full-length hormone. Its short sequence makes it a useful tool for isolating the lipid-metabolism domain of growth hormone.",
+    },
 ];
 
-export const categories = ["All", "Oils", "Orals"];
+export const categories = ["All", "Oils", "Orals", "Peptides"];

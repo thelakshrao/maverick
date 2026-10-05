@@ -186,461 +186,461 @@ export default function QualityPage() {
     return (
         <LazyMotion features={domAnimation}>
             <main className="w-full min-h-dvh bg-[#eef1f6] overflow-x-hidden">
-            <Navbar />
+                <Navbar />
 
-            <section
-                data-navbar="dark"
-                className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pt-32 pb-24 md:pt-40 md:pb-32"
-            >
-                <div className="pointer-events-none absolute inset-0 opacity-[0.05]" aria-hidden>
-                    <Image
-                        src={styleproduct1}
-                        alt=""
-                        fill
-                        sizes="100vw"
-                        className="object-cover object-[80%_center]"
-                    />
-                </div>
-                <FloatingOrb
-                    className="-left-24 top-1/3 h-[420px] w-[420px] bg-[#5b8def]/40"
-                    duration={9}
-                />
-                <FloatingOrb
-                    className="right-0 bottom-0 h-[320px] w-[320px] bg-[#8fb8ff]/30"
-                    duration={11}
-                    delay={1.2}
-                    driftX={-14}
-                    driftY={16}
-                />
-
-                <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 md:grid-cols-2">
-                    <m.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
-                        variants={container}
-                    >
-                        <m.p
-                            variants={edgeVariants("top")}
-                            className="text-xs font-medium uppercase tracking-[0.3em] text-white/60"
-                        >
-                            Quality &amp; Testing
-                        </m.p>
-
-                        <m.h1
-                            variants={edgeVariants("left")}
-                            className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]"
-                        >
-                            <span className="block font-light">Quality you can trust,</span>
-                            <span className="block font-bold">
-                                down to the{" "}
-                                <span className="bg-gradient-to-r from-[#8fb8ff] to-[#5b8def] bg-clip-text text-transparent">
-                                    molecule
-                                </span>
-                                .
-                            </span>
-                        </m.h1>
-
-                        <m.p
-                            variants={edgeVariants("right")}
-                            className="mt-6 max-w-md text-sm leading-relaxed text-white/70 md:text-base"
-                        >
-                            Every Maveric Lab product is made in-house under
-                            pharmaceutical-grade conditions and independently tested —
-                            so what&apos;s on the label is what&apos;s inside, every time.
-                        </m.p>
-
-                        <m.div
-                            variants={container}
-                            className="mt-12 grid max-w-md grid-cols-2 gap-x-6 gap-y-8"
-                        >
-                            {STATS.map((stat) => (
-                                <m.div key={stat.label} variants={popIn}>
-                                    <div className="text-2xl font-bold text-white md:text-3xl">
-                                        {stat.value}
-                                    </div>
-                                    <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">
-                                        {stat.label}
-                                    </div>
-                                </m.div>
-                            ))}
-                        </m.div>
-                    </m.div>
-
-                    <m.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
-                        variants={edgeVariants("right")}
-                        className="relative h-[340px] sm:h-[420px] md:h-[480px]"
-                    >
-                        <div className="pointer-events-none absolute -inset-4 rounded-[36px] bg-[#5b8def]/20 blur-2xl" />
-                        <div className="relative h-full w-full overflow-hidden rounded-[32px] ring-1 ring-white/10">
-                            <Image
-                                src={heroLab}
-                                alt="Lab technician inspecting a Maveric Lab vial"
-                                fill
-                                sizes="(min-width: 768px) 480px, 90vw"
-                                className="object-cover"
-                                priority
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/60 via-transparent to-transparent" />
-                        </div>
-
-                        <m.div
-                            initial={{ opacity: 0, y: 16, scale: 0.9 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            viewport={{ once: true, amount: 0.6 }}
-                            transition={{ delay: 0.5, type: "spring", stiffness: 130, damping: 16 }}
-                            className="absolute -bottom-6 left-6 right-6 sm:left-8 sm:right-auto sm:w-64"
-                        >
-                            <m.div
-                                animate={{ y: [0, -6, 0] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-                                className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)]"
-                            >
-                                <div className="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-[#12306e]/8 text-[#274690]">
-                                    <IconShield className="h-4 w-4" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-[#12306e]">
-                                        Batch Verified
-                                    </div>
-                                    <div className="text-[11px] text-[#12306e]/60">
-                                        Scan · Verify · Track
-                                    </div>
-                                </div>
-                            </m.div>
-                        </m.div>
-                    </m.div>
-                </div>
-            </section>
-
-            <section
-                data-navbar="light"
-                className="relative z-10 mx-auto mt-24 max-w-6xl px-4 md:mt-32 md:px-6"
-            >
-                <m.p
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={edgeVariants("top")}
-                    className="mb-4 text-center text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50 md:text-left"
+                <section
+                    data-navbar="dark"
+                    className="relative overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#3f7ee8] pt-32 pb-24 md:pt-40 md:pb-32"
                 >
-                    Our standards
-                </m.p>
+                    <div className="pointer-events-none absolute inset-0 opacity-[0.05]" aria-hidden>
+                        <Image
+                            src={styleproduct1}
+                            alt=""
+                            fill
+                            sizes="100vw"
+                            className="object-cover object-[80%_center]"
+                        />
+                    </div>
+                    <FloatingOrb
+                        className="-left-24 top-1/3 h-[420px] w-[420px] bg-[#5b8def]/40"
+                        duration={9}
+                    />
+                    <FloatingOrb
+                        className="right-0 bottom-0 h-[320px] w-[320px] bg-[#8fb8ff]/30"
+                        duration={11}
+                        delay={1.2}
+                        driftX={-14}
+                        driftY={16}
+                    />
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {PROMISES.map(({ edge, Icon, title, detail }, i) => (
+                    <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 px-6 md:grid-cols-2">
                         <m.div
-                            key={title}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.3 }}
-                            variants={edgeVariants(edge)}
-                            whileHover={cardHover}
-                            transition={{ delay: i * 0.06 }}
-                            className="rounded-3xl border border-[#12306e]/10 bg-white p-6 shadow-[0_20px_45px_-25px_rgba(18,48,110,0.35)]"
+                            variants={container}
                         >
-                            <m.div
-                                whileHover={{ rotate: 8, scale: 1.08 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                                className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#12306e]/8 text-[#274690]"
-                            >
-                                <Icon className="h-5 w-5" />
-                            </m.div>
-                            <h3 className="mt-5 text-[15px] font-bold text-[#12306e]">{title}</h3>
-                            <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">{detail}</p>
-                        </m.div>
-                    ))}
-                </div>
-            </section>
-
-            <section
-                data-navbar="dark"
-                className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32"
-            >
-                <FloatingOrb
-                    className="right-1/4 top-0 h-[300px] w-[300px] bg-[#5b8def]/25"
-                    duration={10}
-                />
-
-                <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
-                    <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
-                        <div>
                             <m.p
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, amount: 0.3 }}
                                 variants={edgeVariants("top")}
-                                className="text-xs font-medium uppercase tracking-[0.3em] text-white/50"
+                                className="text-xs font-medium uppercase tracking-[0.3em] text-white/60"
                             >
-                                The process
+                                Quality &amp; Testing
                             </m.p>
 
-                            <m.h2
+                            <m.h1
+                                variants={edgeVariants("left")}
+                                className="mt-6 text-[34px] leading-[1.15] text-white md:text-[52px] md:leading-[1.1]"
+                            >
+                                <span className="block font-light">Quality you can trust,</span>
+                                <span className="block font-bold">
+                                    down to the{" "}
+                                    <span className="bg-gradient-to-r from-[#8fb8ff] to-[#5b8def] bg-clip-text text-transparent">
+                                        molecule
+                                    </span>
+                                    .
+                                </span>
+                            </m.h1>
+
+                            <m.p
+                                variants={edgeVariants("right")}
+                                className="mt-6 max-w-md text-sm leading-relaxed text-white/70 md:text-base"
+                            >
+                                Every Maverick Lab product is made in-house under
+                                pharmaceutical-grade conditions and independently tested —
+                                so what&apos;s on the label is what&apos;s inside, every time.
+                            </m.p>
+
+                            <m.div
+                                variants={container}
+                                className="mt-12 grid max-w-md grid-cols-2 gap-x-6 gap-y-8"
+                            >
+                                {STATS.map((stat) => (
+                                    <m.div key={stat.label} variants={popIn}>
+                                        <div className="text-2xl font-bold text-white md:text-3xl">
+                                            {stat.value}
+                                        </div>
+                                        <div className="mt-1 text-[11px] uppercase tracking-wide text-white/50">
+                                            {stat.label}
+                                        </div>
+                                    </m.div>
+                                ))}
+                            </m.div>
+                        </m.div>
+
+                        <m.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.3 }}
+                            variants={edgeVariants("right")}
+                            className="relative h-[340px] sm:h-[420px] md:h-[480px]"
+                        >
+                            <div className="pointer-events-none absolute -inset-4 rounded-[36px] bg-[#5b8def]/20 blur-2xl" />
+                            <div className="relative h-full w-full overflow-hidden rounded-[32px] ring-1 ring-white/10">
+                                <Image
+                                    src={heroLab}
+                                    alt="Lab technician inspecting a Maverick Lab vial"
+                                    fill
+                                    sizes="(min-width: 768px) 480px, 90vw"
+                                    className="object-cover"
+                                    priority
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/60 via-transparent to-transparent" />
+                            </div>
+
+                            <m.div
+                                initial={{ opacity: 0, y: 16, scale: 0.9 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, amount: 0.6 }}
+                                transition={{ delay: 0.5, type: "spring", stiffness: 130, damping: 16 }}
+                                className="absolute -bottom-6 left-6 right-6 sm:left-8 sm:right-auto sm:w-64"
+                            >
+                                <m.div
+                                    animate={{ y: [0, -6, 0] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+                                    className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-[0_20px_45px_-20px_rgba(18,48,110,0.35)]"
+                                >
+                                    <div className="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-[#12306e]/8 text-[#274690]">
+                                        <IconShield className="h-4 w-4" />
+                                    </div>
+                                    <div>
+                                        <div className="text-sm font-bold text-[#12306e]">
+                                            Batch Verified
+                                        </div>
+                                        <div className="text-[11px] text-[#12306e]/60">
+                                            Scan · Verify · Track
+                                        </div>
+                                    </div>
+                                </m.div>
+                            </m.div>
+                        </m.div>
+                    </div>
+                </section>
+
+                <section
+                    data-navbar="light"
+                    className="relative z-10 mx-auto mt-24 max-w-6xl px-4 md:mt-32 md:px-6"
+                >
+                    <m.p
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={edgeVariants("top")}
+                        className="mb-4 text-center text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50 md:text-left"
+                    >
+                        Our standards
+                    </m.p>
+
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        {PROMISES.map(({ edge, Icon, title, detail }, i) => (
+                            <m.div
+                                key={title}
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
-                                variants={edgeVariants("left")}
-                                className="mt-4 max-w-xl text-[28px] font-bold leading-tight text-white md:text-[36px]"
+                                variants={edgeVariants(edge)}
+                                whileHover={cardHover}
+                                transition={{ delay: i * 0.06 }}
+                                className="rounded-3xl border border-[#12306e]/10 bg-white p-6 shadow-[0_20px_45px_-25px_rgba(18,48,110,0.35)]"
                             >
-                                How every batch is proven.
-                            </m.h2>
+                                <m.div
+                                    whileHover={{ rotate: 8, scale: 1.08 }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                                    className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#12306e]/8 text-[#274690]"
+                                >
+                                    <Icon className="h-5 w-5" />
+                                </m.div>
+                                <h3 className="mt-5 text-[15px] font-bold text-[#12306e]">{title}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">{detail}</p>
+                            </m.div>
+                        ))}
+                    </div>
+                </section>
 
-                            <m.p
+                <section
+                    data-navbar="dark"
+                    className="relative mt-24 overflow-hidden bg-gradient-to-br from-[#050b2e] via-[#12306e] to-[#274690] md:mt-32"
+                >
+                    <FloatingOrb
+                        className="right-1/4 top-0 h-[300px] w-[300px] bg-[#5b8def]/25"
+                        duration={10}
+                    />
+
+                    <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
+                        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
+                            <div>
+                                <m.p
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    variants={edgeVariants("top")}
+                                    className="text-xs font-medium uppercase tracking-[0.3em] text-white/50"
+                                >
+                                    The process
+                                </m.p>
+
+                                <m.h2
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    variants={edgeVariants("left")}
+                                    className="mt-4 max-w-xl text-[28px] font-bold leading-tight text-white md:text-[36px]"
+                                >
+                                    How every batch is proven.
+                                </m.h2>
+
+                                <m.p
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    variants={edgeVariants("right")}
+                                    className="mt-4 max-w-xl text-sm leading-relaxed text-white/60"
+                                >
+                                    From raw material to a sealed, verifiable unit — five
+                                    steps, none of them skipped.
+                                </m.p>
+                            </div>
+
+                            <m.div
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
                                 variants={edgeVariants("right")}
-                                className="mt-4 max-w-xl text-sm leading-relaxed text-white/60"
+                                className="relative h-[180px] md:h-[220px]"
                             >
-                                From raw material to a sealed, verifiable unit — five
-                                steps, none of them skipped.
-                            </m.p>
+                                <div className="relative h-full w-full overflow-hidden rounded-[24px] ring-1 ring-white/10">
+                                    <Image
+                                        src={processHplc}
+                                        alt="HPLC testing equipment used to verify each batch"
+                                        fill
+                                        sizes="(min-width: 768px) 400px, 90vw"
+                                        className="object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/50 via-transparent to-transparent" />
+                                </div>
+                            </m.div>
                         </div>
 
+                        <m.ol
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={container}
+                            className="relative mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4"
+                        >
+                            <m.div
+                                initial={{ scaleX: 0 }}
+                                whileInView={{ scaleX: 1 }}
+                                viewport={{ once: true, amount: 0.4 }}
+                                transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}
+                                style={{ transformOrigin: "left" }}
+                                className="pointer-events-none absolute left-0 right-0 top-4 hidden h-px bg-gradient-to-r from-white/0 via-white/25 to-white/0 lg:block"
+                                aria-hidden
+                            />
+
+                            {PROCESS_STEPS.map((step, i) => (
+                                <m.li
+                                    key={step.title}
+                                    variants={edgeVariants(i % 2 === 0 ? "bottom" : "top")}
+                                    whileHover={{ y: -6, backgroundColor: "rgba(255,255,255,0.07)" }}
+                                    transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                                    className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+                                >
+                                    <m.div
+                                        initial={{ scale: 0 }}
+                                        whileInView={{ scale: 1 }}
+                                        viewport={{ once: true, amount: 0.6 }}
+                                        transition={{ delay: 0.2 + i * 0.15, type: "spring", stiffness: 140, damping: 14 }}
+                                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white"
+                                    >
+                                        {i + 1}
+                                    </m.div>
+                                    <h3 className="mt-4 text-sm font-semibold text-white">
+                                        {step.title}
+                                    </h3>
+                                    <p className="mt-2 text-xs leading-relaxed text-white/55">
+                                        {step.detail}
+                                    </p>
+                                </m.li>
+                            ))}
+                        </m.ol>
+                    </div>
+                </section>
+
+                <section className="mx-auto max-w-5xl px-6 py-20 md:py-28">
+                    <m.p
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={edgeVariants("top")}
+                        className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
+                    >
+                        Certificate of Analysis
+                    </m.p>
+
+                    <m.h2
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={edgeVariants("left")}
+                        className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
+                    >
+                        What a sample COA looks like.
+                    </m.h2>
+
+                    <div className="relative mt-10">
                         <m.div
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ once: true, amount: 0.3 }}
-                            variants={edgeVariants("right")}
-                            className="relative h-[180px] md:h-[220px]"
+                            viewport={{ once: true, amount: 0.2 }}
+                            variants={edgeVariants("bottom")}
+                            whileHover={cardHover}
+                            className="overflow-hidden rounded-3xl border border-[#12306e]/10 bg-white shadow-[0_30px_70px_-35px_rgba(18,48,110,0.35)]"
                         >
-                            <div className="relative h-full w-full overflow-hidden rounded-[24px] ring-1 ring-white/10">
-                                <Image
-                                    src={processHplc}
-                                    alt="HPLC testing equipment used to verify each batch"
-                                    fill
-                                    sizes="(min-width: 768px) 400px, 90vw"
-                                    className="object-cover"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#050b2e]/50 via-transparent to-transparent" />
+                            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#12306e]/10 bg-[#12306e]/[0.03] px-6 py-5 sm:px-8">
+                                <div>
+                                    <p className="text-sm font-bold text-[#12306e]">
+                                        Tesamoreline 10 mg — Lyophilized Powder
+                                    </p>
+                                    <p className="mt-0.5 text-xs text-[#12306e]/50">
+                                        Batch ML-2603 · Method HPLC (RP)
+                                    </p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <m.div
+                                        animate={{ scale: [1, 1.06, 1] }}
+                                        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                                        className="hidden items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 sm:inline-flex"
+                                    >
+                                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                        PASS
+                                    </m.div>
+                                    <div className="relative h-12 w-12 flex-none overflow-hidden rounded-xl ring-1 ring-[#12306e]/10 sm:hidden">
+                                        <Image
+                                            src={coaSealMacro}
+                                            alt="Maverick Lab holographic verification seal"
+                                            fill
+                                            sizes="48px"
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                </div>
                             </div>
+
+                            <div className="grid grid-cols-2 gap-4 border-b border-[#12306e]/10 px-6 py-5 text-xs text-[#12306e]/60 sm:grid-cols-4 sm:px-8">
+                                <div>
+                                    <p className="text-[10px] uppercase tracking-wide text-[#12306e]/40">
+                                        Manufactured
+                                    </p>
+                                    <p className="mt-1 font-medium text-[#12306e]">04 Jan 2026</p>
+                                </div>
+                                <div>
+                                    <p className="text-[10px] uppercase tracking-wide text-[#12306e]/40">
+                                        Tested
+                                    </p>
+                                    <p className="mt-1 font-medium text-[#12306e]">10 Jan 2026</p>
+                                </div>
+                            </div>
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full min-w-[480px] text-left text-sm">
+                                    <thead>
+                                        <tr className="text-[11px] uppercase tracking-wide text-[#12306e]/40">
+                                            <th className="px-6 py-3 font-medium sm:px-8">Test</th>
+                                            <th className="px-6 py-3 font-medium sm:px-8">Specification</th>
+                                            <th className="px-6 py-3 font-medium sm:px-8">Result</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {COA_ROWS.map((row, i) => (
+                                            <m.tr
+                                                key={row.test}
+                                                initial={{ opacity: 0, x: -20 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                viewport={{ once: true, amount: 0.6 }}
+                                                transition={{ delay: i * 0.12, duration: 0.7, ease: EASE }}
+                                                className="border-t border-[#12306e]/10 text-[#12306e]"
+                                            >
+                                                <td className="px-6 py-3 font-medium sm:px-8">{row.test}</td>
+                                                <td className="px-6 py-3 text-[#12306e]/60 sm:px-8">{row.spec}</td>
+                                                <td className="px-6 py-3 font-semibold sm:px-8">{row.result}</td>
+                                            </m.tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p className="border-t border-[#12306e]/10 px-6 py-4 text-[11px] text-[#12306e]/40 sm:px-8">
+                                Analysed by an independent laboratory. Representative sample
+                                shown for illustration.
+                            </p>
+                        </m.div>
+
+                        <m.div
+                            initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
+                            whileInView={{ opacity: 1, scale: 1, rotate: -6 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                            transition={{ delay: 0.3, type: "spring", stiffness: 110, damping: 15 }}
+                            whileHover={{ rotate: 0, scale: 1.05 }}
+                            className="absolute -right-4 -top-10 hidden h-28 w-28 overflow-hidden rounded-2xl shadow-[0_20px_45px_-15px_rgba(18,48,110,0.5)] ring-2 ring-white sm:block md:-right-10 md:h-32 md:w-32"
+                        >
+                            <Image
+                                src={coaSealMacro}
+                                alt="Macro shot of a Maverick Lab holographic verification seal"
+                                fill
+                                sizes="160px"
+                                className="object-cover"
+                            />
                         </m.div>
                     </div>
+                </section>
 
-                    <m.ol
+                <section className="mx-auto max-w-5xl px-6 pb-20 md:pb-28">
+                    <m.p
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={edgeVariants("top")}
+                        className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
+                    >
+                        Read the proof
+                    </m.p>
+
+                    <m.h2
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        variants={edgeVariants("left")}
+                        className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
+                    >
+                        What a Certificate of Analysis tells you.
+                    </m.h2>
+
+                    <m.div
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
                         variants={container}
-                        className="relative mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4"
+                        className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3"
                     >
-                        <m.div
-                            initial={{ scaleX: 0 }}
-                            whileInView={{ scaleX: 1 }}
-                            viewport={{ once: true, amount: 0.4 }}
-                            transition={{ duration: 1.1, ease: EASE, delay: 0.2 }}
-                            style={{ transformOrigin: "left" }}
-                            className="pointer-events-none absolute left-0 right-0 top-4 hidden h-px bg-gradient-to-r from-white/0 via-white/25 to-white/0 lg:block"
-                            aria-hidden
-                        />
-
-                        {PROCESS_STEPS.map((step, i) => (
-                            <m.li
-                                key={step.title}
-                                variants={edgeVariants(i % 2 === 0 ? "bottom" : "top")}
-                                whileHover={{ y: -6, backgroundColor: "rgba(255,255,255,0.07)" }}
-                                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                                className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+                        {COA_EXPLAINER.map((item, i) => (
+                            <m.div
+                                key={item.title}
+                                variants={edgeVariants(i === 0 ? "left" : i === 1 ? "bottom" : "right")}
+                                whileHover={cardHover}
+                                className="rounded-2xl border border-[#12306e]/10 bg-white p-6"
                             >
-                                <m.div
-                                    initial={{ scale: 0 }}
-                                    whileInView={{ scale: 1 }}
-                                    viewport={{ once: true, amount: 0.6 }}
-                                    transition={{ delay: 0.2 + i * 0.15, type: "spring", stiffness: 140, damping: 14 }}
-                                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white"
-                                >
-                                    {i + 1}
-                                </m.div>
-                                <h3 className="mt-4 text-sm font-semibold text-white">
-                                    {step.title}
-                                </h3>
-                                <p className="mt-2 text-xs leading-relaxed text-white/55">
-                                    {step.detail}
+                                <h3 className="text-sm font-bold text-[#12306e]">{item.title}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">
+                                    {item.detail}
                                 </p>
-                            </m.li>
+                            </m.div>
                         ))}
-                    </m.ol>
-                </div>
-            </section>
-
-            <section className="mx-auto max-w-5xl px-6 py-20 md:py-28">
-                <m.p
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={edgeVariants("top")}
-                    className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
-                >
-                    Certificate of Analysis
-                </m.p>
-
-                <m.h2
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={edgeVariants("left")}
-                    className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
-                >
-                    What a sample COA looks like.
-                </m.h2>
-
-                <div className="relative mt-10">
-                    <m.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={edgeVariants("bottom")}
-                        whileHover={cardHover}
-                        className="overflow-hidden rounded-3xl border border-[#12306e]/10 bg-white shadow-[0_30px_70px_-35px_rgba(18,48,110,0.35)]"
-                    >
-                        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#12306e]/10 bg-[#12306e]/[0.03] px-6 py-5 sm:px-8">
-                            <div>
-                                <p className="text-sm font-bold text-[#12306e]">
-                                    Tesamoreline 10 mg — Lyophilized Powder
-                                </p>
-                                <p className="mt-0.5 text-xs text-[#12306e]/50">
-                                    Batch ML-2603 · Method HPLC (RP)
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <m.div
-                                    animate={{ scale: [1, 1.06, 1] }}
-                                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="hidden items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600 sm:inline-flex"
-                                >
-                                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                                    PASS
-                                </m.div>
-                                <div className="relative h-12 w-12 flex-none overflow-hidden rounded-xl ring-1 ring-[#12306e]/10 sm:hidden">
-                                    <Image
-                                        src={coaSealMacro}
-                                        alt="Maveric Lab holographic verification seal"
-                                        fill
-                                        sizes="48px"
-                                        className="object-cover"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4 border-b border-[#12306e]/10 px-6 py-5 text-xs text-[#12306e]/60 sm:grid-cols-4 sm:px-8">
-                            <div>
-                                <p className="text-[10px] uppercase tracking-wide text-[#12306e]/40">
-                                    Manufactured
-                                </p>
-                                <p className="mt-1 font-medium text-[#12306e]">04 Jan 2026</p>
-                            </div>
-                            <div>
-                                <p className="text-[10px] uppercase tracking-wide text-[#12306e]/40">
-                                    Tested
-                                </p>
-                                <p className="mt-1 font-medium text-[#12306e]">10 Jan 2026</p>
-                            </div>
-                        </div>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full min-w-[480px] text-left text-sm">
-                                <thead>
-                                    <tr className="text-[11px] uppercase tracking-wide text-[#12306e]/40">
-                                        <th className="px-6 py-3 font-medium sm:px-8">Test</th>
-                                        <th className="px-6 py-3 font-medium sm:px-8">Specification</th>
-                                        <th className="px-6 py-3 font-medium sm:px-8">Result</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {COA_ROWS.map((row, i) => (
-                                        <m.tr
-                                            key={row.test}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true, amount: 0.6 }}
-                                            transition={{ delay: i * 0.12, duration: 0.7, ease: EASE }}
-                                            className="border-t border-[#12306e]/10 text-[#12306e]"
-                                        >
-                                            <td className="px-6 py-3 font-medium sm:px-8">{row.test}</td>
-                                            <td className="px-6 py-3 text-[#12306e]/60 sm:px-8">{row.spec}</td>
-                                            <td className="px-6 py-3 font-semibold sm:px-8">{row.result}</td>
-                                        </m.tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p className="border-t border-[#12306e]/10 px-6 py-4 text-[11px] text-[#12306e]/40 sm:px-8">
-                            Analysed by an independent laboratory. Representative sample
-                            shown for illustration.
-                        </p>
                     </m.div>
+                </section>
 
-                    <m.div
-                        initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
-                        whileInView={{ opacity: 1, scale: 1, rotate: -6 }}
-                        viewport={{ once: true, amount: 0.5 }}
-                        transition={{ delay: 0.3, type: "spring", stiffness: 110, damping: 15 }}
-                        whileHover={{ rotate: 0, scale: 1.05 }}
-                        className="absolute -right-4 -top-10 hidden h-28 w-28 overflow-hidden rounded-2xl shadow-[0_20px_45px_-15px_rgba(18,48,110,0.5)] ring-2 ring-white sm:block md:-right-10 md:h-32 md:w-32"
-                    >
-                        <Image
-                            src={coaSealMacro}
-                            alt="Macro shot of a Maveric Lab holographic verification seal"
-                            fill
-                            sizes="160px"
-                            className="object-cover"
-                        />
-                    </m.div>
-                </div>
-            </section>
+                <MavericVerify />
 
-            <section className="mx-auto max-w-5xl px-6 pb-20 md:pb-28">
-                <m.p
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={edgeVariants("top")}
-                    className="text-xs font-medium uppercase tracking-[0.3em] text-[#12306e]/50"
-                >
-                    Read the proof
-                </m.p>
-
-                <m.h2
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                    variants={edgeVariants("left")}
-                    className="mt-4 max-w-lg text-[28px] font-bold leading-tight text-[#12306e] md:text-[36px]"
-                >
-                    What a Certificate of Analysis tells you.
-                </m.h2>
-
-                <m.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.2 }}
-                    variants={container}
-                    className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3"
-                >
-                    {COA_EXPLAINER.map((item, i) => (
-                        <m.div
-                            key={item.title}
-                            variants={edgeVariants(i === 0 ? "left" : i === 1 ? "bottom" : "right")}
-                            whileHover={cardHover}
-                            className="rounded-2xl border border-[#12306e]/10 bg-white p-6"
-                        >
-                            <h3 className="text-sm font-bold text-[#12306e]">{item.title}</h3>
-                            <p className="mt-2 text-sm leading-relaxed text-[#12306e]/60">
-                                {item.detail}
-                            </p>
-                        </m.div>
-                    ))}
-                </m.div>
-            </section>
-
-            <MavericVerify />
-
-            <Footer />
+                <Footer />
             </main>
         </LazyMotion>
     );

@@ -134,10 +134,10 @@ export default function ContactPage() {
                             className="mt-8 grid grid-cols-2 gap-3 sm:hidden"
                         >
                             {[
-                                { src: athleteWoman, alt: "An athlete who trusts Maveric Lab" },
+                                { src: athleteWoman, alt: "An athlete who trusts Maverick Lab" },
                                 { src: heroLab, alt: "Lab technician verifying a batch" },
                                 { src: athleteMan, alt: "Training with confidence in what you're taking" },
-                                { src: coaSealMacro, alt: "Maveric Lab holographic verification seal" },
+                                { src: coaSealMacro, alt: "Maverick Lab holographic verification seal" },
                             ].map((img, i) => (
                                 <motion.div
                                     key={img.alt}
@@ -160,7 +160,7 @@ export default function ContactPage() {
                                 style={{ rotate: -6 }}
                                 className="absolute left-0 top-0 h-[220px] w-[64%] overflow-hidden rounded-[24px] shadow-[0_25px_50px_-20px_rgba(18,48,110,0.4)] ring-4 ring-white"
                             >
-                                <Image src={athleteWoman} alt="An athlete who trusts Maveric Lab" fill sizes="320px" className="object-cover" />
+                                <Image src={athleteWoman} alt="An athlete who trusts Maverick Lab" fill sizes="320px" className="object-cover" />
                             </motion.div>
 
                             <motion.div
@@ -190,7 +190,7 @@ export default function ContactPage() {
                                 style={{ rotate: -8 }}
                                 className="absolute bottom-2 right-2 h-[130px] w-[34%] overflow-hidden rounded-[20px] shadow-[0_25px_50px_-20px_rgba(18,48,110,0.4)] ring-4 ring-white"
                             >
-                                <Image src={coaSealMacro} alt="Maveric Lab holographic verification seal" fill sizes="180px" className="object-cover" />
+                                <Image src={coaSealMacro} alt="Maverick Lab holographic verification seal" fill sizes="180px" className="object-cover" />
                             </motion.div>
                         </motion.div>
 

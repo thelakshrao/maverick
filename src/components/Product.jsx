@@ -5,6 +5,7 @@ import Image from "next/image";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import oilsFeatured from "@/images/category/oils-featured.png";
 import oralsFeatured from "@/images/category/orals-featured.png";
+import peptidesFeatured from "@/images/peptides/hgh-100.png";
 import { products } from "@/data/products";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -30,6 +31,11 @@ const CATEGORY_TILES = [
         image: oilsFeatured,
         description: "Sterile multi-dose vials with verified concentration.",
     },
+    {
+        category: "Peptides",
+        image: peptidesFeatured,
+        description: "Lyophilized vials, batch-verified for identity and purity.",
+    },
 ];
 
 export default function Product() {
@@ -37,9 +43,9 @@ export default function Product() {
         <LazyMotion features={domAnimation}>
             <section
                 id="products"
-                className="relative bg-[#f6f7fb] py-24 sm:py-28"
+                className="relative bg-[#eef1f6] py-24 sm:py-28"
             >
-                <div className="mx-auto max-w-5xl px-6 sm:px-10">
+                <div className="mx-auto max-w-6xl px-6 sm:px-10">
                     <m.div
                         initial="hidden"
                         whileInView="visible"
@@ -70,7 +76,7 @@ export default function Product() {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.15 }}
                         variants={container}
-                        className="mt-24 grid grid-cols-1 gap-x-8 gap-y-20 sm:grid-cols-2"
+                        className="mt-24 grid grid-cols-1 gap-x-8 gap-y-20 sm:grid-cols-2 lg:grid-cols-3"
                     >
                         {CATEGORY_TILES.map(({ category, image, description }) => {
                             const count = products.filter((p) => p.category === category).length;

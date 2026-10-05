@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import productImage from "@/images/styleproduct1.png";
 
-const DISCLAIMER_KEY = "maverick_disclaimer_accepted";
+const DISCLAIMER_KEY = "Maverick_disclaimer_accepted";
 
 export default function DisclaimerModal() {
     const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +62,7 @@ export default function DisclaimerModal() {
                                 <p className="mt-1 text-slate-600">
                                     This website has solely purpose for education, research and
                                     development. It has nothing relevant with any commercial
-                                    purpose. Please note that Maveric Pharmaceutical does not
+                                    purpose. Please note that Maverick Pharmaceutical does not
                                     deliver to countries that qualify these products of medicine as
                                     specially controlled or scheduled substances, including but
                                     not limited to the United States, Australia, Canada and Europe.

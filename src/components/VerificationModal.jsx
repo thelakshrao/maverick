@@ -100,13 +100,13 @@ export default function VerificationModal({ isOpen, onClose, result, codes }) {
                                 <div className="flex items-center gap-2">
                                     <Image
                                         src={logo}
-                                        alt="MAVERICK Logo"
+                                        alt="MavericK Logo"
                                         width={24}
                                         height={24}
                                         className="object-contain brightness-0 invert"
                                     />
                                     <span className="text-xs font-black tracking-widest text-white">
-                                        MAVERICK
+                                        Maverick
                                     </span>
                                 </div>
                             </div>

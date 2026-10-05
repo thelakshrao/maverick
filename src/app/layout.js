@@ -15,23 +15,23 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
     title: {
-        default: "Maveric Lab — Advanced Peptide Therapy",
-        template: "%s | Maveric Lab",
+        default: "Maverick Lab — Advanced Peptide Therapy",
+        template: "%s | Maverick Lab",
     },
     description:
-        "Maveric Lab supplies pharmaceutical-grade research peptides and injectable compounds. Every batch is HPLC-tested, batch-verified, and traceable from source to seal.",
+        "Maverick Lab supplies pharmaceutical-grade research peptides and injectable compounds. Every batch is HPLC-tested, batch-verified, and traceable from source to seal.",
     keywords: ["peptides", "research peptides", "injectable compounds", "HPLC tested", "batch verified"],
     openGraph: {
         type: "website",
-        url: "https://www.mavericklaboratorys.com/",
-        title: "Maveric Lab — Advanced Peptide Therapy",
+        url: "https://www.Mavericklaboratorys.com/",
+        title: "Maverick Lab — Advanced Peptide Therapy",
         description:
             "Pharmaceutical-grade research peptides. Every batch is HPLC-tested, batch-verified, and traceable from source to seal.",
-        siteName: "Maveric Lab",
+        siteName: "Maverick Lab",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Maveric Lab — Advanced Peptide Therapy",
+        title: "Maverick Lab — Advanced Peptide Therapy",
         description:
             "Pharmaceutical-grade research peptides. Every batch is HPLC-tested, batch-verified, and traceable from source to seal.",
     },

@@ -15,9 +15,6 @@ const rise = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
 
-// Benefit strings are written as "Bold lead-in — rest of the sentence".
-// Split on the em dash so the lead-in can be rendered bold, like the
-// reference site does.
 function splitBenefit(text) {
     const idx = text.indexOf("—");
     if (idx === -1) return { lead: null, rest: text };
@@ -57,6 +54,8 @@ export default function ProductDetailPage() {
         );
     }
 
+    const categoryHref = `/products?category=${encodeURIComponent(product.category)}`;
+
     const related = products
         .filter((p) => p.category === product.category && p.id !== product.id)
         .slice(0, 3);
@@ -66,10 +65,6 @@ export default function ProductDetailPage() {
             data-navbar="light"
             className="relative min-h-screen overflow-hidden bg-[#f6f7fb]"
         >
-            {/* Decorative low-opacity watermark of the product itself, sitting
-                behind the Specifications / Benefits / How It Works copy so the
-                large empty right-hand column isn't bare. Purely decorative,
-                so it's aria-hidden and never intercepts clicks. */}
             <div
                 className="pointer-events-none absolute right-[-10%] top-[520px] h-[900px] w-[900px] opacity-[0.05] sm:h-[1100px] sm:w-[1100px]"
                 aria-hidden
@@ -86,7 +81,6 @@ export default function ProductDetailPage() {
             <Navbar />
 
             <section className="relative mx-auto max-w-6xl px-6 pt-28 pb-24 sm:px-10 md:pt-36">
-                {/* Breadcrumb */}
                 <motion.nav
                     initial="hidden"
                     animate="visible"
@@ -98,10 +92,7 @@ export default function ProductDetailPage() {
                         Products
                     </Link>
                     <span aria-hidden>/</span>
-                    <Link
-                        href={`/products?category=${encodeURIComponent(product.category)}`}
-                        className="hover:text-[#3459c9]"
-                    >
+                    <Link href={categoryHref} className="hover:text-[#3459c9]">
                         {product.category}
                     </Link>
                     <span aria-hidden>/</span>
@@ -156,7 +147,7 @@ export default function ProductDetailPage() {
                                 <span aria-hidden>→</span>
                             </Link>
                             <Link
-                                href="/products"
+                                href={categoryHref}
                                 className="inline-flex h-12 items-center justify-center rounded-xl border border-[#d7dcef] px-6 text-sm font-semibold text-[#0b1a4a] transition-colors hover:bg-white"
                             >
                                 ← Back to all {product.category.toLowerCase()}
@@ -165,7 +156,6 @@ export default function ProductDetailPage() {
                     </motion.div>
                 </div>
 
-                {/* Specifications */}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -218,7 +208,6 @@ export default function ProductDetailPage() {
                     </dl>
                 </motion.div>
 
-                {/* Research Benefits */}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -252,7 +241,6 @@ export default function ProductDetailPage() {
                     </ul>
                 </motion.div>
 
-                {/* How It Works */}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -266,7 +254,6 @@ export default function ProductDetailPage() {
                     </p>
                 </motion.div>
 
-                {/* For Research Use Only */}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -297,7 +284,6 @@ export default function ProductDetailPage() {
                     </p>
                 </motion.div>
 
-                {/* Related products */}
                 {related.length > 0 && (
                     <div className="mt-20">
                         <h2 className="text-xl font-bold text-[#0b1a4a]">

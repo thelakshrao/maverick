@@ -229,7 +229,7 @@ export default function OurStandards() {
                             <div className="relative h-full w-full overflow-hidden rounded-[28px]">
                                 <Image
                                     src={athleteWoman}
-                                    alt="Athlete relying on Maveric Lab's verified quality standards"
+                                    alt="Athlete relying on Maverick Lab's verified quality standards"
                                     fill
                                     sizes="(min-width: 768px) 480px, 90vw"
                                     className="object-cover"
@@ -259,7 +259,7 @@ export default function OurStandards() {
                             </h2>
                             <p className="mt-4 max-w-md text-sm leading-relaxed text-[#12306e]/60">
                                 Coaches and competitors don&apos;t gamble on what they put in their
-                                body. Every Maveric Lab product is dosed and documented to hold up
+                                body. Every Maverick Lab product is dosed and documented to hold up
                                 to that scrutiny, with a full Certificate of Analysis available on
                                 request for anything in our range.
                             </p>
