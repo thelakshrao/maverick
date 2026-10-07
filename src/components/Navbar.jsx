@@ -28,7 +28,7 @@ const navItems = [
     { label: "Contact us", href: "/contact" },
 ];
 
-const LOGO_HEIGHT = 86;
+const LOGO_HEIGHT = 40;
 const LOGO_ASPECT = logo.width / logo.height;
 const LOGO_WIDTH = LOGO_HEIGHT * LOGO_ASPECT;
 
@@ -56,13 +56,6 @@ export default function Navbar() {
     const [openMobileDropdown, setOpenMobileDropdown] = useState(null);
     const navRef = useRef(null);
     const openRef = useRef(open);
-    // Mirrors openDropdown so the scroll-driven auto-hide loop (which runs
-    // outside React's render cycle, inside a rAF callback) can check "is a
-    // desktop dropdown currently open" without going stale. Without this,
-    // the navbar could slide itself off-screen out from under an open
-    // dropdown on the very next scroll tick — including a tiny residual
-    // momentum-scroll tick that fires after the user has already stopped
-    // scrolling and started moving the mouse toward the panel.
     const openDropdownRef = useRef(null);
     const lastScrollY = useRef(0);
     const pathname = usePathname();
@@ -116,11 +109,6 @@ export default function Navbar() {
             const currentY = window.scrollY;
 
             setScrolled(currentY > 20);
-
-            // Never let the navbar hide itself while the mobile menu OR a
-            // desktop dropdown is open — otherwise a scroll tick (including
-            // trackpad momentum settling after the user has already lifted
-            // their fingers) can slide the whole nav away mid-hover.
             if (!openRef.current && !openDropdownRef.current) {
                 if (currentY <= HIDE_THRESHOLD_PX) {
                     setHidden(false);
