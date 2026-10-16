@@ -9,6 +9,7 @@ import trenE200 from "@/images/oils/tren-e-200.png";
 import winstrol100 from "@/images/oils/winstrol-100.png";
 import equipoise250 from "@/images/oils/equipoise-250.png";
 import masteron100 from "@/images/oils/masteron-100.png";
+import susta250 from "@/images/oils/susta-250.png";
 
 import anavar10 from "@/images/orals/anavar-10.png";
 import arimidex1 from "@/images/orals/arimidex-1.png";
@@ -309,6 +310,33 @@ export const products = [
         ],
         mechanism:
             "Drostanolone's 2-methyl group is the key structural difference from unmodified dihydrotestosterone, and is what gives it measurable metabolic stability relative to non-methylated dihydrotestosterone derivatives. Combined with the short propionate ester, serum drostanolone rises and clears quickly relative to longer-estered compounds in this catalogue.",
+    },
+    {
+        id: "susta-250",
+        name: "Susta 250",
+        compound: "Testosterone Blend (Propionate, Phenylpropionate, Isocaproate, Decanoate)",
+        dose: "250 MG/ML",
+        size: "10ml Multi-dose Vial",
+        category: "Oils",
+        aliases: ["Sustanon", "Sust 250"],
+        image: susta250,
+        description:
+            "A four-ester testosterone blend designed to combine fast and slow release in a single preparation. Supplied at 250mg/ml in a sterile multi-dose vial and verified batch-by-batch via high-performance liquid chromatography before release.",
+        subtitle:
+            "A multi-ester testosterone blend built for a layered, staggered release curve.",
+        overview:
+            "Susta 250 combines four testosterone esters of different chain lengths in one oil: propionate, phenylpropionate, isocaproate and decanoate. Because each ester is hydrolyzed at its own rate, the blend releases testosterone in overlapping phases, with the shorter esters contributing an earlier rise in serum levels and the longer esters sustaining it. This makes it a common reference preparation in pharmacokinetic research comparing single-ester and multi-ester release profiles.",
+        halfLife: "~2–15 days (multi-ester)",
+        administration: "Injectable",
+        formula: "C22H32O3 / C28H36O3 / C25H38O3 / C29H46O3",
+        benefits: [
+            "Staggered release — short and long esters overlap to shape a broader serum curve",
+            "Four distinct ester chain lengths in one preparation, useful for multi-ester kinetic comparisons",
+            "Built on the testosterone molecule, which is among the best-characterized compounds in the literature",
+            "Single vial replaces the need to combine separate esters in comparative studies",
+        ],
+        mechanism:
+            "Once injected, each ester is cleaved by plasma and tissue esterases to release free testosterone, which binds the androgen receptor. The propionate and phenylpropionate esters are hydrolyzed quickly, the isocaproate more slowly, and the decanoate slowest of all, so the four esters release testosterone in overlapping waves rather than a single peak. The active molecule is identical across all four esters; only the release kinetics differ.",
     },
     {
         id: "anavar-10",
@@ -626,3 +654,22 @@ export const products = [
 ];
 
 export const categories = ["All", "Oils", "Orals", "Peptides"];
+
+const clean = (s) => String(s ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+
+export function searchProducts(query, list = products) {
+    const whole = clean(query);
+    if (!whole) return list;
+
+    const tokens = String(query)
+        .split(/\s+/)
+        .map(clean)
+        .filter(Boolean);
+
+    return list.filter((p) => {
+        const haystack = clean(
+            [p.name, p.compound, p.category, p.id, ...(p.aliases ?? [])].join(" ")
+        );
+        return haystack.includes(whole) || tokens.every((t) => haystack.includes(t));
+    });
+}

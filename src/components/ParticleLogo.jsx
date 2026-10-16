@@ -143,13 +143,10 @@ export default function ParticleLogo({
         let baseSize = 4;
         let data = null;
         let particles = [];
-        // Visibility state: both must be true to run the RAF loop.
-        let isVisible = true;   // Intersection Observer
-        let isTabVisible = !document.hidden; // Page Visibility API
+        let isVisible = true;   
+        let isTabVisible = !document.hidden; 
         const mouse = { x: -9999, y: -9999, active: false };
         const tilt = { x: 0, y: 0, tx: 0, ty: 0 };
-
-        // Cap device pixel ratio: 2 on desktop, 1.5 on mobile to limit canvas pixel count.
         const MAX_DPR = isMobile ? 1.5 : 2;
 
         const layout = () => {
@@ -242,10 +239,9 @@ export default function ParticleLogo({
 
                 const frame = (now) => {
                     if (!alive) return;
-                    // Pause the loop when not visible or tab is hidden — saves ~100% GPU on mobile.
                     if (!isVisible || !isTabVisible) {
                         raf = requestAnimationFrame(frame);
-                        last = now; // reset dt so particles don't leap on resume
+                        last = now; 
                         return;
                     }
                     raf = requestAnimationFrame(frame);
@@ -305,7 +301,6 @@ export default function ParticleLogo({
             })
             .catch((err) => console.error(err.message));
 
-        // Intersection Observer — pause when the canvas is not in the viewport.
         const io = new IntersectionObserver(
             (entries) => {
                 isVisible = entries[0].isIntersecting;
@@ -314,7 +309,6 @@ export default function ParticleLogo({
         );
         io.observe(stage);
 
-        // Page Visibility API — pause when the browser tab is hidden.
         const onVisibilityChange = () => {
             isTabVisible = !document.hidden;
         };

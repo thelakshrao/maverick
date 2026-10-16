@@ -12,7 +12,7 @@ import logoIcon from "@/images/logo1.png";
 import oilsFeatured from "@/images/category/oils-featured.png";
 import oralsFeatured from "@/images/category/orals-featured.png";
 import peptidesFeatured from "@/images/peptides/hgh-100.png";
-import { products, categories } from "@/data/products";
+import { products, categories, searchProducts } from "@/data/products";
 
 const EASE = [0.16, 1, 0.3, 1];
 const PAGE_SIZE = 9;
@@ -178,13 +178,7 @@ function ProductsContent() {
 
     const searchResults = useMemo(() => {
         if (!isSearching) return [];
-        const q = query.trim().toLowerCase();
-        return products.filter(
-            (p) =>
-                p.name.toLowerCase().includes(q) ||
-                p.compound.toLowerCase().includes(q) ||
-                p.category.toLowerCase().includes(q)
-        );
+        return searchProducts(query);
     }, [query, isSearching]);
 
     const baseList = isSearching
@@ -250,7 +244,7 @@ function ProductsContent() {
                             theme="light"
                             desktopLogo={logoIcon}
                             desktopCount={7000}
-                            mobileCount={4000}
+                            mobileCount={2500}
                             className="relative h-56 w-full md:h-[340px] md:w-[400px] md:shrink-0"
                         />
                     </div>
